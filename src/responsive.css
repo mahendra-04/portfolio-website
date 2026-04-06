@@ -1,0 +1,235 @@
+/* Mobile First Responsive Design */
+
+/* Small devices (mobile) */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Hide side nav on mobile */
+  [style*="position: fixed"][style*="left: 18"] {
+    display: none;
+  }
+
+  /* Adjust header padding */
+  header {
+    padding: 16px 16px 16px 16px !important;
+  }
+
+  /* Adjust main content padding */
+  main section, main .hero {
+    padding: 40px 16px 40px 16px !important;
+  }
+
+  /* Reduce hero section gaps */
+  .hero {
+    gap: 20px !important;
+  }
+
+  /* Responsive typography */
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  h3 {
+    font-size: 1.1rem !important;
+  }
+
+  /* Stack nav links vertically on very small screens */
+  nav {
+    flex-direction: column;
+    gap: 12px !important;
+  }
+
+  /* Responsive button sizing */
+  button, a[style*="padding: 15px 24px"] {
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+  }
+
+  /* Responsive grid */
+  [style*="gridTemplateColumns: repeat"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Reduce card padding on mobile */
+  [style*="padding: 24px"] {
+    padding: 16px !important;
+  }
+
+  [style*="padding: 26px"] {
+    padding: 16px !important;
+  }
+
+  [style*="padding: 28px"] {
+    padding: 16px !important;
+  }
+
+  /* Responsive gap reduction */
+  [style*="gap: 22"] {
+    gap: 14px !important;
+  }
+
+  [style*="gap: 40"] {
+    gap: 20px !important;
+  }
+
+  /* Side nav items smaller on mobile (if visible with JS toggle) */
+  [style*="width: 46"][style*="height: 46"] {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  /* Adjust hero mini grid for mobile */
+  [style*="minmax(180px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Responsive image sizing */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Adjust section title spacing */
+  h2[style*="fontSize: clamp"] {
+    margin-bottom: 16px !important;
+  }
+
+  /* Reduce list item margins */
+  li {
+    margin-bottom: 4px !important;
+  }
+
+  /* Contact section responsive */
+  [style*="contactText"] {
+    font-size: 15px !important;
+  }
+}
+
+/* Tablet devices */
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Show side nav but adjust positioning */
+  [style*="position: fixed"][style*="left: 18"] {
+    left: 12px !important;
+  }
+
+  /* Adjust main content for side nav */
+  main section, main .hero {
+    padding: 60px 24px 60px 70px !important;
+  }
+
+  header {
+    padding: 18px 24px 18px 70px !important;
+  }
+
+  /* Responsive grid for tablets */
+  [style*="gridTemplateColumns: repeat(auto-fit, minmax(240px"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  [style*="gridTemplateColumns: repeat(auto-fit, minmax(180px"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Reduce gaps on tablet */
+  [style*="gap: 40"] {
+    gap: 28px !important;
+  }
+
+  [style*="gap: 22"] {
+    gap: 18px !important;
+  }
+
+  /* Responsive font sizing */
+  h1 {
+    font-size: 3rem !important;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+  }
+
+  /* Reduce card padding */
+  [style*="padding: 24px"] {
+    padding: 20px !important;
+  }
+
+  [style*="padding: 26px"] {
+    padding: 20px !important;
+  }
+
+  [style*="padding: 28px"] {
+    padding: 22px !important;
+  }
+
+  /* Flexbox adjustments */
+  [style*="flexWrap: wrap"] {
+    flex-wrap: wrap;
+  }
+}
+
+/* Large devices - optimize for performance */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  main section {
+    padding: 80px 32px 80px 92px !important;
+  }
+
+  [style*="gridTemplateColumns: repeat(auto-fit, minmax(240px"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Extra large devices */
+@media (min-width: 1441px) {
+  main section {
+    padding: 90px 32px 90px 92px !important;
+  }
+}
+
+/* Orientation adjustments */
+@media (orientation: landscape) and (max-height: 600px) {
+  main .hero {
+    min-height: auto;
+    padding: 30px 16px 30px 16px !important;
+  }
+
+  h1 {
+    font-size: 2rem !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  a, button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  [style*="width: 46"][style*="height: 46"] {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  /* Remove hover effects on touch devices - they'll use the base styles */
+}
+
+/* Print styles */
+@media print {
+  .animated-bg, [style*="position: fixed"] {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+}
