@@ -258,6 +258,8 @@ export default function App() {
   const [showIntro, setShowIntro] = useState(true);
   const viewportWidth = useViewportWidth();
   const useBottomNav = viewportWidth <= 900;
+  const isPhone = viewportWidth <= 640;
+  const isCompactPhone = viewportWidth <= 400;
   const activeSection = useActiveSection(navLinks.map((link) => link.href.slice(1)));
   const cursor = useCustomCursor(viewportWidth > 900);
 
@@ -291,7 +293,13 @@ export default function App() {
               transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
               style={styles.introGlow}
             />
-            <motion.div style={styles.introCard}>
+            <motion.div
+              style={{
+                ...styles.introCard,
+                ...(isPhone ? styles.introCardPhone : null),
+                ...(isCompactPhone ? styles.introCardCompactPhone : null),
+              }}
+            >
               <motion.h1
                 initial={{ opacity: 0, y: 30, skewY: 6 }}
                 animate={{ opacity: 1, y: 0, skewY: 0 }}
@@ -307,7 +315,11 @@ export default function App() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.18, ease: "easeOut" }}
-                style={styles.introSubtitle}
+                style={{
+                  ...styles.introSubtitle,
+                  ...(isPhone ? styles.introSubtitlePhone : null),
+                  ...(isCompactPhone ? styles.introSubtitleCompactPhone : null),
+                }}
               >
                 A tech-driven portfolio for support, embedded systems, and modern problem solving.
               </motion.p>
@@ -352,7 +364,11 @@ export default function App() {
                   ],
                 }}
                 transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
-                style={styles.introFun}
+                style={{
+                  ...styles.introFun,
+                  ...(isPhone ? styles.introFunPhone : null),
+                  ...(isCompactPhone ? styles.introFunCompactPhone : null),
+                }}
               >
                 <Sparkles size={14} />
                 <span>Have fun</span>
@@ -390,13 +406,19 @@ export default function App() {
         </>
       )}
 
-      <header style={styles.header}>
+      <header
+        style={{
+          ...styles.header,
+          ...(isPhone ? styles.headerPhone : null),
+          ...(isCompactPhone ? styles.headerCompactPhone : null),
+        }}
+      >
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div style={styles.logo}>
+          <div style={{ ...styles.logo, ...(isPhone ? styles.logoPhone : null) }}>
             Mahendra<span style={styles.logoAccent}>.ranwa</span>
           </div>
         </motion.div>
@@ -406,18 +428,33 @@ export default function App() {
         style={{
           ...styles.main,
           ...(useBottomNav ? styles.mainWithBottomNav : null),
+          ...(isPhone ? styles.mainPhone : null),
         }}
       >
-        <section id="home" style={styles.hero}>
+        <section
+          id="home"
+          style={{
+            ...styles.hero,
+            ...(isPhone ? styles.heroPhone : null),
+            ...(isCompactPhone ? styles.heroCompactPhone : null),
+          }}
+        >
           <motion.div             variants={staggerContainer}
             initial="hidden"
             animate="show"
-            style={styles.heroLeft}
+            style={{
+              ...styles.heroLeft,
+              ...(isPhone ? styles.heroLeftPhone : null),
+            }}
           >
             <motion.div
               variants={heroText}
               custom={0.1}
-              style={styles.badge}
+              style={{
+              ...styles.badge,
+              ...(isPhone ? styles.badgePhone : null),
+              ...(isCompactPhone ? styles.badgeCompactPhone : null),
+            }}
             >
               <Sparkles size={14} />
               Portfolio Experience
@@ -426,7 +463,10 @@ export default function App() {
             <motion.h1
               variants={heroText}
               custom={0.25}
-              style={styles.heroTitle}
+              style={{
+                ...styles.heroTitle,
+                ...(isCompactPhone ? styles.heroTitleCompactPhone : null),
+              }}
             >
               Building systems
               <br />
@@ -438,7 +478,11 @@ export default function App() {
             <motion.p
               variants={heroText}
               custom={0.35}
-              style={styles.heroSubtitle}
+              style={{
+                ...styles.heroSubtitle,
+                ...(isPhone ? styles.heroSubtitlePhone : null),
+                ...(isCompactPhone ? styles.heroSubtitleCompactPhone : null),
+              }}
             >
               Mahendra Ranwa · Computer Engineering Technology Graduate, Sheridan College
             </motion.p>
@@ -446,7 +490,11 @@ export default function App() {
             <motion.p
               variants={heroText}
               custom={0.45}
-              style={styles.heroDesc}
+              style={{
+                ...styles.heroDesc,
+                ...(isPhone ? styles.heroDescPhone : null),
+                ...(isCompactPhone ? styles.heroDescCompactPhone : null),
+              }}
             >
               Sheridan College's Computer Engineering Technology program trains me to integrate hardware and software, design and test embedded devices, and maintain computer and network systems.
             </motion.p>
@@ -454,18 +502,29 @@ export default function App() {
             <motion.div
               variants={heroText}
               custom={0.55}
-              style={styles.heroButtons}
+              style={{
+                ...styles.heroButtons,
+                ...(isPhone ? styles.heroButtonsPhone : null),
+              }}
             >
               <motion.a
                 whileHover={{ y: -2, scale: 1.02 }}
-                style={styles.primaryBtn}
+                style={{
+                ...styles.primaryBtn,
+                ...(isPhone ? styles.heroButtonPhone : null),
+                ...(isCompactPhone ? styles.heroButtonCompactPhone : null),
+              }}
                 href="#projects"
               >
                 View Projects <ArrowRight size={16} />
               </motion.a>
               <motion.a
                 whileHover={{ y: -2, scale: 1.02 }}
-                style={styles.secondaryBtn}
+                style={{
+                ...styles.secondaryBtn,
+                ...(isPhone ? styles.heroButtonPhone : null),
+                ...(isCompactPhone ? styles.heroButtonCompactPhone : null),
+              }}
                 href={`${assetBase}MahendraRanwaCS.pdf`}
                 target="_blank"
                 rel="noreferrer"
@@ -476,17 +535,41 @@ export default function App() {
 
             <motion.div
               variants={staggerContainer}
-              style={styles.heroMiniGrid}
+              style={{
+                ...styles.heroMiniGrid,
+                ...(isPhone ? styles.heroMiniGridPhone : null),
+              }}
             >
-              <motion.div variants={scaleIn} style={styles.heroMiniCard}>
+              <motion.div
+                variants={scaleIn}
+                style={{
+                  ...styles.heroMiniCard,
+                  ...(isPhone ? styles.heroMiniCardPhone : null),
+                  ...(isCompactPhone ? styles.heroMiniCardCompactPhone : null),
+                }}
+              >
                 <span style={styles.miniLabel}>Program</span>
                 <strong style={styles.miniValue}>Computer Engineering Technology</strong>
               </motion.div>
-              <motion.div variants={scaleIn} style={styles.heroMiniCard}>
+              <motion.div
+                variants={scaleIn}
+                style={{
+                  ...styles.heroMiniCard,
+                  ...(isPhone ? styles.heroMiniCardPhone : null),
+                  ...(isCompactPhone ? styles.heroMiniCardCompactPhone : null),
+                }}
+              >
                 <span style={styles.miniLabel}>Focus</span>
                 <strong style={styles.miniValue}>Embedded Systems & Networks</strong>
               </motion.div>
-              <motion.div variants={scaleIn} style={styles.heroMiniCard}>
+              <motion.div
+                variants={scaleIn}
+                style={{
+                  ...styles.heroMiniCard,
+                  ...(isPhone ? styles.heroMiniCardPhone : null),
+                  ...(isCompactPhone ? styles.heroMiniCardCompactPhone : null),
+                }}
+              >
                 <span style={styles.miniLabel}>Training</span>
                 <strong style={styles.miniValue}>Lab, Capstone, Co-op</strong>
               </motion.div>
@@ -497,9 +580,13 @@ export default function App() {
             variants={heroImageVariant}
             initial="hidden"
             animate="show"
-            style={styles.heroRight}
+            style={{
+              ...styles.heroRight,
+              ...(isPhone ? styles.heroRightPhone : null),
+              ...(isCompactPhone ? styles.heroRightCompactPhone : null),
+            }}
           >
-            <HeroVisual />
+            <HeroVisual compact={isPhone} compactPhone={isCompactPhone} />
           </motion.div>
         </section>
 
@@ -864,8 +951,16 @@ function useCustomCursor(enabled) {
 }
 
 function Section({ id, title, children }) {
+  const isPhone = useViewportWidth() <= 640;
+
   return (
-    <section id={id} style={styles.section}>
+    <section
+      id={id}
+      style={{
+        ...styles.section,
+        ...(isPhone ? styles.sectionPhone : null),
+      }}
+    >
       <div style={styles.sectionGlow} />
       <h2 style={styles.sectionTitle}>{title}</h2>
       {children}
@@ -949,7 +1044,7 @@ function ContactCard({ icon, value, href, type = "link" }) {
   );
 }
 
-function HeroVisual() {
+function HeroVisual({ compact = false, compactPhone = false }) {
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
 
@@ -986,7 +1081,11 @@ function HeroVisual() {
 
   return (
     <motion.div
-      style={styles.heroVisualWrap}
+      style={{
+        ...styles.heroVisualWrap,
+        ...(compact ? styles.heroVisualWrapPhone : null),
+        ...(compactPhone ? styles.heroVisualWrapCompactPhone : null),
+      }}
       onMouseMove={handlePointerMove}
       onMouseLeave={resetPointer}
     >
@@ -996,7 +1095,11 @@ function HeroVisual() {
           scale: [1, 1.08, 1],
         }}
         transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-        style={styles.imageHalo}
+        style={{
+          ...styles.imageHalo,
+          ...(compact ? styles.imageHaloPhone : null),
+          ...(compactPhone ? styles.imageHaloCompactPhone : null),
+        }}
       />
 
       <motion.div
@@ -1004,12 +1107,18 @@ function HeroVisual() {
           rotate: [0, 180, 360],
         }}
         transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-        style={styles.heroRing}
+        style={{
+          ...styles.heroRing,
+          ...(compact ? styles.heroRingPhone : null),
+          ...(compactPhone ? styles.heroRingCompactPhone : null),
+        }}
       />
 
       <motion.div
         style={{
           ...styles.imageCard3DWrap,
+          ...(compact ? styles.imageCard3DWrapPhone : null),
+          ...(compactPhone ? styles.imageCard3DWrapCompactPhone : null),
           rotateX,
           rotateY,
           x: floatX,
@@ -1021,7 +1130,11 @@ function HeroVisual() {
             y: [0, -12, 0],
           }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          style={styles.imageCard}
+          style={{
+            ...styles.imageCard,
+            ...(compact ? styles.imageCardPhone : null),
+            ...(compactPhone ? styles.imageCardCompactPhone : null),
+          }}
         >
           <motion.div
             animate={{
@@ -1029,7 +1142,11 @@ function HeroVisual() {
               x: [0, 4, 0],
             }}
             transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
-            style={styles.heroChipTop}
+            style={{
+              ...styles.heroChipTop,
+              ...(compact ? styles.heroChipTopPhone : null),
+              ...(compactPhone ? styles.heroChipTopCompactPhone : null),
+            }}
           >
             Embedded Systems
           </motion.div>
@@ -1040,7 +1157,11 @@ function HeroVisual() {
               x: [0, -6, 0],
             }}
             transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut" }}
-            style={styles.heroChipBottom}
+            style={{
+              ...styles.heroChipBottom,
+              ...(compact ? styles.heroChipBottomPhone : null),
+              ...(compactPhone ? styles.heroChipBottomCompactPhone : null),
+            }}
           >
             Support + Hardware
           </motion.div>
@@ -1050,7 +1171,11 @@ function HeroVisual() {
           <img
             src={`${assetBase}mahendra.jpeg`}
             alt="Mahendra Ranwa"
-            style={styles.image}
+            style={{
+              ...styles.image,
+              ...(compact ? styles.imagePhone : null),
+              ...(compactPhone ? styles.imageCompactPhone : null),
+            }}
           />
         </motion.div>
       </motion.div>
@@ -1061,7 +1186,11 @@ function HeroVisual() {
           rotate: [-3, 0, -3],
         }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        style={styles.heroStatLeft}
+        style={{
+          ...styles.heroStatLeft,
+          ...(compact ? styles.heroStatLeftPhone : null),
+          ...(compactPhone ? styles.heroStatLeftCompactPhone : null),
+        }}
       >
         <span style={styles.heroStatLabel}>Realtime</span>
         <strong style={styles.heroStatValue}>Systems</strong>
@@ -1073,7 +1202,11 @@ function HeroVisual() {
           rotate: [3, 0, 3],
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        style={styles.heroStatRight}
+        style={{
+          ...styles.heroStatRight,
+          ...(compact ? styles.heroStatRightPhone : null),
+          ...(compactPhone ? styles.heroStatRightCompactPhone : null),
+        }}
       >
         <span style={styles.heroStatLabel}>Hands-on</span>
         <strong style={styles.heroStatValue}>Troubleshooting</strong>
@@ -1083,13 +1216,20 @@ function HeroVisual() {
 }
 
 function SideNav({ useBottomNav, activeSection, position = "right" }) {
+  const isPhone = useViewportWidth() <= 640;
+  const isCompactPhone = useViewportWidth() <= 400;
+
   return (
     <nav
       aria-label="Section navigation"
       style={{
         ...styles.sideNav,
         ...(useBottomNav
-          ? styles.sideNavBottom
+          ? {
+              ...styles.sideNavBottom,
+              ...(isPhone ? styles.sideNavBottomPhone : null),
+              ...(isCompactPhone ? styles.sideNavBottomCompactPhone : null),
+            }
           : position === "left"
             ? styles.sideNavLeft
             : styles.sideNavRight),
@@ -1109,7 +1249,13 @@ function SideNav({ useBottomNav, activeSection, position = "right" }) {
             whileTap={{ scale: 0.96 }}
             style={{
               ...styles.sideNavItem,
-              ...(useBottomNav ? styles.sideNavItemBottom : null),
+              ...(useBottomNav
+                ? {
+                    ...styles.sideNavItemBottom,
+                    ...(isPhone ? styles.sideNavItemBottomPhone : null),
+                    ...(isCompactPhone ? styles.sideNavItemBottomCompactPhone : null),
+                  }
+                : null),
               ...(isActive ? styles.sideNavItemActive : null),
             }}
             title={link.label}
@@ -1286,11 +1432,14 @@ const styles = {
   },
 
   sideNavBottom: {
+    display: "grid",
+    gridTemplateColumns: "repeat(7, minmax(0, 1fr))",
+    justifyItems: "center",
+    alignItems: "center",
     left: 16,
     right: 16,
     bottom: 16,
-    justifyContent: "center",
-    flexWrap: "wrap",
+    gap: 10,
     padding: 10,
     borderRadius: 22,
     background: "linear-gradient(180deg, rgba(9,14,30,0.82), rgba(5,8,22,0.72))",
@@ -1299,12 +1448,30 @@ const styles = {
     boxShadow: "0 18px 48px rgba(0,0,0,0.26)",
   },
 
+  sideNavBottomPhone: {
+    left: 10,
+    right: 10,
+    bottom: 10,
+    gap: 8,
+    padding: 8,
+    borderRadius: 18,
+  },
+
+  sideNavBottomCompactPhone: {
+    left: 8,
+    right: 8,
+    bottom: 8,
+    gap: 6,
+    padding: 6,
+  },
+
   sideNavItem: {
     width: 46,
     height: 46,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    cursor: "none",
     borderRadius: 14,
     color: "#cbd5e1",
     textDecoration: "none",
@@ -1316,8 +1483,21 @@ const styles = {
   },
 
   sideNavItemBottom: {
-    flex: "1 1 46px",
-    maxWidth: 58,
+    width: 46,
+    height: 46,
+    minWidth: 0,
+  },
+
+  sideNavItemBottomPhone: {
+    width: 42,
+    height: 42,
+    borderRadius: 12,
+  },
+
+  sideNavItemBottomCompactPhone: {
+    width: 38,
+    height: 38,
+    borderRadius: 11,
   },
 
   sideNavItemActive: {
@@ -1341,9 +1521,21 @@ const styles = {
     gap: "clamp(8px, 2vw, 12px)",
   },
 
+  headerPhone: {
+    padding: "12px 16px",
+  },
+
+  headerCompactPhone: {
+    padding: "10px 12px",
+  },
+
   logo: {
     fontSize: 24,
     fontWeight: 900,
+  },
+
+  logoPhone: {
+    fontSize: 21,
   },
 
   logoAccent: {
@@ -1360,6 +1552,10 @@ const styles = {
     paddingBottom: 108,
   },
 
+  mainPhone: {
+    overflowX: "hidden",
+  },
+
   hero: {
     maxWidth: 1280,
     margin: "0 auto",
@@ -1371,8 +1567,24 @@ const styles = {
     padding: "clamp(20px, 5vw, 40px) clamp(16px, 4vw, 32px) clamp(40px, 10vw, 80px) clamp(16px, 10vw, 92px)",
   },
 
+  heroPhone: {
+    minHeight: "auto",
+    gridTemplateColumns: "1fr",
+    gap: 28,
+    padding: "24px 16px 48px",
+  },
+
+  heroCompactPhone: {
+    gap: 22,
+    padding: "20px 12px 42px",
+  },
+
   heroLeft: {
     maxWidth: 700,
+  },
+
+  heroLeftPhone: {
+    maxWidth: "100%",
   },
 
   badge: {
@@ -1391,12 +1603,29 @@ const styles = {
     marginBottom: 22,
   },
 
+  badgePhone: {
+    padding: "8px 12px",
+    fontSize: 11,
+    letterSpacing: "0.1em",
+    marginBottom: 18,
+  },
+
+  badgeCompactPhone: {
+    fontSize: 10,
+    padding: "7px 10px",
+  },
+
   heroTitle: {
     fontSize: "clamp(3rem, 8vw, 6rem)",
     lineHeight: 0.92,
     fontWeight: 900,
     margin: 0,
     letterSpacing: "-0.05em",
+  },
+
+  heroTitleCompactPhone: {
+    fontSize: "clamp(2.25rem, 12vw, 2.9rem)",
+    lineHeight: 0.96,
   },
 
   gradientText: {
@@ -1412,6 +1641,16 @@ const styles = {
     fontWeight: 700,
   },
 
+  heroSubtitlePhone: {
+    marginTop: 18,
+    fontSize: 16,
+    lineHeight: 1.5,
+  },
+
+  heroSubtitleCompactPhone: {
+    fontSize: 15,
+  },
+
   heroDesc: {
     marginTop: 18,
     color: "#94a3b8",
@@ -1420,11 +1659,29 @@ const styles = {
     maxWidth: 620,
   },
 
+  heroDescPhone: {
+    marginTop: 14,
+    fontSize: 15,
+    lineHeight: 1.7,
+  },
+
+  heroDescCompactPhone: {
+    fontSize: 14,
+    lineHeight: 1.65,
+  },
+
   heroButtons: {
     marginTop: 30,
     display: "flex",
     gap: 16,
     flexWrap: "wrap",
+  },
+
+  heroButtonsPhone: {
+    marginTop: 24,
+    flexDirection: "column",
+    alignItems: "stretch",
+    gap: 12,
   },
 
   primaryBtn: {
@@ -1452,12 +1709,29 @@ const styles = {
     border: "1px solid rgba(255,255,255,0.12)",
   },
 
+  heroButtonPhone: {
+    width: "100%",
+    justifyContent: "center",
+    padding: "14px 18px",
+  },
+
+  heroButtonCompactPhone: {
+    padding: "13px 16px",
+    fontSize: 14,
+  },
+
   heroMiniGrid: {
     marginTop: 32,
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(clamp(140px, 35vw, 180px), 1fr))",
     gap: "clamp(12px, 2vw, 16px)",
     maxWidth: 760,
+  },
+
+  heroMiniGridPhone: {
+    marginTop: 24,
+    gridTemplateColumns: "1fr",
+    gap: 12,
   },
 
   heroMiniCard: {
@@ -1467,6 +1741,16 @@ const styles = {
     transformStyle: "preserve-3d",
     background: "linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.035))",
     boxShadow: "0 20px 42px rgba(2,6,23,0.22)",
+  },
+
+  heroMiniCardPhone: {
+    padding: 16,
+    borderRadius: 20,
+  },
+
+  heroMiniCardCompactPhone: {
+    padding: 14,
+    borderRadius: 18,
   },
 
   miniLabel: {
@@ -1493,6 +1777,14 @@ const styles = {
     minHeight: 540,
   },
 
+  heroRightPhone: {
+    minHeight: "auto",
+  },
+
+  heroRightCompactPhone: {
+    marginTop: 4,
+  },
+
   heroVisualWrap: {
     position: "relative",
     width: "100%",
@@ -1503,6 +1795,17 @@ const styles = {
     justifyContent: "center",
     perspective: 1400,
     transformStyle: "preserve-3d",
+  },
+
+  heroVisualWrapPhone: {
+    maxWidth: 360,
+    minHeight: 410,
+    margin: "0 auto",
+  },
+
+  heroVisualWrapCompactPhone: {
+    maxWidth: 304,
+    minHeight: 350,
   },
 
   imageGlow: {
@@ -1522,6 +1825,16 @@ const styles = {
     zIndex: 0,
   },
 
+  imageHaloPhone: {
+    inset: 34,
+    filter: "blur(24px)",
+  },
+
+  imageHaloCompactPhone: {
+    inset: 28,
+    filter: "blur(18px)",
+  },
+
   heroRing: {
     position: "absolute",
     width: 400,
@@ -1532,12 +1845,31 @@ const styles = {
     zIndex: 0,
   },
 
+  heroRingPhone: {
+    width: 290,
+    height: 290,
+    boxShadow: "0 0 0 14px rgba(255,255,255,0.015), 0 0 56px rgba(34,211,238,0.08)",
+  },
+
+  heroRingCompactPhone: {
+    width: 248,
+    height: 248,
+  },
+
   imageCard3DWrap: {
     position: "relative",
     width: "100%",
     maxWidth: 390,
     transformStyle: "preserve-3d",
     zIndex: 2,
+  },
+
+  imageCard3DWrapPhone: {
+    maxWidth: 310,
+  },
+
+  imageCard3DWrapCompactPhone: {
+    maxWidth: 270,
   },
 
   imageCard: {
@@ -1551,6 +1883,18 @@ const styles = {
     overflow: "visible",
     transformStyle: "preserve-3d",
     boxShadow: "0 34px 90px rgba(2,6,23,0.38)",
+  },
+
+  imageCardPhone: {
+    padding: 14,
+    borderRadius: 26,
+    maxWidth: 310,
+  },
+
+  imageCardCompactPhone: {
+    padding: 12,
+    borderRadius: 22,
+    maxWidth: 270,
   },
 
   imageBadge: {
@@ -1576,6 +1920,14 @@ const styles = {
     position: "relative",
     zIndex: 3,
     transform: "translateZ(44px)",
+  },
+
+  imagePhone: {
+    borderRadius: 20,
+  },
+
+  imageCompactPhone: {
+    borderRadius: 18,
   },
 
   imageDepthShadow: {
@@ -1617,6 +1969,25 @@ const styles = {
     transform: "translateZ(80px)",
   },
 
+  heroChipTopPhone: {
+    top: 10,
+    left: 10,
+    padding: "8px 12px",
+    fontSize: 10,
+    letterSpacing: "0.08em",
+    maxWidth: "calc(100% - 20px)",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+
+  heroChipTopCompactPhone: {
+    top: 8,
+    left: 8,
+    fontSize: 9,
+    padding: "7px 10px",
+  },
+
   heroChipBottom: {
     position: "absolute",
     right: -28,
@@ -1634,6 +2005,24 @@ const styles = {
     transform: "translateZ(78px)",
   },
 
+  heroChipBottomPhone: {
+    right: 10,
+    bottom: 10,
+    padding: "9px 12px",
+    fontSize: 11,
+    borderRadius: 14,
+    maxWidth: "70%",
+    textAlign: "center",
+  },
+
+  heroChipBottomCompactPhone: {
+    right: 8,
+    bottom: 8,
+    fontSize: 10,
+    padding: "8px 10px",
+    maxWidth: "66%",
+  },
+
   heroStatLeft: {
     ...glass,
     position: "absolute",
@@ -1646,6 +2035,22 @@ const styles = {
     transform: "rotate(-8deg)",
   },
 
+  heroStatLeftPhone: {
+    left: 4,
+    bottom: -6,
+    minWidth: 118,
+    padding: "12px 14px",
+    borderRadius: 18,
+    transform: "rotate(-4deg)",
+  },
+
+  heroStatLeftCompactPhone: {
+    left: 2,
+    bottom: -2,
+    minWidth: 102,
+    padding: "10px 12px",
+  },
+
   heroStatRight: {
     ...glass,
     position: "absolute",
@@ -1656,6 +2061,22 @@ const styles = {
     borderRadius: 22,
     minWidth: 150,
     transform: "rotate(7deg)",
+  },
+
+  heroStatRightPhone: {
+    right: 4,
+    top: 18,
+    minWidth: 128,
+    padding: "12px 14px",
+    borderRadius: 18,
+    transform: "rotate(4deg)",
+  },
+
+  heroStatRightCompactPhone: {
+    right: 2,
+    top: 12,
+    minWidth: 114,
+    padding: "10px 12px",
   },
 
   heroStatLabel: {
@@ -1716,6 +2137,19 @@ const styles = {
     transformStyle: "preserve-3d",
   },
 
+  introCardPhone: {
+    width: "min(92%, 420px)",
+    padding: "30px 20px",
+    borderRadius: 24,
+    transform: "none",
+  },
+
+  introCardCompactPhone: {
+    width: "min(94%, 360px)",
+    padding: "24px 16px",
+    borderRadius: 20,
+  },
+
   introBadge: {
     display: "inline-flex",
     alignItems: "center",
@@ -1749,6 +2183,16 @@ const styles = {
     maxWidth: 520,
     marginLeft: "auto",
     marginRight: "auto",
+  },
+
+  introSubtitlePhone: {
+    marginTop: 16,
+    fontSize: "0.98rem",
+    lineHeight: 1.65,
+  },
+
+  introSubtitleCompactPhone: {
+    fontSize: "0.92rem",
   },
 
   introLoader: {
@@ -1799,6 +2243,17 @@ const styles = {
     WebkitBackdropFilter: "blur(14px)",
   },
 
+  introFunPhone: {
+    fontSize: 11,
+    padding: "10px 14px",
+    letterSpacing: "0.08em",
+  },
+
+  introFunCompactPhone: {
+    padding: "9px 12px",
+    fontSize: 10,
+  },
+
   introWave: {
     position: "absolute",
     inset: 0,
@@ -1819,6 +2274,10 @@ const styles = {
     padding: "clamp(40px, 10vw, 90px) clamp(16px, 4vw, 32px) clamp(40px, 10vw, 90px) clamp(16px, 10vw, 92px)",
     position: "relative",
     transformStyle: "preserve-3d",
+  },
+
+  sectionPhone: {
+    padding: "32px 16px 64px",
   },
 
   sectionGlow: {
