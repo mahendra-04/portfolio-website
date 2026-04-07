@@ -99,6 +99,8 @@ const introVariants = {
   },
 };
 
+const assetBase = import.meta.env.BASE_URL;
+
 const skills = [
   {
     icon: <Cpu size={22} />,
@@ -122,7 +124,7 @@ const projects = [
     no: "01",
     title: "Digital Multimeter (DMM) Fabrication",
     tech: "Electrical Fabrication",
-    image: "/digital-multimeter.png",
+    image: `${assetBase}digital-multimeter.png`,
     points: [
       "Assembled and soldered a functional digital multimeter circuit",
       "Performed PCB-level soldering following electronic assembly practices",
@@ -135,7 +137,7 @@ const projects = [
     no: "02",
     title: "Embedded Control and Signal Processing System",
     tech: "C, STM32 (Nucleo L476)",
-    image: "/embedded-control.jpg",
+    image: `${assetBase}embedded-control.jpg`,
     points: [
       "Developed embedded applications using GPIO, timers, ADC, interrupts, PWM, and input capture",
       "Designed timer-based systems (TIM6, TIM7) for precise delays using PSC and ARR calculations",
@@ -148,7 +150,7 @@ const projects = [
     no: "03",
     title: "Embedded Systems Application (ADC, Timers, Interrupts, UART)",
     tech: "C, PIC24 (Explorer 16)",
-    image: "/explorer16.jpg",
+    image: `${assetBase}explorer16.jpg`,
     points: [
       "Built multi-module system integrating ADC, timers, interrupts, GPIO, and UART communication",
       "Acquired and processed real-time sensor data with interrupt-driven ADC",
@@ -161,7 +163,7 @@ const projects = [
     no: "04",
     title: "Smart Car System (3-Wheel Buggy)",
     tech: "Raspberry Pi, Python",
-    image: "/buggy.jpg",
+    image: `${assetBase}buggy.jpg`,
     points: [
       "Built and assembled a 3-wheel smart car integrating motors, sensors, camera, and control modules",
       "Configured Raspberry Pi GPIO for motor control, sensor interfacing, and peripheral communication",
@@ -464,7 +466,7 @@ export default function App() {
               <motion.a
                 whileHover={{ y: -2, scale: 1.02 }}
                 style={styles.secondaryBtn}
-                href="/MahendraRanwaCS.pdf"
+                href={`${assetBase}MahendraRanwaCS.pdf`}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -1046,7 +1048,7 @@ function HeroVisual() {
           <div style={styles.imageDepthShadow} />
           <div style={styles.imageGradientPlane} />
           <img
-            src="/mahendra.jpeg"
+            src={`${assetBase}mahendra.jpeg`}
             alt="Mahendra Ranwa"
             style={styles.image}
           />
