@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import {
   ArrowRight,
   Cpu,
@@ -242,8 +242,22 @@ const educationCertifications = [
   },
 ];
 
+const navLinks = [
+  { href: "#home", icon: <Home size={18} />, label: "Home" },
+  { href: "#about", icon: <User size={18} />, label: "About" },
+  { href: "#skills", icon: <Cpu size={18} />, label: "Skills" },
+  { href: "#projects", icon: <FolderKanban size={18} />, label: "Projects" },
+  { href: "#experience", icon: <Briefcase size={18} />, label: "Experience" },
+  { href: "#education", icon: <Award size={18} />, label: "Education" },
+  { href: "#contact", icon: <Mail size={18} />, label: "Contact" },
+];
+
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
+  const viewportWidth = useViewportWidth();
+  const useBottomNav = viewportWidth <= 900;
+  const activeSection = useActiveSection(navLinks.map((link) => link.href.slice(1)));
+  const cursor = useCustomCursor(viewportWidth > 900);
 
   useEffect(() => {
     const timeout = setTimeout(() => setShowIntro(false), 4500);
@@ -255,7 +269,10 @@ export default function App() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      style={styles.page}
+      style={{
+        ...styles.page,
+        ...(viewportWidth > 900 ? styles.pageCursorDesktop : null),
+      }}
     >
       <AnimatePresence>
         {showIntro && (
@@ -273,16 +290,6 @@ export default function App() {
               style={styles.introGlow}
             />
             <motion.div style={styles.introCard}>
-              <motion.div
-                initial={{ opacity: 0, y: -16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                style={styles.introBadge}
-              >
-                <Sparkles size={14} />
-                loading experience
-              </motion.div>
-
               <motion.h1
                 initial={{ opacity: 0, y: 30, skewY: 6 }}
                 animate={{ opacity: 1, y: 0, skewY: 0 }}
@@ -333,6 +340,24 @@ export default function App() {
 
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  boxShadow: [
+                    "0 0 0 rgba(56,189,248,0.0)",
+                    "0 18px 40px rgba(56,189,248,0.18)",
+                    "0 0 0 rgba(56,189,248,0.0)",
+                  ],
+                }}
+                transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
+                style={styles.introFun}
+              >
+                <Sparkles size={14} />
+                <span>Have fun</span>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
                 style={styles.introHint}
@@ -351,8 +376,17 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      <CustomCursor cursor={cursor} />
+
       <AnimatedBackground />
-      <SideNav />
+      {useBottomNav ? (
+        <SideNav useBottomNav activeSection={activeSection} />
+      ) : (
+        <>
+          <SideNav activeSection={activeSection} position="left" />
+          <SideNav activeSection={activeSection} position="right" />
+        </>
+      )}
 
       <header style={styles.header}>
         <motion.div
@@ -364,23 +398,14 @@ export default function App() {
             Mahendra<span style={styles.logoAccent}>.ranwa</span>
           </div>
         </motion.div>
-
-        <motion.nav
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          style={styles.nav}
-        >
-          <a href="#about" style={styles.navLink}>About</a>
-          <a href="#skills" style={styles.navLink}>Skills</a>
-          <a href="#projects" style={styles.navLink}>Projects</a>
-          <a href="#experience" style={styles.navLink}>Experience</a>
-          <a href="#education" style={styles.navLink}>Education</a>
-          <a href="#contact" style={styles.navLink}>Contact</a>
-        </motion.nav>
       </header>
 
-      <main style={styles.main}>
+      <main
+        style={{
+          ...styles.main,
+          ...(useBottomNav ? styles.mainWithBottomNav : null),
+        }}
+      >
         <section id="home" style={styles.hero}>
           <motion.div             variants={staggerContainer}
             initial="hidden"
@@ -472,37 +497,7 @@ export default function App() {
             animate="show"
             style={styles.heroRight}
           >
-            <motion.div
-              animate={{
-                opacity: [0.28, 0.72, 0.28],
-                scale: [1, 1.08, 1],
-              }}
-              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-              style={styles.imageHalo}
-            />
-            <motion.div 
-              whileHover={{ y: -10, scale: 1.01 }}
-              animate={{ 
-                y: [0, -14, 0],
-                rotate: [0, 1, -1, 0],
-              }}
-              transition={{ 
-                type: "spring",
-                stiffness: 140,
-                damping: 16,
-                duration: 6, 
-                repeat: Infinity, 
-                ease: "easeInOut",
-                rotate: { duration: 8, repeat: Infinity, ease: "easeInOut" }
-              }}
-              style={styles.imageCard}
-            >
-              <img
-                src="/mahendra.jpeg"
-                alt="Mahendra Ranwa"
-                style={styles.image}
-              />
-            </motion.div>
+            <HeroVisual />
           </motion.div>
         </section>
 
@@ -513,6 +508,12 @@ export default function App() {
             whileInView="show"
             viewport={{ once: true }}
             custom={0}
+            whileHover={{
+              rotateX: 4,
+              rotateY: -4,
+              y: -6,
+              transition: { duration: 0.22 },
+            }}
             style={styles.largeCard}
           >
             <p style={styles.paragraph}>
@@ -539,8 +540,10 @@ export default function App() {
                 key={skill.title}
                 variants={scaleIn}
                 whileHover={{ 
-                  y: -6, 
-                  scale: 1.01,
+                  y: -10,
+                  scale: 1.02,
+                  rotateX: 7,
+                  rotateY: -7,
                   transition: { duration: 0.2 }
                 }}
                 whileTap={{ scale: 0.98 }}
@@ -580,7 +583,10 @@ export default function App() {
                 key={project.no}
                 variants={slideInLeft}
                 whileHover={{ 
-                  x: 4,
+                  x: 6,
+                  y: -6,
+                  rotateX: 4,
+                  rotateY: -5,
                   transition: { duration: 0.2 }
                 }}
                 style={styles.timelineCard}
@@ -648,6 +654,12 @@ export default function App() {
                 whileInView="show"
                 viewport={{ once: true }}
                 custom={index * 0.1}
+                whileHover={{
+                  y: -6,
+                  rotateX: 4,
+                  rotateY: -4,
+                  transition: { duration: 0.22 },
+                }}
                 style={styles.timelineCard}
               >
                 <div style={styles.timelineDot} />
@@ -681,6 +693,12 @@ export default function App() {
                 whileInView="show"
                 viewport={{ once: true }}
                 custom={index * 0.1}
+                whileHover={{
+                  y: -6,
+                  rotateX: 4,
+                  rotateY: -4,
+                  transition: { duration: 0.22 },
+                }}
                 style={styles.timelineCard}
               >
                 <div style={styles.timelineDot} />
@@ -743,12 +761,157 @@ export default function App() {
   );
 }
 
+function useViewportWidth() {
+  const getWidth = () =>
+    typeof window === "undefined" ? 1200 : window.innerWidth;
+
+  const [viewportWidth, setViewportWidth] = useState(getWidth);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const handleResize = () => setViewportWidth(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return viewportWidth;
+}
+
+function useActiveSection(sectionIds) {
+  const [activeSection, setActiveSection] = useState(sectionIds[0] ?? "home");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const updateActiveSection = () => {
+      const scrollPosition = window.scrollY + window.innerHeight * 0.35;
+      let nextActiveSection = sectionIds[0] ?? "home";
+
+      for (const sectionId of sectionIds) {
+        const element = document.getElementById(sectionId);
+        if (!element) continue;
+
+        if (scrollPosition >= element.offsetTop) {
+          nextActiveSection = sectionId;
+        }
+      }
+
+      setActiveSection(nextActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, [sectionIds]);
+
+  return activeSection;
+}
+
+function useCustomCursor(enabled) {
+  const x = useMotionValue(-120);
+  const y = useMotionValue(-120);
+  const scale = useMotionValue(0);
+  const glowScale = useMotionValue(0);
+  const opacity = useMotionValue(0);
+
+  useEffect(() => {
+    if (!enabled || typeof window === "undefined") {
+      x.set(-120);
+      y.set(-120);
+      scale.set(0);
+      glowScale.set(0);
+      opacity.set(0);
+      return undefined;
+    }
+
+    const interactiveSelector =
+      'a, button, [role="button"], input, textarea, select, summary, .cursor-hover';
+
+    const handleMouseMove = (event) => {
+      const hovering = Boolean(event.target.closest(interactiveSelector));
+      x.set(event.clientX);
+      y.set(event.clientY);
+      opacity.set(1);
+      scale.set(hovering ? 0.8 : 1);
+      glowScale.set(hovering ? 1.55 : 1);
+    };
+
+    const handleMouseLeave = () => {
+      opacity.set(0);
+      scale.set(0);
+      glowScale.set(0);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [enabled]);
+
+  return { x, y, scale, glowScale, opacity };
+}
+
 function Section({ id, title, children }) {
   return (
     <section id={id} style={styles.section}>
+      <div style={styles.sectionGlow} />
       <h2 style={styles.sectionTitle}>{title}</h2>
       {children}
     </section>
+  );
+}
+
+function CustomCursor({ cursor }) {
+  const glowX = useSpring(useTransform(cursor.x, (value) => value - 22), {
+    stiffness: 280,
+    damping: 22,
+    mass: 0.6,
+  });
+  const glowY = useSpring(useTransform(cursor.y, (value) => value - 22), {
+    stiffness: 280,
+    damping: 22,
+    mass: 0.6,
+  });
+  const dotX = useSpring(useTransform(cursor.x, (value) => value - 6), {
+    stiffness: 420,
+    damping: 28,
+    mass: 0.45,
+  });
+  const dotY = useSpring(useTransform(cursor.y, (value) => value - 6), {
+    stiffness: 420,
+    damping: 28,
+    mass: 0.45,
+  });
+  const glowScale = useSpring(cursor.glowScale, {
+    stiffness: 280,
+    damping: 22,
+    mass: 0.6,
+  });
+  const dotScale = useSpring(cursor.scale, {
+    stiffness: 420,
+    damping: 28,
+    mass: 0.45,
+  });
+  const cursorOpacity = useSpring(cursor.opacity, {
+    stiffness: 300,
+    damping: 26,
+  });
+
+  return (
+    <>
+      <motion.div style={{ ...styles.cursorGlow, x: glowX, y: glowY, scale: glowScale, opacity: cursorOpacity }} />
+      <motion.div style={{ ...styles.cursorDot, x: dotX, y: dotY, scale: dotScale, opacity: cursorOpacity }} />
+    </>
   );
 }
 
@@ -784,25 +947,178 @@ function ContactCard({ icon, value, href, type = "link" }) {
   );
 }
 
-function SideNav() {
-  const links = [
-    { href: "#home", icon: <Home size={18} />, label: "Home" },
-    { href: "#about", icon: <User size={18} />, label: "About" },
-    { href: "#skills", icon: <Cpu size={18} />, label: "Skills" },
-    { href: "#projects", icon: <FolderKanban size={18} />, label: "Projects" },
-    { href: "#experience", icon: <Briefcase size={18} />, label: "Experience" },
-    { href: "#education", icon: <Award size={18} />, label: "Education" },
-    { href: "#contact", icon: <Mail size={18} />, label: "Contact" },
-  ];
+function HeroVisual() {
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+
+  const rotateX = useSpring(useTransform(pointerY, [-0.5, 0.5], [10, -10]), {
+    stiffness: 160,
+    damping: 18,
+  });
+  const rotateY = useSpring(useTransform(pointerX, [-0.5, 0.5], [-12, 12]), {
+    stiffness: 160,
+    damping: 18,
+  });
+  const floatX = useSpring(useTransform(pointerX, [-0.5, 0.5], [-10, 10]), {
+    stiffness: 120,
+    damping: 20,
+  });
+  const floatY = useSpring(useTransform(pointerY, [-0.5, 0.5], [-8, 8]), {
+    stiffness: 120,
+    damping: 20,
+  });
+
+  const handlePointerMove = (event) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+    pointerX.set(x);
+    pointerY.set(y);
+  };
+
+  const resetPointer = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
 
   return (
-    <div style={styles.sideNav}>
-      {links.map((link) => (
-        <a key={link.href} href={link.href} style={styles.sideNavItem} title={link.label}>
-          {link.icon}
-        </a>
-      ))}
-    </div>
+    <motion.div
+      style={styles.heroVisualWrap}
+      onMouseMove={handlePointerMove}
+      onMouseLeave={resetPointer}
+    >
+      <motion.div
+        animate={{
+          opacity: [0.24, 0.7, 0.24],
+          scale: [1, 1.08, 1],
+        }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+        style={styles.imageHalo}
+      />
+
+      <motion.div
+        animate={{
+          rotate: [0, 180, 360],
+        }}
+        transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+        style={styles.heroRing}
+      />
+
+      <motion.div
+        style={{
+          ...styles.imageCard3DWrap,
+          rotateX,
+          rotateY,
+          x: floatX,
+          y: floatY,
+        }}
+      >
+        <motion.div
+          animate={{
+            y: [0, -12, 0],
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          style={styles.imageCard}
+        >
+          <motion.div
+            animate={{
+              y: [0, -8, 0],
+              x: [0, 4, 0],
+            }}
+            transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
+            style={styles.heroChipTop}
+          >
+            Embedded Systems
+          </motion.div>
+
+          <motion.div
+            animate={{
+              y: [0, 10, 0],
+              x: [0, -6, 0],
+            }}
+            transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut" }}
+            style={styles.heroChipBottom}
+          >
+            Support + Hardware
+          </motion.div>
+
+          <div style={styles.imageDepthShadow} />
+          <div style={styles.imageGradientPlane} />
+          <img
+            src="/mahendra.jpeg"
+            alt="Mahendra Ranwa"
+            style={styles.image}
+          />
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        animate={{
+          y: [0, -10, 0],
+          rotate: [-3, 0, -3],
+        }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        style={styles.heroStatLeft}
+      >
+        <span style={styles.heroStatLabel}>Realtime</span>
+        <strong style={styles.heroStatValue}>Systems</strong>
+      </motion.div>
+
+      <motion.div
+        animate={{
+          y: [0, 12, 0],
+          rotate: [3, 0, 3],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        style={styles.heroStatRight}
+      >
+        <span style={styles.heroStatLabel}>Hands-on</span>
+        <strong style={styles.heroStatValue}>Troubleshooting</strong>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function SideNav({ useBottomNav, activeSection, position = "right" }) {
+  return (
+    <nav
+      aria-label="Section navigation"
+      style={{
+        ...styles.sideNav,
+        ...(useBottomNav
+          ? styles.sideNavBottom
+          : position === "left"
+            ? styles.sideNavLeft
+            : styles.sideNavRight),
+      }}
+    >
+      {navLinks.map((link) => {
+        const isActive = activeSection === link.href.slice(1);
+
+        return (
+          <motion.a
+            key={link.href}
+            href={link.href}
+            whileHover={{
+              y: -3,
+              scale: useBottomNav ? 1.02 : 1.06,
+            }}
+            whileTap={{ scale: 0.96 }}
+            style={{
+              ...styles.sideNavItem,
+              ...(useBottomNav ? styles.sideNavItemBottom : null),
+              ...(isActive ? styles.sideNavItemActive : null),
+            }}
+            title={link.label}
+            aria-label={link.label}
+            aria-current={isActive ? "location" : undefined}
+          >
+            {link.icon}
+          </motion.a>
+        );
+      })}
+    </nav>
   );
 }
 
@@ -859,6 +1175,36 @@ const styles = {
     overflowX: "hidden",
   },
 
+  pageCursorDesktop: {
+    cursor: "none",
+  },
+
+  cursorGlow: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: 44,
+    height: 44,
+    borderRadius: "50%",
+    background: "radial-gradient(circle, rgba(103,232,249,0.28), rgba(96,165,250,0.12) 45%, transparent 72%)",
+    pointerEvents: "none",
+    zIndex: 80,
+    mixBlendMode: "screen",
+  },
+
+  cursorDot: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: 12,
+    height: 12,
+    borderRadius: "50%",
+    background: "linear-gradient(135deg, #67e8f9, #60a5fa)",
+    boxShadow: "0 0 18px rgba(34,211,238,0.45)",
+    pointerEvents: "none",
+    zIndex: 81,
+  },
+
   bgWrap: {
     position: "fixed",
     inset: 0,
@@ -906,17 +1252,49 @@ const styles = {
     backgroundImage:
       "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
     backgroundSize: "70px 70px",
+    transform: "perspective(1200px) rotateX(72deg) scale(1.35)",
+    transformOrigin: "center bottom",
+    opacity: 0.5,
   },
 
   sideNav: {
     position: "fixed",
-    right: 18,
-    top: "50%",
-    transform: "translateY(-50%)",
     zIndex: 30,
     display: "flex",
-    flexDirection: "column",
     gap: 12,
+    alignItems: "center",
+  },
+
+  sideNavRight: {
+    top: 0,
+    bottom: 0,
+    right: 18,
+    flexDirection: "column",
+    justifyContent: "center",
+    padding: "28px 0",
+  },
+
+  sideNavLeft: {
+    top: 0,
+    bottom: 0,
+    left: 18,
+    flexDirection: "column",
+    justifyContent: "center",
+    padding: "28px 0",
+  },
+
+  sideNavBottom: {
+    left: 16,
+    right: 16,
+    bottom: 16,
+    justifyContent: "center",
+    flexWrap: "wrap",
+    padding: 10,
+    borderRadius: 22,
+    background: "linear-gradient(180deg, rgba(9,14,30,0.82), rgba(5,8,22,0.72))",
+    backdropFilter: "blur(18px)",
+    WebkitBackdropFilter: "blur(18px)",
+    boxShadow: "0 18px 48px rgba(0,0,0,0.26)",
   },
 
   sideNavItem: {
@@ -928,10 +1306,23 @@ const styles = {
     borderRadius: 14,
     color: "#cbd5e1",
     textDecoration: "none",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.12)",
+    background: "linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04))",
     backdropFilter: "blur(12px)",
     WebkitBackdropFilter: "blur(12px)",
+    boxShadow: "0 10px 24px rgba(3,7,18,0.16)",
+    transition: "transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, opacity 0.2s ease",
+  },
+
+  sideNavItemBottom: {
+    flex: "1 1 46px",
+    maxWidth: 58,
+  },
+
+  sideNavItemActive: {
+    color: "#ffffff",
+    background: "linear-gradient(135deg, rgba(34,211,238,0.22), rgba(96,165,250,0.18) 55%, rgba(255,255,255,0.12))",
+    boxShadow: "0 14px 34px rgba(34,211,238,0.14), 0 0 24px rgba(96,165,250,0.08)",
+    transform: "translateY(-2px)",
   },
 
   header: {
@@ -939,12 +1330,11 @@ const styles = {
     top: 0,
     zIndex: 20,
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     alignItems: "center",
     padding: "clamp(12px, 3vw, 20px) clamp(16px, 4vw, 32px) clamp(12px, 3vw, 20px) clamp(16px, 10vw, 92px)",
     background: "rgba(5,8,22,0.6)",
     backdropFilter: "blur(14px)",
-    borderBottom: "1px solid rgba(255,255,255,0.08)",
     flexWrap: "wrap",
     gap: "clamp(8px, 2vw, 12px)",
   },
@@ -958,21 +1348,14 @@ const styles = {
     color: "#22d3ee",
   },
 
-  nav: {
-    display: "flex",
-    gap: "clamp(12px, 3vw, 24px)",
-    flexWrap: "wrap",
-  },
-
-  navLink: {
-    color: "#cbd5e1",
-    textDecoration: "none",
-    fontSize: 14,
-  },
-
   main: {
     position: "relative",
     zIndex: 1,
+    transformStyle: "preserve-3d",
+  },
+
+  mainWithBottomNav: {
+    paddingBottom: 108,
   },
 
   hero: {
@@ -1079,6 +1462,9 @@ const styles = {
     ...glass,
     borderRadius: 22,
     padding: 18,
+    transformStyle: "preserve-3d",
+    background: "linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.035))",
+    boxShadow: "0 20px 42px rgba(2,6,23,0.22)",
   },
 
   miniLabel: {
@@ -1095,12 +1481,26 @@ const styles = {
     color: "white",
     fontSize: 16,
     fontWeight: 800,
+    textShadow: "0 8px 18px rgba(15,23,42,0.22)",
   },
 
   heroRight: {
     display: "flex",
     justifyContent: "center",
     position: "relative",
+    minHeight: 540,
+  },
+
+  heroVisualWrap: {
+    position: "relative",
+    width: "100%",
+    maxWidth: 460,
+    minHeight: 540,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    perspective: 1400,
+    transformStyle: "preserve-3d",
   },
 
   imageGlow: {
@@ -1113,21 +1513,42 @@ const styles = {
 
   imageHalo: {
     position: "absolute",
-    inset: -18,
+    inset: 20,
     borderRadius: 999,
     background: "radial-gradient(circle, rgba(99,102,241,0.32), transparent 55%)",
-    filter: "blur(30px)",
+    filter: "blur(36px)",
     zIndex: 0,
+  },
+
+  heroRing: {
+    position: "absolute",
+    width: 400,
+    height: 400,
+    borderRadius: "50%",
+    border: "1px solid rgba(103,232,249,0.14)",
+    boxShadow: "0 0 0 22px rgba(255,255,255,0.015), 0 0 90px rgba(34,211,238,0.08)",
+    zIndex: 0,
+  },
+
+  imageCard3DWrap: {
+    position: "relative",
+    width: "100%",
+    maxWidth: 390,
+    transformStyle: "preserve-3d",
+    zIndex: 2,
   },
 
   imageCard: {
     ...glass,
     position: "relative",
-    padding: 16,
-    borderRadius: 30,
+    padding: 18,
+    borderRadius: 34,
     width: "100%",
     maxWidth: 380,
     zIndex: 1,
+    overflow: "visible",
+    transformStyle: "preserve-3d",
+    boxShadow: "0 34px 90px rgba(2,6,23,0.38)",
   },
 
   imageBadge: {
@@ -1147,9 +1568,110 @@ const styles = {
 
   image: {
     width: "100%",
-    borderRadius: 22,
+    borderRadius: 26,
     display: "block",
     objectFit: "cover",
+    position: "relative",
+    zIndex: 3,
+    transform: "translateZ(44px)",
+  },
+
+  imageDepthShadow: {
+    position: "absolute",
+    inset: "14% 12% -10% 12%",
+    background: "radial-gradient(circle at 50% 50%, rgba(15,23,42,0.28), transparent 68%)",
+    filter: "blur(28px)",
+    transform: "translateZ(-20px)",
+    zIndex: 1,
+  },
+
+  imageGradientPlane: {
+    position: "absolute",
+    inset: 0,
+    borderRadius: 34,
+    background: "linear-gradient(140deg, rgba(103,232,249,0.16), rgba(96,165,250,0.08) 40%, rgba(255,255,255,0.02) 62%, rgba(192,132,252,0.14))",
+    transform: "translateZ(18px)",
+    zIndex: 2,
+    pointerEvents: "none",
+    mixBlendMode: "screen",
+  },
+
+  heroChipTop: {
+    position: "absolute",
+    top: -18,
+    left: -24,
+    zIndex: 4,
+    padding: "11px 16px",
+    borderRadius: 999,
+    background: "rgba(10,16,33,0.8)",
+    color: "#67e8f9",
+    fontSize: 12,
+    fontWeight: 800,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    boxShadow: "0 18px 34px rgba(2,6,23,0.28)",
+    backdropFilter: "blur(14px)",
+    WebkitBackdropFilter: "blur(14px)",
+    transform: "translateZ(80px)",
+  },
+
+  heroChipBottom: {
+    position: "absolute",
+    right: -28,
+    bottom: 22,
+    zIndex: 4,
+    padding: "12px 16px",
+    borderRadius: 18,
+    background: "rgba(10,16,33,0.82)",
+    color: "#dbeafe",
+    fontSize: 13,
+    fontWeight: 700,
+    boxShadow: "0 18px 34px rgba(2,6,23,0.28)",
+    backdropFilter: "blur(14px)",
+    WebkitBackdropFilter: "blur(14px)",
+    transform: "translateZ(78px)",
+  },
+
+  heroStatLeft: {
+    ...glass,
+    position: "absolute",
+    left: -14,
+    bottom: 110,
+    zIndex: 3,
+    padding: "16px 18px",
+    borderRadius: 22,
+    minWidth: 132,
+    transform: "rotate(-8deg)",
+  },
+
+  heroStatRight: {
+    ...glass,
+    position: "absolute",
+    right: -8,
+    top: 88,
+    zIndex: 3,
+    padding: "16px 18px",
+    borderRadius: 22,
+    minWidth: 150,
+    transform: "rotate(7deg)",
+  },
+
+  heroStatLabel: {
+    display: "block",
+    color: "#94a3b8",
+    fontSize: 11,
+    textTransform: "uppercase",
+    letterSpacing: "0.14em",
+    marginBottom: 8,
+    fontWeight: 700,
+  },
+
+  heroStatValue: {
+    display: "block",
+    color: "white",
+    fontSize: 16,
+    lineHeight: 1.2,
+    fontWeight: 800,
   },
 
   introOverlay: {
@@ -1188,6 +1710,8 @@ const styles = {
     textAlign: "center",
     overflow: "hidden",
     zIndex: 2,
+    transform: "perspective(1200px) rotateX(6deg)",
+    transformStyle: "preserve-3d",
   },
 
   introBadge: {
@@ -1243,10 +1767,34 @@ const styles = {
   },
 
   introHint: {
+    display: "none",
     marginTop: 22,
     color: "#94a3b8",
     fontSize: 14,
     letterSpacing: "0.02em",
+  },
+
+  introFun: {
+    marginTop: 22,
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+    padding: "12px 18px",
+    borderRadius: 999,
+    color: "#eff6ff",
+    fontSize: 13,
+    fontWeight: 800,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    background: "linear-gradient(135deg, rgba(56,189,248,0.16), rgba(124,58,237,0.2), rgba(255,255,255,0.08))",
+    border: "1px solid rgba(125,211,252,0.24)",
+    boxShadow: "0 14px 32px rgba(14,165,233,0.14)",
+    width: "fit-content",
+    marginLeft: "auto",
+    marginRight: "auto",
+    backdropFilter: "blur(14px)",
+    WebkitBackdropFilter: "blur(14px)",
   },
 
   introWave: {
@@ -1267,6 +1815,18 @@ const styles = {
     maxWidth: 1280,
     margin: "0 auto",
     padding: "clamp(40px, 10vw, 90px) clamp(16px, 4vw, 32px) clamp(40px, 10vw, 90px) clamp(16px, 10vw, 92px)",
+    position: "relative",
+    transformStyle: "preserve-3d",
+  },
+
+  sectionGlow: {
+    position: "absolute",
+    inset: "8% 10% auto 10%",
+    height: 140,
+    background: "radial-gradient(circle, rgba(56,189,248,0.08), transparent 70%)",
+    filter: "blur(26px)",
+    pointerEvents: "none",
+    zIndex: 0,
   },
 
   sectionTitle: {
@@ -1274,12 +1834,20 @@ const styles = {
     fontWeight: 900,
     marginBottom: "clamp(16px, 3vw, 28px)",
     letterSpacing: "-0.04em",
+    position: "relative",
+    zIndex: 1,
+    textShadow: "0 12px 32px rgba(34,211,238,0.12)",
   },
 
   largeCard: {
     ...glass,
     borderRadius: 28,
     padding: 28,
+    position: "relative",
+    zIndex: 1,
+    transformStyle: "preserve-3d",
+    background: "linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.035))",
+    boxShadow: "0 30px 70px rgba(2,6,23,0.28)",
   },
 
   paragraph: {
@@ -1303,18 +1871,25 @@ const styles = {
     borderRadius: 16,
     marginBottom: 20,
     border: "1px solid rgba(255,255,255,0.1)",
+    boxShadow: "0 24px 48px rgba(2,6,23,0.24)",
+    transform: "translateZ(30px)",
   },
 
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(clamp(200px, 40vw, 240px), 1fr))",
     gap: "clamp(14px, 3vw, 22px)",
+    position: "relative",
+    zIndex: 1,
   },
 
   card: {
     ...glass,
     borderRadius: 26,
     padding: 24,
+    transformStyle: "preserve-3d",
+    background: "linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035))",
+    boxShadow: "0 26px 56px rgba(2,6,23,0.24)",
   },
 
   iconBox: {
@@ -1327,6 +1902,8 @@ const styles = {
     background: "rgba(34,211,238,0.1)",
     color: "#67e8f9",
     marginBottom: 16,
+    boxShadow: "0 18px 28px rgba(34,211,238,0.12)",
+    transform: "translateZ(22px)",
   },
 
   cardTitle: {
@@ -1350,6 +1927,7 @@ const styles = {
     color: "#dbeafe",
     fontSize: 15,
     marginBottom: 10,
+    boxShadow: "0 12px 22px rgba(2,6,23,0.12)",
   },
 
   projectNo: {
@@ -1369,6 +1947,8 @@ const styles = {
   timelineWrap: {
     display: "grid",
     gap: "clamp(14px, 3vw, 22px)",
+    position: "relative",
+    zIndex: 1,
   },
 
   timelineCard: {
@@ -1376,6 +1956,9 @@ const styles = {
     borderRadius: 28,
     padding: 26,
     position: "relative",
+    transformStyle: "preserve-3d",
+    background: "linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.04))",
+    boxShadow: "0 30px 68px rgba(2,6,23,0.26)",
   },
 
   timelineDot: {
@@ -1404,6 +1987,7 @@ const styles = {
     margin: 0,
     fontSize: 24,
     fontWeight: 800,
+    textShadow: "0 10px 22px rgba(15,23,42,0.2)",
   },
 
   jobCompany: {
