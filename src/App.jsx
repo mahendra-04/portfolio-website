@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import {
   ArrowRight,
+  Check,
+  Copy,
   Cpu,
+  Download,
+  Filter,
   Wrench,
   Terminal,
   Mail,
@@ -104,146 +108,185 @@ const assetBase = import.meta.env.BASE_URL;
 const skills = [
   {
     icon: <Cpu size={22} />,
-    title: "Systems Integration",
-    items: ["Embedded firmware", "Microcontroller design", "Sensors & actuators", "ADC / PWM / UART", "Real-time control"],
+    title: "Operating Systems",
+    items: ["Windows 10/11", "Linux/UNIX", "System setup", "User environment support", "Desktop troubleshooting"],
   },
   {
     icon: <Terminal size={22} />,
-    title: "Software & Networks",
-    items: ["C / Python / Java", "Linux systems", "Networking fundamentals", "TCP/IP & Ethernet", "Protocol diagnostics"],
+    title: "Networking & Tools",
+    items: ["TCP/IP", "DNS / DHCP", "IP configuration", "Office 365", "Git / Anaconda / MPLAB X / STM32CubeMX"],
   },
   {
     icon: <Wrench size={22} />,
-    title: "Lab & Support",
-    items: ["PCB assembly", "Oscilloscopes & multimeters", "Circuit troubleshooting", "System validation", "User-facing support"],
+    title: "Hardware & Support",
+    items: ["PC assembly", "Peripherals & printers", "Ticket handling", "Issue diagnosis", "Documentation & user support"],
   },
 ];
-
 const projects = [
   {
     no: "01",
-    title: "Digital Multimeter (DMM) Fabrication",
-    tech: "Electrical Fabrication",
-    image: `${assetBase}digital-multimeter.png`,
+    title: "Personal Portfolio Website",
+    tech: "React, Vite, JavaScript, HTML, CSS",
+    image: `${assetBase}mahendra.jpeg`,
+    category: "Web",
+    tags: ["Frontend", "Responsive UI", "Deployment"],
     points: [
-      "Assembled and soldered a functional digital multimeter circuit",
-      "Performed PCB-level soldering following electronic assembly practices",
-      "Tested and verified voltage, current, and resistance measurements",
-      "Diagnosed and corrected circuit faults during assembly",
-      "Ensured accurate functionality through validation and troubleshooting",
+      "Developed and deployed a responsive portfolio website using React and Vite",
+      "Managed version control and deployment using Git and GitHub Pages",
+      "Resolved deployment issues including broken asset paths and production build differences",
+      "Implemented responsive UI behavior for desktop and mobile devices",
+      "Used ESLint and modern UI libraries to improve code quality and presentation",
     ],
   },
   {
     no: "02",
-    title: "Embedded Control and Signal Processing System",
-    tech: "C, STM32 (Nucleo L476)",
-    image: `${assetBase}embedded-control.jpg`,
+    title: "Raspberry Pi Smart Car System",
+    tech: "Python, Raspberry Pi",
+    image: `${assetBase}buggy.jpg`,
+    category: "Embedded",
+    tags: ["Raspberry Pi", "Remote Access", "Sensors"],
     points: [
-      "Developed embedded applications using GPIO, timers, ADC, interrupts, PWM, and input capture",
-      "Designed timer-based systems (TIM6, TIM7) for precise delays using PSC and ARR calculations",
-      "Implemented interrupt-driven control with EXTI and timer interrupts for real-time response",
-      "Generated and analyzed PWM signals and measured signal characteristics using input capture",
-      "Integrated ADC and analog watchdog for real-time monitoring and system control",
+      "Built and configured a three-wheel smart car with motors, sensors, and control modules",
+      "Installed and configured Raspberry Pi OS and the supporting system environment",
+      "Established remote access using SSH and VNC for control and monitoring",
+      "Integrated an ultrasonic sensor for distance measurement and obstacle detection",
+      "Troubleshot hardware connections, power issues, and software configuration",
     ],
   },
   {
     no: "03",
-    title: "Embedded Systems Application (ADC, Timers, Interrupts, UART)",
-    tech: "C, PIC24 (Explorer 16)",
-    image: `${assetBase}explorer16.jpg`,
+    title: "System Troubleshooting & Embedded Diagnostics",
+    tech: "Hardware diagnostics, system testing, structured debugging",
+    image: `${assetBase}embedded-control.jpg`,
+    category: "Support",
+    tags: ["Diagnostics", "Testing", "Root Cause Analysis"],
     points: [
-      "Built multi-module system integrating ADC, timers, interrupts, GPIO, and UART communication",
-      "Acquired and processed real-time sensor data with interrupt-driven ADC",
-      "Transmitted formatted data via UART (9600 baud) to terminal interface",
-      "Implemented LED control logic with variable timing and pattern generation",
-      "Designed interrupt-based system for timing, control, and user interaction",
-    ],
-  },
-  {
-    no: "04",
-    title: "Smart Car System (3-Wheel Buggy)",
-    tech: "Raspberry Pi, Python",
-    image: `${assetBase}buggy.jpg`,
-    points: [
-      "Built and assembled a 3-wheel smart car integrating motors, sensors, camera, and control modules",
-      "Configured Raspberry Pi GPIO for motor control, sensor interfacing, and peripheral communication",
-      "Implemented remote control and video streaming for real-time monitoring",
-      "Integrated ultrasonic sensor for distance measurement and obstacle awareness",
-      "Developed modular control logic for movement, sensing, and system coordination",
+      "Diagnosed hardware and software faults using structured debugging methods",
+      "Performed system-level testing to improve reliability and performance",
+      "Applied troubleshooting workflows across hardware, networking, and embedded lab environments",
+      "Used practical diagnostics to reduce downtime and isolate root causes quickly",
+      "Strengthened problem-solving through hands-on testing and validation work",
     ],
   },
 ];
-
+const projectFilters = ["All", "Support", "Embedded", "Web"];
+const snapshotStats = [
+  { value: "3+", label: "Hands-on project builds" },
+  { value: "A+", label: "Core 1 completed" },
+  { value: "24/7", label: "Troubleshooting mindset" },
+  { value: "Hybrid", label: "Open to onsite and remote support" },
+];
+const quickActions = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/mahendra-ranwa/",
+    icon: <ExternalLink size={16} />,
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/mahendra-04",
+    icon: <ExternalLink size={16} />,
+  },
+  {
+    label: "Resume",
+    href: `${assetBase}MahendraRanwaCS.pdf`,
+    icon: <Download size={16} />,
+    download: true,
+  },
+];
+const highlights = [
+  {
+    title: "Target Roles",
+    description: "Actively pursuing IT Support, Help Desk, and Desktop Support opportunities where I can solve user issues quickly and communicate clearly.",
+  },
+  {
+    title: "Support Strengths",
+    description: "Troubleshoot Windows environments, hardware faults, software issues, user access problems, and basic network connectivity with a calm, structured approach.",
+  },
+  {
+    title: "What I Bring",
+    description: "Hands-on lab support, volunteer web support, embedded systems experience, and a service mindset focused on reducing downtime for users.",
+  },
+];
+const homeLab = [
+  "Installed and configured Windows and Raspberry Pi environments for testing and remote support practice.",
+  "Used SSH and VNC to manage systems remotely and verify connectivity in real-world troubleshooting scenarios.",
+  "Worked through hardware, networking, and software faults using a step-by-step diagnostic process.",
+  "Built confidence with peripherals, system setup, and issue isolation that maps directly to entry-level IT support work.",
+];
 const experience = [
   {
     role: "Web Technician (Volunteer)",
     company: "U+ Toastmasters Academy",
-    date: "Sep 2025 – Mar 2026",
+    date: "Sep 2025 - Mar 2026",
     points: [
-      "Managed website updates and digital content for the community platform.",
-      "Maintained system reliability and supported technical operations.",
-      "Collaborated with teams to improve digital communication workflows.",
+      "Maintained website functionality and resolved technical issues to keep the team site reliable for day-to-day use.",
+      "Supported users with content updates, access-related problems, and troubleshooting requests with clear communication.",
+      "Worked with team members to improve reliability and respond quickly when issues affected usability.",
     ],
   },
   {
     role: "Support Technician",
     company: "Sheridan College IT Centre, Brampton",
-    date: "Apr 2024 – Aug 2024",
+    date: "Apr 2024 - Aug 2024",
     points: [
-      "Provided technical support for hardware, software, and network issues.",
-      "Installed and configured lab systems and academic software.",
-      "Diagnosed and resolved system faults to minimize downtime.",
-      "Assisted users with OS, connectivity, and application troubleshooting.",
+      "Provided front-line technical support for hardware, software, and network issues in busy academic lab environments.",
+      "Installed and configured Windows systems and academic software across multiple workstations to keep labs ready for student use.",
+      "Diagnosed and resolved Wi-Fi, LAN, and IP configuration issues to restore connectivity with minimal downtime.",
+      "Assisted users with login problems, system errors, and application troubleshooting while maintaining a strong service mindset.",
+      "Improved system availability by identifying root causes quickly and resolving technical faults before they escalated.",
     ],
   },
   {
-    role: "Tutor (Electronics Fabrication)",
+    role: "Tutor - Electronics Fabrication",
     company: "Sheridan College",
-    date: "May 2023 – Dec 2023",
+    date: "May 2023 - Dec 2023",
     points: [
-      "Assisted students with soldering techniques, PCB assembly, and component placement.",
-      "Guided troubleshooting of circuit faults and measurement using lab equipment.",
-      "Explained electronic fabrication concepts and safe handling practices.",
-      "Supported hands-on lab sessions to improve practical skills and accuracy.",
+      "Helped students troubleshoot hardware and circuit issues using practical diagnostic steps.",
+      "Guided safe use of lab tools, test equipment, and debugging techniques during hands-on work.",
+      "Strengthened technical problem-solving by explaining faults clearly and helping students test fixes methodically.",
     ],
   },
 ];
-
 const educationCertifications = [
   {
-    role: "Computer Engineering Technology",
-    company: "Sheridan College, Brampton",
-    date: "Jan 2023 – Apr 2026",
+    role: "Computer Engineering Technology (Advanced Diploma)",
+    company: "Sheridan College",
+    date: "Jan 2023 - Apr 2026",
     points: [
-      "Specialized in embedded systems, microcontrollers, and hardware-software integration",
-      "Completed courses in Embedded Systems, Digital Electronics, Microprocessor Design, Control Systems, Networking, and Capstone Engineering",
-      "Worked in lab-based environments with STM32, PIC24, Arduino, Raspberry Pi, test equipment, and integrated systems",
-      "Delivered practical projects that include smart vehicles, instrumentation systems, and real-time control solutions",
-      "Prepared for professional certification and industry-ready work through capstone and co-op learning pathways",
+      "Built hands-on experience across embedded systems, networking, and computer support.",
+      "Worked with hardware-software integration, diagnostics, and lab-based technical problem solving.",
+      "Developed practical skills through system testing, troubleshooting, and project work.",
+    ],
+  },
+  {
+    role: "CompTIA A+ (In Progress)",
+    company: "Certification",
+    date: "Current",
+    points: [
+      "Core 1 (220-1101): Completed",
+      "Core 2 (220-1102): In progress",
     ],
   },
   {
     role: "IT Service Desk: Service Management",
     company: "Certification",
-    date: "Completed",
+    date: "March 2026",
     points: [
-      "Mastered IT service management principles and helpdesk best practices",
-      "Learned effective communication and problem-solving techniques for user support",
-      "Gained knowledge in ticket management, system troubleshooting, and service delivery",
+      "Focused on service management fundamentals, support workflows, and user communication.",
+      "Strengthened troubleshooting and service delivery practices for IT support work.",
     ],
   },
   {
     role: "Computer Components and Peripherals for IT Technicians",
     company: "Certification",
-    date: "Completed",
+    date: "March 2026",
     points: [
-      "Acquired in-depth knowledge of computer hardware components and peripherals",
-      "Learned diagnostic techniques for hardware troubleshooting and repair",
-      "Developed skills in system assembly, maintenance, and technical support operations",
+      "Built knowledge of computer hardware components, peripherals, and repair-oriented troubleshooting.",
+      "Improved understanding of system assembly, maintenance, and technician support tasks.",
     ],
   },
 ];
-
 const navLinks = [
   { href: "#home", icon: <Home size={18} />, label: "Home" },
   { href: "#about", icon: <User size={18} />, label: "About" },
@@ -256,17 +299,38 @@ const navLinks = [
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
+  const [selectedProjectFilter, setSelectedProjectFilter] = useState("All");
+  const [copiedLabel, setCopiedLabel] = useState("");
   const viewportWidth = useViewportWidth();
   const useBottomNav = viewportWidth <= 900;
   const isPhone = viewportWidth <= 640;
   const isCompactPhone = viewportWidth <= 400;
   const activeSection = useActiveSection(navLinks.map((link) => link.href.slice(1)));
   const cursor = useCustomCursor(viewportWidth > 900);
+  const scrollProgress = useScrollProgress();
+  const filteredProjects = selectedProjectFilter === "All"
+    ? projects
+    : projects.filter((project) => project.category === selectedProjectFilter);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setShowIntro(false), 4500);
+    const timeout = setTimeout(() => setShowIntro(false), 1400);
     return () => clearTimeout(timeout);
   }, []);
+
+  useEffect(() => {
+    if (!copiedLabel) return undefined;
+    const timeout = setTimeout(() => setCopiedLabel(""), 1800);
+    return () => clearTimeout(timeout);
+  }, [copiedLabel]);
+
+  const handleCopy = async (label, value) => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopiedLabel(label);
+    } catch {
+      setCopiedLabel(`${label} copied`);
+    }
+  };
 
   return (
     <motion.div 
@@ -278,6 +342,12 @@ export default function App() {
         ...(viewportWidth > 900 ? styles.pageCursorDesktop : null),
       }}
     >
+      <motion.div
+        style={{
+          ...styles.scrollProgress,
+          scaleX: scrollProgress,
+        }}
+      />
       <AnimatePresence>
         {showIntro && (
           <motion.div
@@ -371,7 +441,7 @@ export default function App() {
                 }}
               >
                 <Sparkles size={14} />
-                <span>Have fun</span>
+                <span>Open to Work</span>
               </motion.div>
 
               <motion.div
@@ -380,7 +450,7 @@ export default function App() {
                 transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
                 style={styles.introHint}
               >
-                ✦ enjoy the animated entry and discover the projects below.
+                Focused on IT support, troubleshooting, and dependable user service.
               </motion.div>
             </motion.div>
 
@@ -422,6 +492,29 @@ export default function App() {
             Mahendra<span style={styles.logoAccent}>.ranwa</span>
           </div>
         </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.28 }}
+          style={{
+            ...styles.headerActions,
+            ...(isPhone ? styles.headerActionsPhone : null),
+          }}
+        >
+          {quickActions.map((action) => (
+            <a
+              key={action.label}
+              href={action.href}
+              target={action.download ? undefined : "_blank"}
+              rel={action.download ? undefined : "noreferrer"}
+              download={action.download || undefined}
+              style={styles.headerAction}
+            >
+              {action.icon}
+              <span>{action.label}</span>
+            </a>
+          ))}
+        </motion.div>
       </header>
 
       <main
@@ -457,7 +550,7 @@ export default function App() {
             }}
             >
               <Sparkles size={14} />
-              Portfolio Experience
+              Open to IT Support Opportunities
             </motion.div>
 
             <motion.h1
@@ -468,11 +561,11 @@ export default function App() {
                 ...(isCompactPhone ? styles.heroTitleCompactPhone : null),
               }}
             >
-              Building systems
+              Helping teams stay
               <br />
-              that move from
+              productive across
               <br />
-              <span style={styles.gradientText}>code to hardware.</span>
+              <span style={styles.gradientText}>systems, users, and networks.</span>
             </motion.h1>
 
             <motion.p
@@ -484,7 +577,7 @@ export default function App() {
                 ...(isCompactPhone ? styles.heroSubtitleCompactPhone : null),
               }}
             >
-              Mahendra Ranwa · Computer Engineering Technology Graduate, Sheridan College
+              Mahendra Ranwa | IT Support Technician | Help Desk | Desktop Support
             </motion.p>
 
             <motion.p
@@ -496,8 +589,20 @@ export default function App() {
                 ...(isCompactPhone ? styles.heroDescCompactPhone : null),
               }}
             >
-              Sheridan College's Computer Engineering Technology program trains me to integrate hardware and software, design and test embedded devices, and maintain computer and network systems.
+              IT Support Technician based in Brampton with hands-on experience troubleshooting hardware, software, and connectivity issues in academic and team-based environments.
             </motion.p>
+
+            <motion.div
+              variants={staggerContainer}
+              style={{
+                ...styles.heroStatusRow,
+                ...(isPhone ? styles.heroStatusRowPhone : null),
+              }}
+            >
+              <motion.span variants={scaleIn} style={styles.statusPill}>Brampton, Ontario</motion.span>
+              <motion.span variants={scaleIn} style={styles.statusPill}>Available for full-time roles</motion.span>
+              <motion.span variants={scaleIn} style={styles.statusPill}>CompTIA A+ Core 1 completed</motion.span>
+            </motion.div>
 
             <motion.div
               variants={heroText}
@@ -529,7 +634,19 @@ export default function App() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Open Resume
+                View Resume
+              </motion.a>
+              <motion.a
+                whileHover={{ y: -2, scale: 1.02 }}
+                style={{
+                ...styles.secondaryBtn,
+                ...(isPhone ? styles.heroButtonPhone : null),
+                ...(isCompactPhone ? styles.heroButtonCompactPhone : null),
+              }}
+                href={`${assetBase}MahendraRanwaCS.pdf`}
+                download
+              >
+                Download Resume
               </motion.a>
             </motion.div>
 
@@ -548,8 +665,8 @@ export default function App() {
                   ...(isCompactPhone ? styles.heroMiniCardCompactPhone : null),
                 }}
               >
-                <span style={styles.miniLabel}>Program</span>
-                <strong style={styles.miniValue}>Computer Engineering Technology</strong>
+                <span style={styles.miniLabel}>Target</span>
+                <strong style={styles.miniValue}>IT Support and Help Desk Roles</strong>
               </motion.div>
               <motion.div
                 variants={scaleIn}
@@ -559,8 +676,8 @@ export default function App() {
                   ...(isCompactPhone ? styles.heroMiniCardCompactPhone : null),
                 }}
               >
-                <span style={styles.miniLabel}>Focus</span>
-                <strong style={styles.miniValue}>Embedded Systems & Networks</strong>
+                <span style={styles.miniLabel}>Strength</span>
+                <strong style={styles.miniValue}>Troubleshooting Windows, hardware, and network issues</strong>
               </motion.div>
               <motion.div
                 variants={scaleIn}
@@ -570,8 +687,8 @@ export default function App() {
                   ...(isCompactPhone ? styles.heroMiniCardCompactPhone : null),
                 }}
               >
-                <span style={styles.miniLabel}>Training</span>
-                <strong style={styles.miniValue}>Lab, Capstone, Co-op</strong>
+                <span style={styles.miniLabel}>Availability</span>
+                <strong style={styles.miniValue}>Open to onsite, hybrid, and entry-level support opportunities</strong>
               </motion.div>
             </motion.div>
           </motion.div>
@@ -590,6 +707,29 @@ export default function App() {
           </motion.div>
         </section>
 
+        <section
+          style={{
+            ...styles.snapshotSection,
+            ...(isPhone ? styles.snapshotSectionPhone : null),
+          }}
+        >
+          {snapshotStats.map((item, index) => (
+            <motion.div
+              key={item.label}
+              variants={scaleIn}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              custom={index * 0.08}
+              whileHover={{ y: -6, scale: 1.02 }}
+              style={styles.snapshotCard}
+            >
+              <strong style={styles.snapshotValue}>{item.value}</strong>
+              <span style={styles.snapshotLabel}>{item.label}</span>
+            </motion.div>
+          ))}
+        </section>
+
         <Section id="about" title="About">
           <motion.div
             variants={fadeUp}
@@ -606,14 +746,43 @@ export default function App() {
             style={styles.largeCard}
           >
             <p style={styles.paragraph}>
-              I'm studying Computer Engineering Technology at Sheridan College, where I learn to integrate hardware and software, design embedded devices, and build computer systems that solve real problems.
+              I am an IT Support Technician with hands-on experience supporting users, troubleshooting devices, and resolving software and network issues in academic and collaborative environments.
             </p>
             <p style={styles.paragraph}>
-              The program emphasizes lab-based learning, embedded systems development, and project-driven design. I train with sensors, microcontrollers, network systems, and real-time control while preparing for professional certification and industry work.
+              I work comfortably with Windows systems, user support, issue diagnosis, workstation setup, and structured troubleshooting designed to restore service quickly and reduce downtime.
             </p>
             <p style={styles.paragraphLast}>
-              I combine this technical foundation with hands-on IT support experience to deliver reliable system performance, strong troubleshooting, and clear communication for users and teams.
+              I am currently pursuing CompTIA A+ certification, with Core 1 completed, and I am looking for opportunities where I can contribute on day one while continuing to grow in IT support, desktop support, and service desk work.
             </p>
+          </motion.div>
+        </Section>
+
+        <Section id="highlights" title="Why Hire Me">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            style={styles.grid}
+          >
+            {highlights.map((item) => (
+              <motion.div
+                key={item.title}
+                variants={scaleIn}
+                whileHover={{
+                  y: -10,
+                  scale: 1.02,
+                  rotateX: 6,
+                  rotateY: -6,
+                  transition: { duration: 0.2 },
+                }}
+                style={styles.card}
+              >
+                <div style={styles.highlightLabel}>Recruiter Snapshot</div>
+                <h3 style={styles.cardTitle}>{item.title}</h3>
+                <p style={styles.projectDesc}>{item.description}</p>
+              </motion.div>
+            ))}
           </motion.div>
         </Section>
 
@@ -661,13 +830,43 @@ export default function App() {
         </Section>
 
         <Section id="projects" title="Projects">
+          <div
+            style={{
+              ...styles.projectToolbar,
+              ...(isPhone ? styles.projectToolbarPhone : null),
+            }}
+          >
+            <div style={styles.projectToolbarLabel}>
+              <Filter size={16} />
+              <span>Browse by focus area</span>
+            </div>
+            <div style={styles.filterGroup}>
+              {projectFilters.map((filter) => {
+                const isActive = selectedProjectFilter === filter;
+
+                return (
+                  <button
+                    key={filter}
+                    type="button"
+                    onClick={() => setSelectedProjectFilter(filter)}
+                    style={{
+                      ...styles.filterPill,
+                      ...(isActive ? styles.filterPillActive : null),
+                    }}
+                  >
+                    {filter}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
           <motion.div 
             variants={staggerContainer}
             initial="hidden"
             animate="show"
             style={styles.timelineWrap}
           >
-            {projects.map((project, index) => (
+            {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.no}
                 variants={slideInLeft}
@@ -695,6 +894,13 @@ export default function App() {
                       <p style={styles.jobCompany}>{project.tech}</p>
                     </div>
                     <span style={styles.jobDate}>{project.no}</span>
+                  </div>
+
+                  <div style={styles.projectTagRow}>
+                    <span style={styles.projectCategoryBadge}>{project.category}</span>
+                    {project.tags.map((tag) => (
+                      <span key={tag} style={styles.projectTag}>{tag}</span>
+                    ))}
                   </div>
 
                   {project.image && (
@@ -730,6 +936,25 @@ export default function App() {
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+        </Section>
+
+        <Section id="lab" title="Home Lab & Support Practice">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            style={styles.largeCard}
+          >
+            <p style={styles.paragraph}>
+              I keep building hands-on support experience outside the classroom through personal setup, troubleshooting, and remote access practice.
+            </p>
+            <ul style={styles.jobList}>
+              {homeLab.map((item) => (
+                <li key={item} style={styles.jobPoint}>{item}</li>
+              ))}
+            </ul>
           </motion.div>
         </Section>
 
@@ -812,6 +1037,28 @@ export default function App() {
         </Section>
 
         <Section id="contact" title="Contact">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            style={{
+              ...styles.contactCallout,
+              ...(isPhone ? styles.contactCalloutPhone : null),
+            }}
+          >
+            <div>
+              <div style={styles.contactEyebrow}>Let's connect</div>
+              <h3 style={styles.contactHeading}>Available for IT support, help desk, and desktop support opportunities.</h3>
+              <p style={styles.contactLead}>
+                If you are hiring for a technical support role, I would love to share more about my experience and how I approach troubleshooting.
+              </p>
+            </div>
+            <div style={styles.contactCtaRow}>
+              <a href="mailto:mranwa100@gmail.com" style={styles.primaryBtn}>Email Me</a>
+              <a href="https://www.linkedin.com/in/mahendra-ranwa/" target="_blank" rel="noreferrer" style={styles.secondaryBtn}>LinkedIn</a>
+            </div>
+          </motion.div>
           <motion.div 
             variants={staggerContainer}
             initial="hidden"
@@ -824,12 +1071,20 @@ export default function App() {
               value="mranwa100@gmail.com" 
               href="mailto:mranwa100@gmail.com"
               type="email"
+              copyValue="mranwa100@gmail.com"
+              onCopy={handleCopy}
+              copiedLabel={copiedLabel}
+              copyLabel="Email copied"
             />
             <ContactCard 
               icon={<Phone size={20} />} 
               value="+1 437-244-5424" 
               href="tel:+14372445424"
               type="phone"
+              copyValue="+1 437-244-5424"
+              onCopy={handleCopy}
+              copiedLabel={copiedLabel}
+              copyLabel="Phone copied"
             />
             <ContactCard 
               icon={<MapPin size={20} />} 
@@ -839,12 +1094,25 @@ export default function App() {
             />
             <ContactCard 
               icon={<ExternalLink size={20} />} 
-              value="LinkedIn Profile" 
-              href="https://www.linkedin.com/in/mahendra-ranwa-092396290/"
+              value="GitHub Profile" 
+              href="https://github.com/mahendra-04"
               type="link"
+            />
+            <ContactCard 
+              icon={<ExternalLink size={20} />} 
+              value="LinkedIn Profile" 
+              href="https://www.linkedin.com/in/mahendra-ranwa/"
+              type="link"
+            />
+            <ContactCard 
+              icon={<ArrowRight size={20} />} 
+              value="Download Resume" 
+              href={`${assetBase}MahendraRanwaCS.pdf`}
+              type="download"
             />
           </motion.div>
         </Section>
+        <ScrollToTopButton />
       </main>
     </motion.div>
   );
@@ -1012,7 +1280,18 @@ function CustomCursor({ cursor }) {
   );
 }
 
-function ContactCard({ icon, value, href, type = "link" }) {
+function ContactCard({
+  icon,
+  value,
+  href,
+  type = "link",
+  copyValue,
+  onCopy,
+  copiedLabel,
+  copyLabel,
+}) {
+  const showCopied = copiedLabel === copyLabel;
+
   return (
     <motion.div 
       variants={scaleIn}
@@ -1025,6 +1304,14 @@ function ContactCard({ icon, value, href, type = "link" }) {
       onClick={() => {
         if (type === "email") window.location.href = href;
         else if (type === "phone") window.location.href = href;
+        else if (type === "download") {
+          const link = document.createElement("a");
+          link.href = href;
+          link.download = "MahendraRanwaCS.pdf";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
         else window.open(href, "_blank");
       }}
       style={{...styles.card, cursor: "pointer"}}
@@ -1039,8 +1326,58 @@ function ContactCard({ icon, value, href, type = "link" }) {
       >
         {icon}
       </motion.div>
-      <p style={styles.contactText}>{value}</p>
+      <div style={styles.contactCardBody}>
+        <p style={styles.contactText}>{value}</p>
+        {copyValue ? (
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              onCopy?.(copyLabel, copyValue);
+            }}
+            style={{
+              ...styles.copyButton,
+              ...(showCopied ? styles.copyButtonActive : null),
+            }}
+          >
+            {showCopied ? <Check size={14} /> : <Copy size={14} />}
+            <span>{showCopied ? "Copied" : "Copy"}</span>
+          </button>
+        ) : null}
+      </div>
     </motion.div>
+  );
+}
+
+function ScrollToTopButton() {
+  const [visible, setVisible] = useState(false);
+  const viewportWidth = useViewportWidth();
+  const useBottomNav = viewportWidth <= 900;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const handleScroll = () => setVisible(window.scrollY > 500);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <button
+      type="button"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      style={{
+        ...styles.scrollTopButton,
+        ...(useBottomNav ? styles.scrollTopButtonBottomNav : null),
+      }}
+      aria-label="Scroll to top"
+    >
+      <ArrowRight size={18} style={{ transform: "rotate(-90deg)" }} />
+    </button>
   );
 }
 
@@ -1305,6 +1642,35 @@ function AnimatedBackground() {
   );
 }
 
+function useScrollProgress() {
+  const progress = useMotionValue(0);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const updateProgress = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const nextProgress = totalHeight <= 0 ? 0 : window.scrollY / totalHeight;
+      progress.set(nextProgress);
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+
+    return () => {
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
+    };
+  }, [progress]);
+
+  return useSpring(progress, {
+    stiffness: 120,
+    damping: 20,
+    mass: 0.2,
+  });
+}
+
 const glass = {
   background: "rgba(255,255,255,0.05)",
   border: "1px solid rgba(255,255,255,0.12)",
@@ -1325,6 +1691,18 @@ const styles = {
 
   pageCursorDesktop: {
     cursor: "none",
+  },
+
+  scrollProgress: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 4,
+    zIndex: 90,
+    background: "linear-gradient(90deg, #67e8f9, #60a5fa, #c084fc)",
+    transformOrigin: "0% 50%",
+    boxShadow: "0 0 24px rgba(96,165,250,0.35)",
   },
 
   cursorGlow: {
@@ -1542,6 +1920,33 @@ const styles = {
     color: "#22d3ee",
   },
 
+  headerActions: {
+    marginLeft: "auto",
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 10,
+  },
+
+  headerActionsPhone: {
+    width: "100%",
+    marginLeft: 0,
+  },
+
+  headerAction: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 8,
+    padding: "10px 14px",
+    borderRadius: 999,
+    color: "#e2e8f0",
+    textDecoration: "none",
+    fontSize: 13,
+    fontWeight: 700,
+    background: "rgba(255,255,255,0.06)",
+    border: "1px solid rgba(255,255,255,0.1)",
+    boxShadow: "0 12px 28px rgba(2,6,23,0.18)",
+  },
+
   main: {
     position: "relative",
     zIndex: 1,
@@ -1670,6 +2075,31 @@ const styles = {
     lineHeight: 1.65,
   },
 
+  heroStatusRow: {
+    marginTop: 22,
+    display: "flex",
+    gap: 12,
+    flexWrap: "wrap",
+  },
+
+  heroStatusRowPhone: {
+    marginTop: 18,
+    gap: 10,
+  },
+
+  statusPill: {
+    display: "inline-flex",
+    alignItems: "center",
+    padding: "10px 14px",
+    borderRadius: 999,
+    background: "rgba(255,255,255,0.06)",
+    border: "1px solid rgba(255,255,255,0.1)",
+    color: "#dbeafe",
+    fontSize: 13,
+    fontWeight: 700,
+    boxShadow: "0 14px 26px rgba(2,6,23,0.18)",
+  },
+
   heroButtons: {
     marginTop: 30,
     display: "flex",
@@ -1783,6 +2213,44 @@ const styles = {
 
   heroRightCompactPhone: {
     marginTop: 4,
+  },
+
+  snapshotSection: {
+    maxWidth: 1280,
+    margin: "0 auto",
+    padding: "0 clamp(16px, 4vw, 32px) clamp(32px, 5vw, 52px) clamp(16px, 10vw, 92px)",
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+    gap: 14,
+  },
+
+  snapshotSectionPhone: {
+    padding: "0 16px 28px",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+  },
+
+  snapshotCard: {
+    ...glass,
+    padding: 20,
+    borderRadius: 24,
+    display: "flex",
+    flexDirection: "column",
+    gap: 8,
+    background: "linear-gradient(180deg, rgba(14,165,233,0.11), rgba(255,255,255,0.03))",
+    boxShadow: "0 22px 42px rgba(2,6,23,0.2)",
+  },
+
+  snapshotValue: {
+    fontSize: 30,
+    fontWeight: 900,
+    color: "#f8fafc",
+    letterSpacing: "-0.04em",
+  },
+
+  snapshotLabel: {
+    color: "#94a3b8",
+    fontSize: 14,
+    lineHeight: 1.5,
   },
 
   heroVisualWrap: {
@@ -2380,6 +2848,21 @@ const styles = {
     margin: "0 0 8px",
   },
 
+  highlightLabel: {
+    display: "inline-flex",
+    alignItems: "center",
+    padding: "8px 12px",
+    borderRadius: 999,
+    background: "rgba(34,211,238,0.1)",
+    border: "1px solid rgba(34,211,238,0.16)",
+    color: "#a5f3fc",
+    fontSize: 11,
+    fontWeight: 800,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    marginBottom: 14,
+  },
+
   itemPill: {
     padding: "12px 14px",
     borderRadius: 14,
@@ -2403,6 +2886,82 @@ const styles = {
     color: "#94a3b8",
     lineHeight: 1.8,
     fontSize: 16,
+  },
+
+  projectToolbar: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 18,
+    flexWrap: "wrap",
+    marginBottom: 24,
+    position: "relative",
+    zIndex: 1,
+  },
+
+  projectToolbarPhone: {
+    alignItems: "flex-start",
+  },
+
+  projectToolbarLabel: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 10,
+    color: "#cbd5e1",
+    fontSize: 14,
+    fontWeight: 700,
+  },
+
+  filterGroup: {
+    display: "flex",
+    gap: 10,
+    flexWrap: "wrap",
+  },
+
+  filterPill: {
+    padding: "10px 14px",
+    borderRadius: 999,
+    border: "1px solid rgba(255,255,255,0.1)",
+    background: "rgba(255,255,255,0.05)",
+    color: "#cbd5e1",
+    fontSize: 13,
+    fontWeight: 700,
+    cursor: "pointer",
+  },
+
+  filterPillActive: {
+    background: "linear-gradient(135deg, rgba(34,211,238,0.24), rgba(96,165,250,0.18))",
+    color: "#ffffff",
+    boxShadow: "0 14px 28px rgba(34,211,238,0.12)",
+  },
+
+  projectTagRow: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 10,
+    marginBottom: 18,
+  },
+
+  projectCategoryBadge: {
+    padding: "8px 12px",
+    borderRadius: 999,
+    background: "rgba(103,232,249,0.12)",
+    color: "#a5f3fc",
+    border: "1px solid rgba(34,211,238,0.16)",
+    fontSize: 12,
+    fontWeight: 800,
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+  },
+
+  projectTag: {
+    padding: "8px 12px",
+    borderRadius: 999,
+    background: "rgba(255,255,255,0.05)",
+    color: "#dbeafe",
+    border: "1px solid rgba(255,255,255,0.08)",
+    fontSize: 12,
+    fontWeight: 700,
   },
 
   timelineWrap: {
@@ -2484,4 +3043,103 @@ const styles = {
     fontWeight: 700,
     wordBreak: "break-word",
   },
+
+  contactCallout: {
+    ...glass,
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1.5fr) minmax(220px, 0.9fr)",
+    gap: 24,
+    alignItems: "center",
+    padding: 28,
+    borderRadius: 28,
+    marginBottom: 24,
+    position: "relative",
+    zIndex: 1,
+    background: "linear-gradient(135deg, rgba(56,189,248,0.14), rgba(15,23,42,0.42) 55%, rgba(192,132,252,0.12))",
+  },
+
+  contactCalloutPhone: {
+    gridTemplateColumns: "1fr",
+    padding: 22,
+  },
+
+  contactEyebrow: {
+    color: "#a5f3fc",
+    fontSize: 12,
+    fontWeight: 800,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    marginBottom: 14,
+  },
+
+  contactHeading: {
+    margin: 0,
+    fontSize: "clamp(1.55rem, 4vw, 2.4rem)",
+    lineHeight: 1.08,
+    fontWeight: 900,
+  },
+
+  contactLead: {
+    marginTop: 14,
+    marginBottom: 0,
+    color: "#cbd5e1",
+    fontSize: 16,
+    lineHeight: 1.8,
+  },
+
+  contactCtaRow: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 12,
+  },
+
+  contactCardBody: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 14,
+  },
+
+  copyButton: {
+    width: "fit-content",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 8,
+    padding: "9px 12px",
+    borderRadius: 999,
+    border: "1px solid rgba(255,255,255,0.1)",
+    background: "rgba(255,255,255,0.05)",
+    color: "#cbd5e1",
+    fontSize: 12,
+    fontWeight: 800,
+    cursor: "pointer",
+  },
+
+  copyButtonActive: {
+    color: "#ffffff",
+    background: "rgba(34,211,238,0.15)",
+    border: "1px solid rgba(34,211,238,0.22)",
+  },
+
+  scrollTopButton: {
+    position: "fixed",
+    right: 22,
+    bottom: 28,
+    width: 52,
+    height: 52,
+    borderRadius: "50%",
+    border: "1px solid rgba(255,255,255,0.12)",
+    background: "linear-gradient(180deg, rgba(14,165,233,0.9), rgba(59,130,246,0.88))",
+    color: "white",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow: "0 18px 34px rgba(14,165,233,0.25)",
+    cursor: "pointer",
+    zIndex: 35,
+  },
+
+  scrollTopButtonBottomNav: {
+    bottom: 94,
+  },
 };
+
