@@ -82,67 +82,67 @@ const modeConfig = {
     name: "Recruiter Mode",
     heroTitle: "Mahendra Ranwa",
     heroSubtitle:
-      "Entry-level IT support and help desk candidate with hands-on experience supporting Windows systems, troubleshooting technical issues, and assisting users.",
+      "Recent Computer Engineering Technology graduate with hands-on experience in user support, system setup, and technical troubleshooting.",
     heroLead:
-      "Hands-on experience troubleshooting hardware, software, and network issues in academic environments. Comfortable with Windows setup, user support, connectivity troubleshooting, and practical issue resolution. Currently pursuing CompTIA A+ certification with Core 1 completed.",
+      "Hands-on experience gained through lab support, technical projects, and user-facing problem solving. Background includes workstation setup, hardware and software diagnostics, networking fundamentals, and day-to-day technical assistance.",
     heroSignals: [
       "Brampton, ON",
-      "IT Support / Help Desk / Desktop Support",
+      "IT Help Desk / Desktop Support / Technical Support",
       "CompTIA A+ Core 1 completed",
     ],
     heroCards: [
-      { title: "Best Fit", value: "IT Support, Help Desk, Desktop Support" },
-      { title: "Core Strength", value: "Windows support, troubleshooting, and user assistance" },
-      { title: "Current Focus", value: "CompTIA A+ in progress with hands-on technical learning" },
+      { title: "Career Focus", value: "Help Desk, Desktop Support, and entry-level IT operations roles" },
+      { title: "Core Value", value: "Reliable technical support, practical troubleshooting, and clear communication" },
+      { title: "Current Direction", value: "Building on practical support experience while growing in infrastructure and service delivery" },
     ],
     markNotes: {
-      profile: "A quick summary of experience, direction, and how the support work fits entry-level IT roles.",
-      skills: "Technical skills grouped around operating systems, networking, tools, and hands-on support work.",
-      projects: "Projects that show setup, troubleshooting, remote access, and technical problem solving in practice.",
-      experience: "Support work, tutoring, education, and certifications presented as direct hiring evidence.",
-      contact: "A direct closing section for recruiters and hiring managers.",
+      profile: "A short introduction to my background, technical interests, and direction in IT support.",
+      skills: "Technical skills organized around systems, tools, and support responsibilities relevant to entry-level IT work.",
+      projects: "Projects that show configuration, troubleshooting, and hands-on technical execution.",
+      experience: "Work, lab, and support experience that reflects practical problem solving and user assistance.",
+      contact: "A direct closing section for hiring managers and recruiters.",
     },
   },
   technical: {
     name: "Technical Mode",
     heroTitle: "Mahendra Ranwa",
     heroSubtitle:
-      "Windows support, diagnostics, and structured troubleshooting across hardware, software, networking, and workstation setup.",
+      "Recent Computer Engineering Technology graduate focused on systems support, diagnostics, networking basics, and technical problem solving.",
     heroLead:
-      "This view highlights the technical side of the resume: Windows 10/11, TCP/IP, DNS, DHCP, IP configuration, Office 365, Git, SSH, VNC, hardware support, and structured diagnostics across academic labs and technical projects.",
+      "This view highlights the technical side of my background: Windows 10/11, TCP/IP, DNS, DHCP, IP configuration, remote access tools, hardware setup, and structured diagnostics developed through labs, support work, and personal projects.",
     heroSignals: ["Windows 10/11", "TCP/IP, DNS, DHCP", "SSH, VNC, and system setup"],
     heroCards: [
-      { title: "Environment", value: "Lab systems, shared workstations, and project-based setups" },
-      { title: "Technical Focus", value: "Diagnostics, configuration, remote access, and issue isolation" },
-      { title: "Workflow", value: "Identify, test, verify, and document the issue path" },
+      { title: "Environment", value: "Shared labs, project systems, and user-facing technical environments" },
+      { title: "Technical Focus", value: "Configuration, diagnostics, connectivity issues, and endpoint support" },
+      { title: "Workflow", value: "Identify the issue, isolate the cause, apply the fix, and verify the result" },
     ],
     markNotes: {
-      profile: "Technical framing centered on setup, diagnostics, troubleshooting, and support workflow.",
-      skills: "Grouped to show the systems, tools, networking basics, and support tasks used across the resume.",
-      projects: "Projects presented as technical cases with setup steps, troubleshooting, and outcomes.",
-      experience: "Experience shown as practical support work rather than general summaries.",
-      contact: "A concise close after the technical walkthrough.",
+      profile: "A technical summary of how I approach support, diagnostics, and hands-on system work.",
+      skills: "Systems, tools, networking basics, and troubleshooting skills relevant to IT support roles.",
+      projects: "Technical case studies showing configuration, debugging, and problem solving in practice.",
+      experience: "Practical experience supporting systems, users, and shared technical environments.",
+      contact: "A concise close for technical hiring conversations.",
     },
   },
   narrative: {
     name: "Narrative Mode",
     heroTitle: "Mahendra Ranwa",
     heroSubtitle:
-      "A guided portfolio view that connects support experience, technical projects, and career direction.",
+      "A guided portfolio view that connects my education, technical projects, support experience, and career direction in IT.",
     heroLead:
-      "This path moves from profile to skills, projects, and experience so the portfolio reads like a clear introduction: who I am, what I can support, how I troubleshoot, and why I fit entry-level IT support and help desk roles.",
+      "This path shows how my Computer Engineering Technology background, project work, and user support experience connect to the IT career I want to build.",
     heroSignals: ["Profile and direction", "Skills and projects", "Experience and credentials"],
     heroCards: [
-      { title: "Start", value: "Role, support background, and current direction" },
-      { title: "Middle", value: "Skills, projects, and troubleshooting examples" },
-      { title: "Finish", value: "Experience, education, certifications, and contact" },
+      { title: "Start", value: "Background, support mindset, and career direction" },
+      { title: "Middle", value: "Skills, projects, and hands-on troubleshooting examples" },
+      { title: "Finish", value: "Experience, education, certifications, and next-step contact" },
     ],
     markNotes: {
-      profile: "The introduction section explains the support background and what kind of role this portfolio targets.",
-      skills: "The skill section shows the technical base behind the support work.",
-      projects: "The project section connects classroom and personal work to real troubleshooting ability.",
-      experience: "The lower half turns the story into concrete proof from work, education, and certifications.",
-      contact: "The final section keeps outreach simple and direct.",
+      profile: "The introduction explains who I am, what I have worked on, and where I want to grow in IT.",
+      skills: "The skills section shows the technical foundation behind my support and troubleshooting work.",
+      projects: "The projects section connects hands-on learning to real IT support responsibilities.",
+      experience: "The lower half turns the story into evidence through support work, labs, and credentials.",
+      contact: "The final section keeps outreach simple and professional.",
     },
   },
 };
@@ -151,21 +151,21 @@ const modeConfig = {
 const profileCards = [
   {
     label: "Support Profile",
-    title: "Hands-on support experience in academic environments",
+    title: "Recent graduate with hands-on experience in shared technical environments",
     text:
-      "Hands-on experience troubleshooting hardware, software, and network issues in Sheridan College lab environments while supporting users and keeping shared systems operational.",
+      "I recently completed Computer Engineering Technology and gained practical experience supporting shared lab systems, resolving technical issues, and assisting users with day-to-day problems.",
   },
   {
     label: "Career Direction",
-    title: "Focused on entry-level IT support, help desk, and desktop support roles",
+    title: "Focused on help desk and desktop support opportunities",
     text:
-      "Seeking opportunities where Windows support, issue diagnosis, workstation setup, and user assistance are part of the day-to-day work.",
+      "I am seeking entry-level roles in IT Help Desk, Desktop Support, or Technical Support where I can contribute through setup, diagnostics, troubleshooting, and user support.",
   },
   {
     label: "Working Style",
-    title: "Practical troubleshooting with clear user communication",
+    title: "Structured work style with clear communication",
     text:
-      "Approaches technical issues in a structured way, explains steps clearly, and aims to restore service with minimal disruption for the user.",
+      "I enjoy hands-on technical work, approach problems step by step, and focus on resolving issues clearly and professionally.",
   },
 ];
 
@@ -173,21 +173,21 @@ const profileCards = [
 const strengths = [
   {
     icon: Wrench,
-    title: "Troubleshooting",
-    text: "Applies a practical troubleshooting process across hardware, software, and basic connectivity issues.",
-    points: ["Hardware and software faults", "Wi-Fi, LAN, and IP issues", "Step-by-step issue diagnosis"],
+    title: "Issue Analysis",
+    text: "I use a structured process to identify symptoms, isolate likely causes, test solutions, and verify results.",
+    points: ["Hardware and software faults", "Wi-Fi, LAN, and IP issues", "Root-cause analysis"],
   },
   {
     icon: Monitor,
     title: "Windows & Workstations",
-    text: "Comfortable with Windows environments, shared workstations, software setup, and day-to-day desktop support tasks.",
+    text: "Comfortable setting up and maintaining Windows workstations, installing software, and preparing systems for shared use.",
     points: ["Windows 10/11", "System setup", "Software installation"],
   },
   {
     icon: Briefcase,
-    title: "User Support",
-    text: "Focuses on helping users through login issues, application problems, and technical questions with clear communication.",
-    points: ["User-facing support", "Clear communication", "Dependable follow-through"],
+    title: "Service Delivery",
+    text: "Comfortable supporting users through login issues, application errors, setup questions, and routine technical requests.",
+    points: ["End-user support", "Clear communication", "Follow-through"],
   },
 ];
 
@@ -196,22 +196,32 @@ const skillGroups = [
   {
     icon: Monitor,
     title: "Operating Systems",
-    items: ["Windows 10/11", "Linux/UNIX"],
+    items: ["Windows 10/11", "Linux/UNIX", "System imaging and setup"],
   },
   {
     icon: Cable,
     title: "Networking",
-    items: ["TCP/IP", "DNS", "DHCP", "IP configuration", "Basic troubleshooting"],
+    items: ["TCP/IP", "DNS", "DHCP", "IP configuration", "Wi-Fi and LAN troubleshooting"],
   },
   {
     icon: Cpu,
     title: "Tools & Platforms",
-    items: ["Office 365", "Git", "Anaconda", "MPLAB X", "STM32CubeMX"],
+    items: ["Office 365", "Git", "SSH", "VNC", "Anaconda", "MPLAB X", "STM32CubeMX"],
   },
   {
     icon: Wrench,
     title: "Hardware & Support",
     items: ["PC assembly", "Peripherals", "Printers", "Ticket handling", "Issue diagnosis", "User support", "System setup", "Documentation"],
+  },
+  {
+    icon: Briefcase,
+    title: "Troubleshooting",
+    items: ["Incident triage", "Login issues", "Software errors", "Connectivity testing", "Verification"],
+  },
+  {
+    icon: Cpu,
+    title: "Scripting & Technical Learning",
+    items: ["Python fundamentals", "Command-line workflow", "Configuration tasks", "Technical documentation"],
   },
 ];
 
@@ -222,48 +232,54 @@ const projects = [
     title: "Personal Portfolio Website",
     category: "Project 01 / Portfolio Website",
     stack: "React, Vite, JavaScript, HTML, CSS",
-    summary: "Responsive portfolio website built to present technical work clearly across desktop and mobile devices.",
-    outcome: "Strengthened frontend troubleshooting, deployment, and production debugging skills.",
+    lens: "Frontend build",
+    summary: "Built and deployed a responsive portfolio website to present my technical background clearly across desktop and mobile devices.",
+    outcome: "Strengthened my ability to manage deployment, troubleshoot frontend issues, and resolve production problems methodically.",
     image: "",
+    highlights: ["Responsive across desktop and mobile", "Deployed through GitHub Pages", "Resolved live build and asset issues"],
     actions: [
-      "Developed and deployed the site using React, Vite, JavaScript, HTML, and CSS.",
-      "Managed version control and deployment through Git and GitHub Pages.",
-      "Resolved broken asset paths and production build issues during deployment.",
-      "Improved layout and responsiveness for desktop and mobile viewing.",
+      "Built the site using React, Vite, JavaScript, HTML, and CSS.",
+      "Configured deployment and version control with Git and GitHub Pages.",
+      "Troubleshot asset path issues and build problems during production deployment.",
+      "Improved layout, responsiveness, and overall usability across different screen sizes.",
     ],
-    notes: ["Responsive design", "Deployment debugging", "Production fixes"],
+    notes: ["Responsive UI", "GitHub Pages", "Production debugging"],
   },
   {
     id: "smart-car",
     title: "Raspberry Pi Smart Car System",
     category: "Project 02 / Raspberry Pi System",
     stack: "Python, Raspberry Pi, SSH, VNC, sensors",
-    summary: "Raspberry Pi project focused on system setup, remote access, sensor integration, and hardware troubleshooting.",
-    outcome: "Improved troubleshooting across configuration, connectivity, power, and hardware interfacing.",
+    lens: "Embedded systems",
+    summary: "Built and configured a Raspberry Pi smart car with remote access, sensor integration, and hardware control.",
+    outcome: "Gained practical experience with setup, remote access, hardware integration, and diagnosing power or connectivity issues.",
     image: `${assetBase}buggy.jpg`,
+    highlights: ["Remote access with SSH and VNC", "Ultrasonic sensor integration", "Hands-on wiring and hardware setup"],
     actions: [
-      "Built and configured a three-wheel smart car using motors, sensors, and control modules.",
-      "Installed and configured Raspberry Pi OS and the system environment.",
-      "Established SSH and VNC access for monitoring and remote control.",
-      "Integrated an ultrasonic sensor for distance measurement and obstacle detection.",
+      "Built and configured a three-wheel smart car with motors, sensors, and control modules.",
+      "Installed Raspberry Pi OS and configured the system environment.",
+      "Set up SSH and VNC for remote access, monitoring, and control.",
+      "Integrated an ultrasonic sensor for obstacle detection and distance measurement.",
     ],
-    notes: ["Remote access", "Sensor integration", "Power and wiring"],
+    notes: ["Remote access", "Sensor control", "Hardware setup"],
   },
   {
     id: "diagnostics",
     title: "System Troubleshooting & Diagnostics",
     category: "Project 03 / Diagnostics Work",
     stack: "Hardware diagnostics, debugging, system testing",
-    summary: "Diagnostics-focused work centered on identifying faults and validating stable fixes.",
-    outcome: "Built a more methodical approach to testing, fault isolation, and verification.",
+    lens: "Diagnostics workflow",
+    summary: "Applied structured diagnostics to identify faults, isolate root causes, and verify stable fixes across technical systems.",
+    outcome: "Built a stronger diagnostic mindset that applies directly to IT support, help desk work, and technical issue resolution.",
     image: `${assetBase}embedded-control.jpg`,
+    highlights: ["Root-cause focused testing", "System-level verification", "Stable fixes over guesswork"],
     actions: [
-      "Applied structured debugging methods across hardware and software faults.",
-      "Performed system-level testing to isolate issues and confirm stable fixes.",
-      "Used testing and verification to narrow down likely causes of faults.",
-      "Focused on confirming stable fixes after troubleshooting work.",
+      "Used structured debugging methods across hardware and software faults.",
+      "Performed system-level testing to isolate issues and confirm fixes.",
+      "Compared likely causes through testing and verification instead of guesswork.",
+      "Validated system stability after each fix before closing the issue.",
     ],
-    notes: ["Issue isolation", "Testing", "Verification"],
+    notes: ["Fault isolation", "System testing", "Verification"],
   },
 ];
 
@@ -274,11 +290,11 @@ const experienceItems = [
     company: "Sheridan College IT Centre, Brampton",
     date: "Apr 2024 - Aug 2024",
     bullets: [
-      "Provided technical support for hardware, software, and network issues in lab environments.",
+      "Provided technical support for hardware, software, and network issues in shared lab environments.",
       "Installed and configured Windows systems and academic software across multiple workstations.",
       "Diagnosed Wi-Fi, LAN, and IP configuration issues and restored connectivity.",
-      "Assisted users with login issues, system errors, and application troubleshooting.",
-      "Helped reduce downtime by resolving faults quickly in shared academic environments.",
+      "Assisted users with login problems, system errors, and application access issues.",
+      "Helped reduce downtime by resolving technical faults quickly and communicating clearly with users.",
     ],
   },
   {
@@ -286,9 +302,9 @@ const experienceItems = [
     company: "U+ Toastmasters Academy",
     date: "Sep 2025 - Mar 2026",
     bullets: [
-      "Maintained website functionality and resolved technical issues affecting day-to-day use.",
-      "Supported users with content updates and access-related problems.",
-      "Worked with team members to keep the site reliable and usable.",
+      "Maintained website functionality and resolved technical issues affecting everyday use.",
+      "Handled content updates, minor configuration tasks, and access-related issues.",
+      "Worked with team members to keep the site reliable and manageable.",
     ],
   },
   {
@@ -296,9 +312,9 @@ const experienceItems = [
     company: "Sheridan College",
     date: "May 2023 - Dec 2023",
     bullets: [
-      "Assisted students with troubleshooting hardware and circuit-related issues.",
-      "Guided proper use of tools, test equipment, and debugging techniques.",
-      "Supported hands-on learning by helping students work through technical problems step by step.",
+      "Assisted students with troubleshooting hardware and circuit-related issues during lab work.",
+      "Guided the proper use of tools, test equipment, and debugging methods.",
+      "Explained technical problems clearly and helped students work through solutions step by step.",
     ],
   },
 ];
@@ -354,23 +370,79 @@ const troubleshootingCases = [
   {
     id: "login",
     symptom: "User cannot log in",
-    assessment: "Check username, password state, and whether the issue is local or account-related.",
-    action: "Confirm credentials, test another account or device, and isolate whether the problem is workstation, application, or user-account specific.",
-    result: "Restore access or escalate with clearer issue context.",
+    assessment: "Check whether the issue is caused by incorrect credentials, account lockout, profile problems, or a local workstation issue.",
+    action: "Confirm the username and password, test another account, check for account lock status, and compare with a known-good device.",
+    result: "Restore access quickly or escalate with clear details about where the login process failed.",
   },
   {
     id: "network",
     symptom: "Workstation is offline",
-    assessment: "Check Wi-Fi or LAN state first, then confirm IP configuration and network behavior.",
-    action: "Review adapter status, verify physical or wireless connection, test basic IP settings, and compare with a working system.",
-    result: "Restore connectivity or narrow the issue to network, device, or configuration.",
+    assessment: "Check whether the issue is with the cable, Wi-Fi connection, adapter status, or IP configuration.",
+    action: "Verify the physical or wireless connection, check adapter settings, review IP details, and compare the system against a working machine.",
+    result: "Restore connectivity or narrow the fault to the workstation, local configuration, or network side.",
   },
   {
     id: "software",
     symptom: "Application fails to launch",
-    assessment: "Check whether the issue is installation-related, permission-related, or environment-specific.",
-    action: "Verify software status, confirm prerequisites, test relaunch, and compare with a known-good workstation setup.",
-    result: "Return the application to usable state or document the fault path clearly.",
+    assessment: "Check whether the issue is related to installation, permissions, user profile settings, or missing dependencies.",
+    action: "Confirm the application status, verify prerequisites, relaunch the software, and compare the setup with a working workstation.",
+    result: "Return the application to a usable state or document the exact failure point for escalation.",
+  },
+  {
+    id: "printer",
+    symptom: "Printer is not responding",
+    assessment: "Check whether the issue is local to the workstation, the printer connection, the print queue, or the driver.",
+    action: "Verify printer power and connectivity, clear stuck jobs, confirm the selected printer, and test with another workstation if needed.",
+    result: "Restore printing service or isolate the problem to hardware, queue management, or driver configuration.",
+  },
+  {
+    id: "slow-system",
+    symptom: "Computer is running slowly",
+    assessment: "Check for high resource usage, startup load, software issues, or hardware limitations.",
+    action: "Review running processes, check startup applications, test disk and memory usage, and restart or update the system where appropriate.",
+    result: "Improve system performance or identify whether the slowdown is caused by software, hardware, or configuration.",
+  },
+  {
+    id: "remote-access",
+    symptom: "Remote access session will not connect",
+    assessment: "Check whether the issue is caused by credentials, network reachability, remote service settings, or the client configuration.",
+    action: "Confirm connectivity, verify the remote service is enabled, test credentials, and compare the settings against a working remote session.",
+    result: "Restore remote access or identify whether the issue is with the host, network path, or client setup.",
+  },
+  {
+    id: "email-sync",
+    symptom: "Email is not syncing",
+    assessment: "Check whether the issue is related to network access, account configuration, mailbox status, or the mail client.",
+    action: "Verify internet connectivity, confirm account settings, test webmail access, and restart or re-sync the email client.",
+    result: "Restore email access or isolate whether the issue is with the device, application, or account.",
+  },
+  {
+    id: "audio",
+    symptom: "No sound during a meeting",
+    assessment: "Check whether the issue is caused by mute settings, the selected audio device, drivers, or the conferencing app.",
+    action: "Verify speaker and microphone settings, test another audio device, confirm app permissions, and check system sound output.",
+    result: "Restore audio for the meeting or identify whether the fault is device, driver, or application related.",
+  },
+  {
+    id: "update",
+    symptom: "System update fails",
+    assessment: "Check whether the failure is caused by low storage, service interruption, corrupted update files, or restart requirements.",
+    action: "Review update status, confirm available storage, retry the update, restart the system, and check for related error messages.",
+    result: "Complete the update successfully or document the failure clearly for escalation.",
+  },
+  {
+    id: "usb-device",
+    symptom: "USB device is not detected",
+    assessment: "Check whether the issue is with the port, cable, driver, power delivery, or the device itself.",
+    action: "Test another USB port, reconnect the device, check Device Manager, and compare the device on another workstation if needed.",
+    result: "Restore device recognition or isolate whether the issue is with the workstation or the peripheral.",
+  },
+  {
+    id: "shared-drive",
+    symptom: "Shared drive cannot be accessed",
+    assessment: "Check whether the issue is caused by network reachability, permissions, mapping configuration, or server availability.",
+    action: "Verify network access, test the shared path, confirm permissions, and compare the mapping against a working user account.",
+    result: "Restore access to the shared drive or narrow the issue to permissions, connectivity, or server-side availability.",
   },
 ];
 
@@ -498,6 +570,56 @@ function ReactiveCard({ className, children }) {
     <div className={`reactive-card ${className || ""}`.trim()} {...handlers}>
       <div className="reactive-card__shine" />
       {children}
+    </div>
+  );
+}
+
+function HeroScene({ currentMode }) {
+  return (
+    <div className="hero-scene">
+      <div className="hero-scene__layer hero-scene__layer--halo-outer" aria-hidden="true">
+        <motion.div
+          className="hero-scene__halo hero-scene__halo--outer"
+          animate={{ rotate: 360, scale: [1, 1.03, 1] }}
+          transition={{ rotate: { duration: 28, repeat: Infinity, ease: "linear" }, scale: { duration: 8, repeat: Infinity, ease: "easeInOut" } }}
+        />
+      </div>
+      <div className="hero-scene__layer hero-scene__layer--halo-inner" aria-hidden="true">
+        <motion.div
+          className="hero-scene__halo hero-scene__halo--inner"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+        />
+      </div>
+
+      <div className="hero-scene__layer hero-scene__layer--poster">
+        <motion.div
+          animate={{ y: [0, -6, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ReactiveCard className="hero-poster hero-poster--scene">
+            <div className="hero-poster__top">
+              <span />
+              <span />
+              <span />
+            </div>
+            <div className="hero-poster__stage">
+              <img
+                src={`${assetBase}mahendra.jpeg`}
+                alt="Mahendra Ranwa"
+                className="hero-poster__image"
+              />
+              <div className="hero-poster__stamp">
+                <div className="hero-poster__stamp-label">Viewing Mode</div>
+                <div className="hero-poster__stamp-value">{currentMode.name}</div>
+              </div>
+            </div>
+          </ReactiveCard>
+        </motion.div>
+      </div>
+
+      <div className="hero-scene__glow hero-scene__glow--one" aria-hidden="true" />
+      <div className="hero-scene__glow hero-scene__glow--two" aria-hidden="true" />
     </div>
   );
 }
@@ -690,11 +812,11 @@ export default function App() {
               <span />
               <span />
             </div>
-            <div className="entry-sequence__panel-mark">Portal 01</div>
+            <div className="entry-sequence__panel-mark">Portfolio View</div>
             <div className="entry-sequence__eyebrow">{previewMode.name}</div>
             <h1 className="entry-sequence__title">Mahendra Ranwa</h1>
             <p className="entry-sequence__text">
-              {previewMode.heroSubtitle} The site will remember how you explored it.
+              {previewMode.heroSubtitle} This site remembers your preferred view.
             </p>
 
             <div className="entry-sequence__signals">
@@ -727,7 +849,7 @@ export default function App() {
               onMouseEnter={() => setEntryPreviewMode(mode)}
               className="entry-sequence__skip"
             >
-              Continue with saved mode
+              Continue
             </button>
           </motion.div>
         </motion.div>
@@ -827,24 +949,7 @@ export default function App() {
             transition={{ duration: 0.74, ease: "easeOut" }}
             className="hero-assembly__visuals"
           >
-            <ReactiveCard className="hero-poster">
-              <div className="hero-poster__top">
-                <span />
-                <span />
-                <span />
-              </div>
-              <div className="hero-poster__stage">
-                <img
-                  src={`${assetBase}mahendra.jpeg`}
-                  alt="Mahendra Ranwa"
-                  className="hero-poster__image"
-                />
-                <div className="hero-poster__stamp">
-                  <div className="hero-poster__stamp-label">Active Mode</div>
-                  <div className="hero-poster__stamp-value">{currentMode.name}</div>
-                </div>
-              </div>
-            </ReactiveCard>
+            <HeroScene currentMode={currentMode} />
 
             <div className="mode-switch">
               {Object.entries(modeConfig).map(([key, value]) => (
@@ -1035,9 +1140,9 @@ export default function App() {
                       <div className="project-stage__mock-line project-stage__mock-line--short" />
                       <div className="project-stage__mock-hero">
                         <div className="project-stage__mock-hero-copy">
-                          Windows support, troubleshooting, and practical user assistance.
+                          Clear structure, fast navigation, and a polished presentation of technical work.
                         </div>
-                        <div className="project-stage__mock-hero-badge">Open to IT Support Roles</div>
+                        <div className="project-stage__mock-hero-badge">Personal Website</div>
                       </div>
                       <div className="project-stage__mock-grid">
                         <div className="project-stage__mock-block">
@@ -1052,27 +1157,46 @@ export default function App() {
                       </div>
                     </div>
                   ) : (
-                    <img
-                      src={selectedProject.image}
-                      alt={selectedProject.title}
-                      className="project-stage__image"
-                    />
+                    <div className="project-stage__image-wrap">
+                      <img
+                        src={selectedProject.image}
+                        alt={selectedProject.title}
+                        className="project-stage__image"
+                      />
+                    </div>
                   )}
                 </div>
 
                 <div className="project-stage__content">
-                  <div className="project-stage__meta">
-                    <span>{selectedProject.category}</span>
-                    <span>{selectedProject.stack}</span>
+                  <div className="project-stage__header">
+                    <div className="project-stage__meta">
+                      <span>{selectedProject.category}</span>
+                      <span>{selectedProject.lens}</span>
+                    </div>
+                    <div className="project-stage__stack">
+                      {selectedProject.stack.split(", ").map((item) => (
+                        <span key={item}>{item}</span>
+                      ))}
+                    </div>
                   </div>
                   <h3 className="project-stage__title">{selectedProject.title}</h3>
                   <p className="project-stage__summary">{selectedProject.summary}</p>
+
+                  <div className="project-stage__highlights">
+                    {selectedProject.highlights.map((item) => (
+                      <div key={item} className="project-stage__highlight">
+                        <span>Focus</span>
+                        <p>{item}</p>
+                      </div>
+                    ))}
+                  </div>
 
                   <div className="project-stage__outcome">
                     <div className="project-stage__outcome-label">Outcome</div>
                     <p>{selectedProject.outcome}</p>
                   </div>
 
+                  <div className="project-stage__list-label">What I worked on</div>
                   <ul className="project-stage__list">
                     {selectedProject.actions.map((bullet) => (
                       <li key={bullet}>{bullet}</li>
@@ -1104,8 +1228,14 @@ export default function App() {
                     onClick={() => setSelectedProjectId(project.id)}
                     className={`project-chooser ${project.id === selectedProject.id ? "project-chooser--active" : ""}`}
                   >
+                    <span className="project-chooser__marker" />
                     <span className="project-chooser__category">{project.category}</span>
                     <span className="project-chooser__title">{project.title}</span>
+                    <span className="project-chooser__summary">{project.summary}</span>
+                    <span className="project-chooser__footer">
+                      <span>{project.lens}</span>
+                      <span>{project.notes[0]}</span>
+                    </span>
                   </motion.button>
                 ))}
               </div>
@@ -1191,9 +1321,9 @@ export default function App() {
             >
               <ReactiveCard className="contact-stage__feature">
                 <div className="contact-stage__label">Available For</div>
-                <h3 className="contact-stage__title">Entry-level IT support, help desk, and desktop support opportunities</h3>
+                <h3 className="contact-stage__title">Open to help desk and desktop support roles</h3>
                 <p className="contact-stage__text">
-                  If you are hiring for an entry-level support role, I would be glad to discuss how I can contribute through troubleshooting, system setup, and day-to-day user support.
+                  I would welcome the opportunity to contribute in a hands-on support environment.
                 </p>
 
                 <div className="contact-stage__actions">
@@ -1212,9 +1342,9 @@ export default function App() {
                 </div>
 
                 <div className="contact-stage__support-strip">
-                  <span>Windows Support</span>
-                  <span>User Assistance</span>
-                  <span>Technical Troubleshooting</span>
+                  <span>Desktop Support</span>
+                  <span>Ticket Handling</span>
+                  <span>System Setup</span>
                 </div>
               </ReactiveCard>
             </motion.article>
@@ -1259,7 +1389,7 @@ export default function App() {
         <div>
           <div className="footer-bar__brand">Mahendra.ranwa</div>
           <p className="footer-bar__text">
-            Entry-level IT support portfolio focused on Windows systems, troubleshooting, and practical user support.
+            Portfolio focused on desktop support, systems work, and practical technical problem solving.
           </p>
         </div>
 
