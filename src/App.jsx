@@ -82,24 +82,24 @@ const modeConfig = {
     name: "Recruiter Mode",
     heroTitle: "Mahendra Ranwa",
     heroSubtitle:
-      "Recent Computer Engineering Technology graduate with hands-on experience in user support, system setup, and technical troubleshooting.",
+      "Mahendra Ranwa | IT Support Technician | Help Desk | Desktop Support",
     heroLead:
-      "Hands-on experience gained through lab support, technical projects, and user-facing problem solving. Background includes workstation setup, hardware and software diagnostics, networking fundamentals, and day-to-day technical assistance.",
+      "IT Support Technician based in Brampton with hands-on experience troubleshooting hardware, software, and connectivity issues in academic and team-based environments.",
     heroSignals: [
       "Brampton, ON",
       "IT Help Desk / Desktop Support / Technical Support",
       "CompTIA A+ Core 1 completed",
     ],
     heroCards: [
-      { title: "Career Focus", value: "Help Desk, Desktop Support, and entry-level IT operations roles" },
-      { title: "Core Value", value: "Reliable technical support, practical troubleshooting, and clear communication" },
-      { title: "Current Direction", value: "Building on practical support experience while growing in infrastructure and service delivery" },
+      { title: "Target", value: "IT Support and Help Desk Roles" },
+      { title: "Strength", value: "Troubleshooting Windows, hardware, and network issues" },
+      { title: "Availability", value: "Open to onsite, hybrid, and entry-level support opportunities" },
     ],
     markNotes: {
-      profile: "A short introduction to my background, technical interests, and direction in IT support.",
-      skills: "Technical skills organized around systems, tools, and support responsibilities relevant to entry-level IT work.",
-      projects: "Projects that show configuration, troubleshooting, and hands-on technical execution.",
-      experience: "Work, lab, and support experience that reflects practical problem solving and user assistance.",
+      profile: "A clear overview of my background, support experience, and direction in IT.",
+      skills: "Technical skills grouped around operating systems, networking, tools, hardware, and troubleshooting.",
+      projects: "Hands-on projects that show configuration, problem solving, and practical technical work.",
+      experience: "Support, volunteer, and academic experience presented with a focus on troubleshooting and user assistance.",
       contact: "A direct closing section for hiring managers and recruiters.",
     },
   },
@@ -128,9 +128,9 @@ const modeConfig = {
     name: "Narrative Mode",
     heroTitle: "Mahendra Ranwa",
     heroSubtitle:
-      "A guided portfolio view that connects my education, technical projects, support experience, and career direction in IT.",
+      "Helping teams stay productive across systems, users, and networks.",
     heroLead:
-      "This path shows how my Computer Engineering Technology background, project work, and user support experience connect to the IT career I want to build.",
+      "This view connects my education, hands-on projects, support experience, and career direction as I build toward IT support, desktop support, and help desk work.",
     heroSignals: ["Profile and direction", "Skills and projects", "Experience and credentials"],
     heroCards: [
       { title: "Start", value: "Background, support mindset, and career direction" },
@@ -151,21 +151,21 @@ const modeConfig = {
 const profileCards = [
   {
     label: "Support Profile",
-    title: "Recent graduate with hands-on experience in shared technical environments",
+    title: "IT support experience built through labs, users, and shared technical environments",
     text:
-      "I recently completed Computer Engineering Technology and gained practical experience supporting shared lab systems, resolving technical issues, and assisting users with day-to-day problems.",
+      "I am an IT Support Technician with hands-on experience supporting users, troubleshooting devices, and resolving software and network issues in academic and collaborative environments.",
   },
   {
     label: "Career Direction",
     title: "Focused on help desk and desktop support opportunities",
     text:
-      "I am seeking entry-level roles in IT Help Desk, Desktop Support, or Technical Support where I can contribute through setup, diagnostics, troubleshooting, and user support.",
+      "I work comfortably with Windows systems, user support, issue diagnosis, workstation setup, and structured troubleshooting designed to restore service quickly and reduce downtime.",
   },
   {
     label: "Working Style",
-    title: "Structured work style with clear communication",
+    title: "Ready to contribute and continue growing in IT support",
     text:
-      "I enjoy hands-on technical work, approach problems step by step, and focus on resolving issues clearly and professionally.",
+      "I am currently pursuing CompTIA A+ certification, with Core 1 completed, and I am looking for opportunities where I can contribute on day one while continuing to grow in IT support, desktop support, and service desk work.",
   },
 ];
 
@@ -174,19 +174,19 @@ const strengths = [
   {
     icon: Wrench,
     title: "Issue Analysis",
-    text: "I use a structured process to identify symptoms, isolate likely causes, test solutions, and verify results.",
+    text: "Use a structured troubleshooting process to identify symptoms, isolate likely causes, test solutions, and verify the result.",
     points: ["Hardware and software faults", "Wi-Fi, LAN, and IP issues", "Root-cause analysis"],
   },
   {
     icon: Monitor,
     title: "Windows & Workstations",
     text: "Comfortable setting up and maintaining Windows workstations, installing software, and preparing systems for shared use.",
-    points: ["Windows 10/11", "System setup", "Software installation"],
+    points: ["Windows 10/11", "System setup", "Desktop troubleshooting"],
   },
   {
     icon: Briefcase,
     title: "Service Delivery",
-    text: "Comfortable supporting users through login issues, application errors, setup questions, and routine technical requests.",
+    text: "Support users through login issues, application errors, setup questions, and routine technical requests with clear communication.",
     points: ["End-user support", "Clear communication", "Follow-through"],
   },
 ];
@@ -196,7 +196,7 @@ const skillGroups = [
   {
     icon: Monitor,
     title: "Operating Systems",
-    items: ["Windows 10/11", "Linux/UNIX", "System imaging and setup"],
+    items: ["Windows 10/11", "Linux/UNIX", "System setup", "User environment support"],
   },
   {
     icon: Cable,
@@ -211,7 +211,7 @@ const skillGroups = [
   {
     icon: Wrench,
     title: "Hardware & Support",
-    items: ["PC assembly", "Peripherals", "Printers", "Ticket handling", "Issue diagnosis", "User support", "System setup", "Documentation"],
+    items: ["PC assembly", "Peripherals and printers", "Ticket handling", "Issue diagnosis", "Documentation and user support"],
   },
   {
     icon: Briefcase,
@@ -233,15 +233,15 @@ const projects = [
     category: "Project 01 / Portfolio Website",
     stack: "React, Vite, JavaScript, HTML, CSS",
     lens: "Frontend build",
-    summary: "Built and deployed a responsive portfolio website to present my technical background clearly across desktop and mobile devices.",
-    outcome: "Strengthened my ability to manage deployment, troubleshoot frontend issues, and resolve production problems methodically.",
+    summary: "Developed and deployed a responsive portfolio website using React and Vite.",
+    outcome: "Strengthened frontend implementation, deployment management, and production troubleshooting skills.",
     image: "",
     highlights: ["Responsive across desktop and mobile", "Deployed through GitHub Pages", "Resolved live build and asset issues"],
     actions: [
-      "Built the site using React, Vite, JavaScript, HTML, and CSS.",
-      "Configured deployment and version control with Git and GitHub Pages.",
-      "Troubleshot asset path issues and build problems during production deployment.",
-      "Improved layout, responsiveness, and overall usability across different screen sizes.",
+      "Developed and deployed the site using React, Vite, JavaScript, HTML, and CSS.",
+      "Managed version control and deployment using Git and GitHub Pages.",
+      "Resolved deployment issues including broken asset paths and production build differences.",
+      "Implemented responsive UI behavior for desktop and mobile devices.",
     ],
     notes: ["Responsive UI", "GitHub Pages", "Production debugging"],
   },
@@ -252,7 +252,7 @@ const projects = [
     stack: "Python, Raspberry Pi, SSH, VNC, sensors",
     lens: "Embedded systems",
     summary: "Built and configured a Raspberry Pi smart car with remote access, sensor integration, and hardware control.",
-    outcome: "Gained practical experience with setup, remote access, hardware integration, and diagnosing power or connectivity issues.",
+    outcome: "Improved setup, remote access, hardware integration, and troubleshooting across power, wiring, and connectivity.",
     image: `${assetBase}buggy.jpg`,
     highlights: ["Remote access with SSH and VNC", "Ultrasonic sensor integration", "Hands-on wiring and hardware setup"],
     actions: [
@@ -265,19 +265,19 @@ const projects = [
   },
   {
     id: "diagnostics",
-    title: "System Troubleshooting & Diagnostics",
+    title: "System Troubleshooting & Embedded Diagnostics",
     category: "Project 03 / Diagnostics Work",
     stack: "Hardware diagnostics, debugging, system testing",
     lens: "Diagnostics workflow",
-    summary: "Applied structured diagnostics to identify faults, isolate root causes, and verify stable fixes across technical systems.",
-    outcome: "Built a stronger diagnostic mindset that applies directly to IT support, help desk work, and technical issue resolution.",
+    summary: "Diagnosed hardware and software faults using structured debugging methods and system-level testing.",
+    outcome: "Strengthened problem solving through hands-on testing, validation, and root-cause analysis.",
     image: `${assetBase}embedded-control.jpg`,
     highlights: ["Root-cause focused testing", "System-level verification", "Stable fixes over guesswork"],
     actions: [
-      "Used structured debugging methods across hardware and software faults.",
-      "Performed system-level testing to isolate issues and confirm fixes.",
-      "Compared likely causes through testing and verification instead of guesswork.",
-      "Validated system stability after each fix before closing the issue.",
+      "Diagnosed hardware and software faults using structured debugging methods.",
+      "Performed system-level testing to improve reliability and performance.",
+      "Applied troubleshooting workflows across hardware, networking, and embedded lab environments.",
+      "Used practical diagnostics to reduce downtime and isolate root causes quickly.",
     ],
     notes: ["Fault isolation", "System testing", "Verification"],
   },
@@ -294,7 +294,7 @@ const experienceItems = [
       "Installed and configured Windows systems and academic software across multiple workstations.",
       "Diagnosed Wi-Fi, LAN, and IP configuration issues and restored connectivity.",
       "Assisted users with login problems, system errors, and application access issues.",
-      "Helped reduce downtime by resolving technical faults quickly and communicating clearly with users.",
+      "Improved system availability by identifying root causes quickly and resolving technical faults before they escalated.",
     ],
   },
   {
@@ -303,8 +303,8 @@ const experienceItems = [
     date: "Sep 2025 - Mar 2026",
     bullets: [
       "Maintained website functionality and resolved technical issues affecting everyday use.",
-      "Handled content updates, minor configuration tasks, and access-related issues.",
-      "Worked with team members to keep the site reliable and manageable.",
+      "Supported users with content updates, access-related problems, and troubleshooting requests with clear communication.",
+      "Worked with team members to improve reliability and respond quickly when issues affected usability.",
     ],
   },
   {
@@ -313,8 +313,8 @@ const experienceItems = [
     date: "May 2023 - Dec 2023",
     bullets: [
       "Assisted students with troubleshooting hardware and circuit-related issues during lab work.",
-      "Guided the proper use of tools, test equipment, and debugging methods.",
-      "Explained technical problems clearly and helped students work through solutions step by step.",
+      "Guided the proper use of lab tools, test equipment, and debugging techniques during hands-on work.",
+      "Strengthened technical problem-solving by explaining faults clearly and helping students test fixes methodically.",
     ],
   },
 ];
@@ -1139,7 +1139,7 @@ export default function App() {
                       <div className="project-stage__mock-line" />
                       <div className="project-stage__mock-line project-stage__mock-line--short" />
                       <div className="project-stage__mock-hero">
-                        <div className="project-stage__mock-hero-copy">
+                      <div className="project-stage__mock-hero-copy">
                           Clear structure, fast navigation, and a polished presentation of technical work.
                         </div>
                         <div className="project-stage__mock-hero-badge">Personal Website</div>
@@ -1323,7 +1323,7 @@ export default function App() {
                 <div className="contact-stage__label">Available For</div>
                 <h3 className="contact-stage__title">Open to help desk and desktop support roles</h3>
                 <p className="contact-stage__text">
-                  I would welcome the opportunity to contribute in a hands-on support environment.
+                  Available for IT support, help desk, and desktop support opportunities. I would be glad to share more about my experience and how I approach troubleshooting.
                 </p>
 
                 <div className="contact-stage__actions">
