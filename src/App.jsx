@@ -82,18 +82,18 @@ const modeConfig = {
     name: "Recruiter Mode",
     heroTitle: "Mahendra Ranwa",
     heroSubtitle:
-      "Mahendra Ranwa | IT Support Technician | Help Desk | Desktop Support",
+      "IT Support Technician focused on diagnosing and resolving system, network, and hardware issues efficiently.",
     heroLead:
-      "IT Support Technician based in Brampton with hands-on experience troubleshooting hardware, software, and connectivity issues in academic and team-based environments.",
+      "Recent Computer Engineering Technology graduate building toward IT Help Desk and Desktop Support roles through hands-on lab support, Windows setup, and structured troubleshooting.",
     heroSignals: [
-      "Brampton, ON",
-      "IT Help Desk / Desktop Support / Technical Support",
       "CompTIA A+ Core 1 completed",
+      "Hands-on with Windows, networking, and hardware troubleshooting",
+      "Supported workstation setup, software installs, and issue resolution in shared labs",
     ],
     heroCards: [
-      { title: "Target", value: "IT Support and Help Desk Roles" },
-      { title: "Strength", value: "Troubleshooting Windows, hardware, and network issues" },
-      { title: "Availability", value: "Open to onsite, hybrid, and entry-level support opportunities" },
+      { title: "Role Focus", value: "IT Help Desk, Desktop Support, and Technical Support roles" },
+      { title: "Core Strengths", value: "Windows support, endpoint setup, connectivity checks, and user-facing troubleshooting" },
+      { title: "Proof", value: "IT Centre support experience, hands-on projects, and active certification progress" },
     ],
     markNotes: {
       profile: "A clear overview of my background, support experience, and direction in IT.",
@@ -107,14 +107,14 @@ const modeConfig = {
     name: "Technical Mode",
     heroTitle: "Mahendra Ranwa",
     heroSubtitle:
-      "Recent Computer Engineering Technology graduate focused on systems support, diagnostics, networking basics, and technical problem solving.",
+      "Systems support | networking fundamentals | diagnostics and remote access",
     heroLead:
-      "This view highlights the technical side of my background: Windows 10/11, TCP/IP, DNS, DHCP, IP configuration, remote access tools, hardware setup, and structured diagnostics developed through labs, support work, and personal projects.",
+      "Built technical depth through lab support, embedded systems work, remote access setup, and structured diagnostics across Windows systems, networking, and hardware.",
     heroSignals: ["Windows 10/11", "TCP/IP, DNS, DHCP", "SSH, VNC, and system setup"],
     heroCards: [
       { title: "Environment", value: "Shared labs, project systems, and user-facing technical environments" },
-      { title: "Technical Focus", value: "Configuration, diagnostics, connectivity issues, and endpoint support" },
-      { title: "Workflow", value: "Identify the issue, isolate the cause, apply the fix, and verify the result" },
+      { title: "Technical Focus", value: "Configuration, endpoint issues, connectivity, and remote access" },
+      { title: "Workflow", value: "Identify the issue, isolate the cause, apply the fix, verify the result" },
     ],
     markNotes: {
       profile: "A technical summary of how I approach support, diagnostics, and hands-on system work.",
@@ -130,7 +130,7 @@ const modeConfig = {
     heroSubtitle:
       "Helping teams stay productive across systems, users, and networks.",
     heroLead:
-      "This view connects my education, hands-on projects, support experience, and career direction as I build toward IT support, desktop support, and help desk work.",
+      "This view connects my education, practical support experience, and hands-on projects to the kind of IT support career I am building.",
     heroSignals: ["Profile and direction", "Skills and projects", "Experience and credentials"],
     heroCards: [
       { title: "Start", value: "Background, support mindset, and career direction" },
@@ -151,21 +151,21 @@ const modeConfig = {
 const profileCards = [
   {
     label: "Support Profile",
-    title: "IT support experience built through labs, users, and shared technical environments",
+    title: "What I do",
     text:
-      "I am an IT Support Technician with hands-on experience supporting users, troubleshooting devices, and resolving software and network issues in academic and collaborative environments.",
+      "Support users and shared systems by configuring workstations, resolving everyday technical issues, and keeping environments ready for use.",
   },
   {
     label: "Career Direction",
-    title: "Focused on help desk and desktop support opportunities",
+    title: "What I am good at",
     text:
-      "I work comfortably with Windows systems, user support, issue diagnosis, workstation setup, and structured troubleshooting designed to restore service quickly and reduce downtime.",
+      "Diagnosing workstation, software, login, and connectivity problems with a structured approach that reduces downtime and keeps communication clear.",
   },
   {
     label: "Working Style",
-    title: "Ready to contribute and continue growing in IT support",
+    title: "What I am building now",
     text:
-      "I am currently pursuing CompTIA A+ certification, with Core 1 completed, and I am looking for opportunities where I can contribute on day one while continuing to grow in IT support, desktop support, and service desk work.",
+      "Building deeper support readiness through CompTIA A+, lab-based diagnostics, and projects involving remote access, hardware setup, and system validation.",
   },
 ];
 
@@ -174,7 +174,7 @@ const strengths = [
   {
     icon: Wrench,
     title: "Issue Analysis",
-    text: "Use a structured troubleshooting process to identify symptoms, isolate likely causes, test solutions, and verify the result.",
+    text: "Diagnose hardware, software, and connectivity problems by working through symptoms, isolating causes, and verifying results.",
     points: ["Hardware and software faults", "Wi-Fi, LAN, and IP issues", "Root-cause analysis"],
   },
   {
@@ -186,7 +186,7 @@ const strengths = [
   {
     icon: Briefcase,
     title: "Service Delivery",
-    text: "Support users through login issues, application errors, setup questions, and routine technical requests with clear communication.",
+    text: "Support users through login issues, application errors, setup requests, and routine technical questions with clear communication.",
     points: ["End-user support", "Clear communication", "Follow-through"],
   },
 ];
@@ -195,8 +195,8 @@ const strengths = [
 const skillGroups = [
   {
     icon: Monitor,
-    title: "Operating Systems",
-    items: ["Windows 10/11", "Linux/UNIX", "System setup", "User environment support"],
+    title: "Core Skills",
+    items: ["Windows 10/11", "Workstation setup", "Desktop troubleshooting", "User environment support"],
   },
   {
     icon: Cable,
@@ -205,13 +205,13 @@ const skillGroups = [
   },
   {
     icon: Cpu,
-    title: "Tools & Platforms",
+    title: "Tools",
     items: ["Office 365", "Git", "SSH", "VNC", "Anaconda", "MPLAB X", "STM32CubeMX"],
   },
   {
     icon: Wrench,
-    title: "Hardware & Support",
-    items: ["PC assembly", "Peripherals and printers", "Ticket handling", "Issue diagnosis", "Documentation and user support"],
+    title: "Hardware",
+    items: ["PC assembly", "Peripherals and printers", "Device setup", "Issue diagnosis", "Documentation"],
   },
   {
     icon: Briefcase,
@@ -220,8 +220,8 @@ const skillGroups = [
   },
   {
     icon: Cpu,
-    title: "Scripting & Technical Learning",
-    items: ["Python fundamentals", "Command-line workflow", "Configuration tasks", "Technical documentation"],
+    title: "Programming",
+    items: ["Python", "Java", "C", "Command-line workflow", "Technical documentation"],
   },
 ];
 
@@ -233,15 +233,15 @@ const projects = [
     category: "Project 01 / Portfolio Website",
     stack: "React, Vite, JavaScript, HTML, CSS",
     lens: "Frontend build",
-    summary: "Developed and deployed a responsive portfolio website using React and Vite.",
-    outcome: "Strengthened frontend implementation, deployment management, and production troubleshooting skills.",
+    purpose: "Built a responsive portfolio website to present technical work clearly and reliably across desktop and mobile devices.",
+    result: "Delivered a stable production build on GitHub Pages after resolving asset path, deployment, and responsive layout issues.",
     image: "",
-    highlights: ["Responsive across desktop and mobile", "Deployed through GitHub Pages", "Resolved live build and asset issues"],
+    highlights: ["System: React and Vite frontend", "Logic: production debugging and responsive layout fixes", "Result: stable live deployment on GitHub Pages"],
     actions: [
-      "Developed and deployed the site using React, Vite, JavaScript, HTML, and CSS.",
-      "Managed version control and deployment using Git and GitHub Pages.",
-      "Resolved deployment issues including broken asset paths and production build differences.",
-      "Implemented responsive UI behavior for desktop and mobile devices.",
+      "Implemented the site in React, Vite, JavaScript, HTML, and CSS with a responsive layout for desktop and mobile screens.",
+      "Managed source control, build workflow, and deployment through Git and GitHub Pages.",
+      "Diagnosed broken asset paths, production build differences, and deployment issues until the live site matched the local version.",
+      "Refined layout behavior, content hierarchy, and visual consistency to improve readability for recruiters.",
     ],
     notes: ["Responsive UI", "GitHub Pages", "Production debugging"],
   },
@@ -251,15 +251,15 @@ const projects = [
     category: "Project 02 / Raspberry Pi System",
     stack: "Python, Raspberry Pi, SSH, VNC, sensors",
     lens: "Embedded systems",
-    summary: "Built and configured a Raspberry Pi smart car with remote access, sensor integration, and hardware control.",
-    outcome: "Improved setup, remote access, hardware integration, and troubleshooting across power, wiring, and connectivity.",
+    purpose: "Built and configured a Raspberry Pi smart car system for remote control, sensor input, and hardware interaction.",
+    result: "Improved remote access, hardware integration, and fault isolation across power, wiring, and connectivity problems.",
     image: `${assetBase}buggy.jpg`,
-    highlights: ["Remote access with SSH and VNC", "Ultrasonic sensor integration", "Hands-on wiring and hardware setup"],
+    highlights: ["System: Raspberry Pi, sensors, and control modules", "Logic: remote access plus sensor-driven interaction", "Result: reliable testing across wiring, power, and connectivity"],
     actions: [
       "Built and configured a three-wheel smart car with motors, sensors, and control modules.",
-      "Installed Raspberry Pi OS and configured the system environment.",
-      "Set up SSH and VNC for remote access, monitoring, and control.",
-      "Integrated an ultrasonic sensor for obstacle detection and distance measurement.",
+      "Installed Raspberry Pi OS, prepared the environment, and verified core system configuration.",
+      "Implemented SSH and VNC access for remote setup, monitoring, and control.",
+      "Integrated an ultrasonic sensor for obstacle detection and distance measurement while testing hardware behavior end to end.",
     ],
     notes: ["Remote access", "Sensor control", "Hardware setup"],
   },
@@ -269,15 +269,15 @@ const projects = [
     category: "Project 03 / Diagnostics Work",
     stack: "Hardware diagnostics, debugging, system testing",
     lens: "Diagnostics workflow",
-    summary: "Diagnosed hardware and software faults using structured debugging methods and system-level testing.",
-    outcome: "Strengthened problem solving through hands-on testing, validation, and root-cause analysis.",
+    purpose: "Applied structured diagnostics to identify hardware and software faults in lab and embedded environments.",
+    result: "Strengthened root-cause analysis, validation, and system-level troubleshooting through repeatable testing workflows.",
     image: `${assetBase}embedded-control.jpg`,
-    highlights: ["Root-cause focused testing", "System-level verification", "Stable fixes over guesswork"],
+    highlights: ["System: embedded and lab-based test setups", "Logic: step-by-step fault isolation and validation", "Result: faster identification of hardware and software failures"],
     actions: [
-      "Diagnosed hardware and software faults using structured debugging methods.",
-      "Performed system-level testing to improve reliability and performance.",
+      "Diagnosed hardware and software faults using structured debugging methods instead of trial-and-error fixes.",
+      "Performed system-level testing to verify reliability, behavior, and expected output.",
       "Applied troubleshooting workflows across hardware, networking, and embedded lab environments.",
-      "Used practical diagnostics to reduce downtime and isolate root causes quickly.",
+      "Documented findings clearly enough to isolate root causes and confirm working fixes.",
     ],
     notes: ["Fault isolation", "System testing", "Verification"],
   },
@@ -1180,7 +1180,10 @@ export default function App() {
                     </div>
                   </div>
                   <h3 className="project-stage__title">{selectedProject.title}</h3>
-                  <p className="project-stage__summary">{selectedProject.summary}</p>
+                  <div className="project-stage__summary-block">
+                    <div className="project-stage__list-label">Purpose</div>
+                    <p className="project-stage__summary">{selectedProject.purpose}</p>
+                  </div>
 
                   <div className="project-stage__highlights">
                     {selectedProject.highlights.map((item) => (
@@ -1192,11 +1195,11 @@ export default function App() {
                   </div>
 
                   <div className="project-stage__outcome">
-                    <div className="project-stage__outcome-label">Outcome</div>
-                    <p>{selectedProject.outcome}</p>
+                    <div className="project-stage__outcome-label">Result</div>
+                    <p>{selectedProject.result}</p>
                   </div>
 
-                  <div className="project-stage__list-label">What I worked on</div>
+                  <div className="project-stage__list-label">What I implemented</div>
                   <ul className="project-stage__list">
                     {selectedProject.actions.map((bullet) => (
                       <li key={bullet}>{bullet}</li>
@@ -1231,7 +1234,7 @@ export default function App() {
                     <span className="project-chooser__marker" />
                     <span className="project-chooser__category">{project.category}</span>
                     <span className="project-chooser__title">{project.title}</span>
-                    <span className="project-chooser__summary">{project.summary}</span>
+                    <span className="project-chooser__summary">{project.purpose}</span>
                     <span className="project-chooser__footer">
                       <span>{project.lens}</span>
                       <span>{project.notes[0]}</span>
@@ -1323,7 +1326,7 @@ export default function App() {
                 <div className="contact-stage__label">Available For</div>
                 <h3 className="contact-stage__title">Open to help desk and desktop support roles</h3>
                 <p className="contact-stage__text">
-                  Available for IT support, help desk, and desktop support opportunities. I would be glad to share more about my experience and how I approach troubleshooting.
+                  Open to full-time IT support opportunities where I can contribute in workstation support, user issue resolution, software setup, and day-to-day technical operations.
                 </p>
 
                 <div className="contact-stage__actions">
