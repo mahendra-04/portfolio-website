@@ -1,3 +1,4 @@
+/* Light theme design tokens: colors, shadows, radii, and shared layout sizes. */
 :root {
   --bg: #f5f1e8;
   --bg-soft: #ebe4d6;
@@ -23,6 +24,8 @@
   --container: 1180px;
 }
 
+/* Dark theme overrides reuse the same variable names so the component styles
+   below do not need duplicate light/dark selectors. */
 :root[data-theme="dark"] {
   --bg: #09131d;
   --bg-soft: #0d1f2d;
@@ -44,16 +47,20 @@
   --shadow-strong: 0 30px 76px rgba(0, 0, 0, 0.38);
 }
 
+/* Global reset and box-model consistency. */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* Smooth in-page anchor scrolling for nav links. */
 html {
   scroll-behavior: smooth;
 }
 
+/* Base page styling, including the layered background gradients used across
+   the entire site. */
 body {
   margin: 0;
   color: var(--text);
@@ -65,17 +72,20 @@ body {
   font-family: "Segoe UI", Inter, "Helvetica Neue", Arial, sans-serif;
 }
 
+/* Reset anchor default color/underline so link styling is controlled manually. */
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* Images are made responsive by default. */
 img {
   display: block;
   width: 100%;
   max-width: 100%;
 }
 
+/* Form controls inherit the surrounding type styles. */
 button,
 input,
 textarea,
@@ -83,6 +93,7 @@ select {
   font: inherit;
 }
 
+/* Shared accessible focus ring across interactive elements. */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -92,12 +103,14 @@ textarea:focus-visible {
   outline-offset: 3px;
 }
 
+/* Top-level wrapper used for layered page decorations and overflow control. */
 .site-shell {
   position: relative;
   min-height: 100vh;
   overflow-x: clip;
 }
 
+/* Subtle page overlay to soften the background and add texture. */
 .site-shell::before {
   content: "";
   position: fixed;
@@ -108,6 +121,7 @@ textarea:focus-visible {
   opacity: 0.45;
 }
 
+/* Keyboard-only skip link for accessibility. */
 .skip-link {
   position: absolute;
   left: 1rem;
@@ -124,6 +138,7 @@ textarea:focus-visible {
   top: 1rem;
 }
 
+/* Fixed decorative gradient layers that sit behind all page content. */
 .site-shell__gradient {
   position: fixed;
   inset: 0;
@@ -143,6 +158,7 @@ textarea:focus-visible {
     radial-gradient(circle at 20% 82%, rgba(207, 122, 49, 0.08), transparent 22%);
 }
 
+/* Main content layers sit above the decorative backgrounds. */
 .topbar,
 main,
 .footer {
@@ -150,6 +166,7 @@ main,
   z-index: 1;
 }
 
+/* Sticky header wrapper. */
 .topbar {
   position: sticky;
   top: 0;
@@ -157,6 +174,7 @@ main,
   padding: 1rem 1.25rem 0;
 }
 
+/* The header uses a compact grid to align brand, nav, theme toggle, and CTA. */
 .topbar__inner {
   position: relative;
   max-width: var(--container);
@@ -179,6 +197,7 @@ main,
   overflow: clip;
 }
 
+/* Slightly stronger header treatment after scrolling. */
 .topbar--scrolled .topbar__inner {
   background: color-mix(in srgb, var(--panel-strong) 94%, transparent 6%);
   border-color: color-mix(in srgb, var(--line-strong) 40%, var(--line) 60%);
@@ -186,6 +205,7 @@ main,
   transform: translateY(0);
 }
 
+/* Brand block on the left side of the header. */
 .brand {
   display: inline-grid;
   gap: 0.05rem;
@@ -212,6 +232,7 @@ main,
   display: none;
 }
 
+/* Header panel contains the nav and mobile resume button. */
 .topbar__panel {
   display: flex;
   align-items: center;
@@ -220,6 +241,7 @@ main,
   width: 100%;
 }
 
+/* Shared flex row pattern used in several small UI clusters. */
 .topbar__nav,
 .footer__links,
 .hero__socials,
@@ -230,6 +252,7 @@ main,
   flex-wrap: wrap;
 }
 
+/* Desktop navigation pill group. */
 .topbar__nav {
   min-width: 0;
   flex-wrap: nowrap;
@@ -244,6 +267,7 @@ main,
   background: color-mix(in srgb, var(--panel) 86%, transparent 14%);
 }
 
+/* Individual nav links. */
 .topbar__link {
   flex: 0 0 auto;
   color: var(--subtle);
@@ -260,6 +284,7 @@ main,
     box-shadow 180ms ease;
 }
 
+/* Shared hover lift for small text links and nav items. */
 .topbar__link:hover,
 .topbar__link:focus-visible,
 .inline-link:hover,
@@ -272,11 +297,13 @@ main,
   transform: translateY(-1px);
 }
 
+/* Hover background for inactive nav items. */
 .topbar__link:hover,
 .topbar__link:focus-visible {
   background: color-mix(in srgb, var(--accent-soft) 78%, transparent 22%);
 }
 
+/* Active section style driven by App.jsx through the activeSection state. */
 .topbar__link--active {
   color: var(--text);
   background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, white 86%), color-mix(in srgb, var(--accent-secondary) 14%, white 86%));
@@ -296,6 +323,7 @@ main,
   display: none;
 }
 
+/* Circular theme toggle button. */
 .theme-toggle {
   width: 2.6rem;
   height: 2.6rem;
@@ -336,11 +364,13 @@ main,
     box-shadow 180ms ease;
 }
 
+/* Shared button lift interaction. */
 .button:hover,
 .button:focus-visible {
   transform: translateY(-2px);
 }
 
+/* Filled primary call-to-action button. */
 .button--primary {
   border-color: transparent;
   background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 62%, var(--accent-secondary) 38%));
@@ -348,6 +378,7 @@ main,
   box-shadow: 0 16px 28px rgba(21, 116, 110, 0.22);
 }
 
+/* Secondary/ghost buttons reuse the panel styling. */
 .button--secondary,
 .button--ghost {
   background: color-mix(in srgb, var(--panel) 88%, transparent 12%);
@@ -368,10 +399,12 @@ main {
   padding: 0 1.25rem 5.5rem;
 }
 
+/* Ensures anchored sections do not hide behind the sticky header. */
 main section[id] {
   scroll-margin-top: 7rem;
 }
 
+/* Hero section wrapper and large decorative backdrop. */
 .hero {
   position: relative;
   padding: 2rem 0 2.2rem;
@@ -395,6 +428,7 @@ main section[id] {
   z-index: -1;
 }
 
+/* Two-column hero layout on larger screens. */
 .hero__inner {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
@@ -402,6 +436,7 @@ main section[id] {
   align-items: start;
 }
 
+/* Shared inner padding for the hero text and side panel columns. */
 .hero__copy,
 .hero__panel {
   padding: 1.25rem 1.1rem;
@@ -415,6 +450,7 @@ main section[id] {
   align-self: start;
 }
 
+/* Eyebrow/pill label above the hero headline. */
 .hero__eyebrow {
   display: inline-flex;
   align-self: flex-start;
@@ -424,6 +460,7 @@ main section[id] {
   border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent 82%);
 }
 
+/* Shared small uppercase label treatment used throughout the site. */
 .eyebrow,
 .section-intro__eyebrow,
 .project-card__type,
@@ -440,6 +477,7 @@ main section[id] {
   text-transform: uppercase;
 }
 
+/* Short supporting line above the hero headline. */
 .hero__kicker {
   margin: 1rem 0 0;
   color: color-mix(in srgb, var(--accent-strong) 82%, var(--text) 18%);
@@ -449,6 +487,7 @@ main section[id] {
   letter-spacing: 0.05em;
 }
 
+/* Main heading styles used by hero and section headings. */
 .hero h1,
 .section-intro h2,
 .contact-panel h2 {
@@ -485,12 +524,14 @@ main section[id] {
   font-size: 1rem;
 }
 
+/* Primary hero description width is limited for readability. */
 .hero__lead {
   max-width: 59ch;
   margin: 1.2rem 0 0;
   font-size: 1rem;
 }
 
+/* Small pill-style metadata row beneath the hero text. */
 .hero__availability {
   display: flex;
   gap: 0.7rem;
@@ -498,6 +539,7 @@ main section[id] {
   margin-top: 1.3rem;
 }
 
+/* Shared pill treatment for availability tags, stack tags, and list tags. */
 .hero__availability span,
 .stack-pill,
 .tag-list li,
@@ -510,6 +552,7 @@ main section[id] {
   font-size: 0.84rem;
 }
 
+/* Hero action button row. */
 .hero__actions {
   display: flex;
   gap: 1rem;
@@ -517,6 +560,7 @@ main section[id] {
   margin-top: 2rem;
 }
 
+/* Smaller inline text links used in social/footer contexts. */
 .inline-link,
 .footer__link,
 .text-action {
@@ -541,6 +585,7 @@ main section[id] {
   align-self: start;
 }
 
+/* Shared panel/card surface used across almost every content block. */
 .hero-card,
 .project-card,
 .about-panel,
@@ -563,6 +608,7 @@ main section[id] {
   border-radius: 30px;
 }
 
+/* Decorative image background behind the portrait. */
 .hero-card__media {
   aspect-ratio: 4 / 4.3;
   background:
@@ -601,6 +647,7 @@ main section[id] {
   font-weight: 700;
 }
 
+/* Small credibility cards under the portrait. */
 .hero__stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -634,6 +681,7 @@ main section[id] {
   padding-top: 5.25rem;
 }
 
+/* Section wrappers provide the large rounded backgrounds behind each block. */
 .section--work,
 .section--about,
 .section--services,
@@ -667,6 +715,7 @@ main section[id] {
   box-shadow: 0 18px 36px rgba(48, 49, 58, 0.04);
 }
 
+/* Shared intro layout: eyebrow on the left, content on the right. */
 .section-intro {
   display: grid;
   grid-template-columns: 150px minmax(0, 1fr);
@@ -716,6 +765,7 @@ main section[id] {
   flex-wrap: wrap;
 }
 
+/* Grid containers for the repeated card sections. */
 .projects-grid,
 .services-grid,
 .tools-grid {
@@ -741,6 +791,7 @@ main section[id] {
     background-color 220ms ease;
 }
 
+/* Hover treatment for cards and panel surfaces. */
 .project-card:hover,
 .project-card:focus-within,
 .service-card:hover,
@@ -757,6 +808,7 @@ main section[id] {
   box-shadow: var(--shadow-strong);
 }
 
+/* Project cards use a media-top / content-bottom split. */
 .project-card {
   display: grid;
   overflow: hidden;
@@ -843,6 +895,7 @@ main section[id] {
   gap: 0.75rem;
 }
 
+/* Shared inset panel style used inside project detail grids and strength cards. */
 .project-card__details div,
 .strength-card,
 .featured-project__item {
@@ -908,6 +961,7 @@ main section[id] {
   margin: 0;
 }
 
+/* About section uses a two-column content + sidebar layout. */
 .about-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.78fr);
@@ -940,6 +994,7 @@ main section[id] {
   margin-top: 1.2rem;
 }
 
+/* Each experience row is split into meta info on the left and bullets on the right. */
 .timeline__item {
   position: relative;
   display: grid;
@@ -971,6 +1026,7 @@ main section[id] {
   list-style: none;
 }
 
+/* Experience bullets are plain text lines now, with no default list markers. */
 .timeline li {
   list-style: none;
 }
@@ -1060,6 +1116,7 @@ main section[id] {
   margin-top: 1rem;
 }
 
+/* Service bullets keep the small accent dot, unlike the experience section. */
 .service-points {
   display: grid;
   gap: 0.55rem;
@@ -1110,12 +1167,15 @@ main section[id] {
   margin-top: 1.4rem;
 }
 
+/* The right side of the contact section stacks the form, direct contact cards,
+   and map card. */
 .contact-panel__side {
   display: grid;
   gap: 0.95rem;
   align-content: start;
 }
 
+/* Contact form field layout and interactive states. */
 .contact-form {
   display: grid;
   gap: 0.95rem;
@@ -1175,6 +1235,7 @@ main section[id] {
   color: color-mix(in srgb, #c43b3b 82%, var(--text) 18%);
 }
 
+/* Clickable email/phone/location cards. */
 .contact-list {
   display: grid;
   gap: 0.9rem;
@@ -1237,6 +1298,7 @@ main section[id] {
     box-shadow 180ms ease;
 }
 
+/* Dark-mode-specific map background adjustment. */
 :root[data-theme="dark"] .contact-map {
   background:
     radial-gradient(circle at 20% 25%, rgba(103, 212, 203, 0.18), transparent 24%),
@@ -1278,6 +1340,8 @@ main section[id] {
   padding: 2.2rem 1.25rem 2.7rem;
 }
 
+/* Footer keeps links and summary content in a simple horizontal row until the
+   mobile breakpoints collapse it. */
 .footer__inner {
   max-width: var(--container);
   margin: 0 auto;
@@ -1320,6 +1384,7 @@ main section[id] {
   transform: translateY(0);
 }
 
+/* Mid-size desktop/tablet breakpoint: nav compresses and some grids reduce. */
 @media (min-width: 901px) and (max-width: 1120px) {
   .topbar__inner {
     grid-template-columns: minmax(185px, 210px) minmax(0, 1fr) auto;
@@ -1349,6 +1414,7 @@ main section[id] {
   }
 }
 
+/* Large tablet / small laptop breakpoint. */
 @media (max-width: 1080px) {
   .hero__inner,
   .about-grid,
@@ -1394,6 +1460,7 @@ main section[id] {
   }
 }
 
+/* Mobile navigation and single-column layout changes start here. */
 @media (max-width: 900px) {
   .topbar {
     padding-top: 0.9rem;
@@ -1492,6 +1559,7 @@ main section[id] {
   }
 }
 
+/* Smaller tablet / large phone adjustments. */
 @media (max-width: 720px) {
   main,
   .footer,
@@ -1580,6 +1648,7 @@ main section[id] {
   }
 }
 
+/* Small-phone tuning: tighter spacing, smaller type, and stacked controls. */
 @media (max-width: 560px) {
   .topbar {
     padding-top: 0.75rem;
@@ -1734,6 +1803,7 @@ main section[id] {
   }
 }
 
+/* Respect reduced-motion user preferences by disabling animated transitions. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

@@ -26,8 +26,12 @@ import {
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
+// Vite exposes the deployed base path through BASE_URL, which lets asset links
+// work both locally and on GitHub Pages.
 const assetBase = import.meta.env.BASE_URL;
 
+// Primary navigation items. Each id matches a section id in the page so links
+// can scroll directly to the correct block.
 const navItems = [
   { id: "hero", label: "Home" },
   { id: "work", label: "Work" },
@@ -37,6 +41,7 @@ const navItems = [
   { id: "contact", label: "Contact" },
 ];
 
+// Reusable external/profile links used in the hero, contact area, and footer.
 const socialLinks = [
   {
     label: "LinkedIn",
@@ -56,12 +61,15 @@ const socialLinks = [
   },
 ];
 
+// Short credential-style highlights shown beside the hero portrait.
 const heroStats = [
   { value: "Open to work", label: "Help desk and IT operations" },
   { value: "Hands-on", label: "Windows, devices, and troubleshooting" },
   { value: "Lab-tested", label: "Shared labs and classroom environments" },
 ];
 
+// Main project cards rendered in the Work section. The first item becomes the
+// lead project visually because the UI renders this array in order.
 const projects = [
   {
     title: "Raspberry Pi Smart Car System",
@@ -101,6 +109,7 @@ const projects = [
   },
 ];
 
+// Support areas shown as service cards.
 const serviceItems = [
   {
     title: "Desktop Support",
@@ -122,6 +131,7 @@ const serviceItems = [
   },
 ];
 
+// Timeline entries for the Experience block.
 const experience = [
   {
     role: "Support Technician",
@@ -146,6 +156,7 @@ const experience = [
   },
 ];
 
+// Qualifications shown in the About sidebar.
 const credentials = [
   "Computer Engineering Technology (Advanced Diploma), Sheridan College",
   "CompTIA A+ (Core 1 completed, Core 2 in progress)",
@@ -153,6 +164,7 @@ const credentials = [
   "Computer Components and Peripherals for IT Technicians",
 ];
 
+// Short personal strengths shown in compact cards.
 const strengths = [
   {
     title: "User support",
@@ -171,6 +183,7 @@ const strengths = [
   },
 ];
 
+// Quick tech/support keywords displayed in the horizontal stack band.
 const stackItems = [
   "Windows Support",
   "Help Desk",
@@ -180,6 +193,7 @@ const stackItems = [
   "React + Vite",
 ];
 
+// Tool and workflow categories shown in the Tools section.
 const toolItems = [
   {
     title: "Windows & Device Setup",
@@ -203,6 +217,7 @@ const toolItems = [
   },
 ];
 
+// Featured case study content for the large summary card under projects.
 const featuredProject = {
   eyebrow: "Featured case study",
   title: "Portfolio Website Refresh",
@@ -217,6 +232,7 @@ const featuredProject = {
   tech: ["React", "Vite", "GitHub Pages", "Responsive CSS"],
 };
 
+// Direct contact methods rendered as clickable cards.
 const contactItems = [
   {
     label: "Email",
@@ -238,11 +254,15 @@ const contactItems = [
   },
 ];
 
+// Shared section heading component so each section keeps the same layout and
+// typography system.
 function SectionIntro({ eyebrow, title, text }) {
   return (
     <div className="section-intro section-intro--animated">
+      {/* Small uppercase label that sits to the left of each section heading. */}
       <span className="section-intro__eyebrow">{eyebrow}</span>
       <div className="section-intro__content">
+        {/* Main section title and optional supporting text. */}
         <h2>{title}</h2>
         <p>{text}</p>
       </div>
@@ -250,7 +270,11 @@ function SectionIntro({ eyebrow, title, text }) {
   );
 }
 
+// Shared link renderer for social/footer links. It handles regular links and
+// downloadable links from the same data shape.
 function SocialLink({ item, className = "" }) {
+  // The icon component is stored in the data object, so we pull it out here
+  // and render it like any other React component.
   const Icon = item.icon;
 
   return (
@@ -268,26 +292,47 @@ function SocialLink({ item, className = "" }) {
 }
 
 export default function App() {
+  // Access key for Web3Forms. This is injected through the local .env file and
+  // used by the contact form submission handler.
   const web3FormsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
+  // Ref used to detect clicks outside the header when the mobile menu is open.
   const headerRef = useRef(null);
+
+  // Header/menu UI state.
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+
+  // Theme preference is persisted so the chosen mode survives reloads.
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
+
+  // Stores which contact field was copied most recently so the UI can briefly
+  // swap the copy icon to a check mark.
   const [copiedField, setCopiedField] = useState("");
+
+  // Form submission feedback shown below the contact form button.
   const [contactStatus, setContactStatus] = useState({ type: "", message: "" });
   const [sendingMessage, setSendingMessage] = useState(false);
+
+  // Controlled form state for the contact form inputs.
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
     message: "",
   });
 
+  // Keeps desktop/mobile navigation behavior in sync with viewport size and
+  // scroll position. On smaller screens, scrolling also closes the open menu.
   useEffect(() => {
+    // If the screen grows back to desktop width, force-close the mobile menu so
+    // the layout resets cleanly.
     const onResize = () => {
       if (window.innerWidth > 900) setMenuOpen(false);
     };
 
+    // Adds the "scrolled" header style after the page moves down a bit, and
+    // also closes the mobile menu while the user scrolls on smaller screens.
     const onScroll = () => {
       setScrolled(window.scrollY > 18);
       if (window.innerWidth <= 900) {
@@ -306,14 +351,21 @@ export default function App() {
     };
   }, []);
 
+  // Watches each page section and updates the active nav item based on what is
+  // currently most visible in the viewport.
   useEffect(() => {
+    // Build a list of actual section elements from the navigation config.
     const sectionIds = navItems.map((item) => item.id);
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean);
 
+    // IntersectionObserver is cheaper and cleaner than manually tracking scroll
+    // position for every section.
     const observer = new IntersectionObserver(
       (entries) => {
+        // Multiple sections can overlap the viewport at once, so we choose the
+        // visible section with the strongest intersection ratio.
         const visibleEntry = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -323,6 +375,8 @@ export default function App() {
         }
       },
       {
+        // These values make the active link change around the middle of the
+        // viewport instead of right at the top edge.
         rootMargin: "-18% 0px -55% 0px",
         threshold: [0.15, 0.35, 0.55],
       }
@@ -333,22 +387,28 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
+  // Applies the theme to the root document element and saves the preference.
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  // Handles mobile-menu dismissal when the user clicks outside the header or
+  // presses Escape.
   useEffect(() => {
+    // Do not attach outside-click listeners if the menu is closed.
     if (!menuOpen) {
       return undefined;
     }
 
+    // If the click/tap target is outside the header wrapper, close the menu.
     const handlePointerDown = (event) => {
       if (!headerRef.current?.contains(event.target)) {
         setMenuOpen(false);
       }
     };
 
+    // Keyboard-friendly close behavior.
     const handleEscape = (event) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
@@ -366,14 +426,22 @@ export default function App() {
     };
   }, [menuOpen]);
 
+  // Adds the "is-visible" class once elements scroll into view so the reveal
+  // animation only runs once per element.
   useEffect(() => {
+    // Every animated block uses the same class name, so one observer can
+    // handle all of them.
     const items = document.querySelectorAll(".reveal-on-scroll");
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // The CSS animation is controlled by this class switch.
             entry.target.classList.add("is-visible");
+
+            // Stop observing after the first reveal so the animation does not
+            // keep replaying while the user scrolls.
             observer.unobserve(entry.target);
           }
         });
@@ -386,19 +454,33 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
+  // Small helper used by several links/buttons that should always close the
+  // mobile navigation.
   const closeMenu = () => setMenuOpen(false);
+
+  // Immediately updates the highlighted nav item when a link is clicked, even
+  // before the IntersectionObserver finishes updating.
   const handleNavClick = (id) => {
     setActiveSection(id);
     closeMenu();
   };
 
+  // Generic input handler for the controlled contact form.
   const handleContactChange = (event) => {
     const { name, value } = event.target;
+
+    // Because each input's "name" matches a key in contactForm, one handler is
+    // enough for the whole form.
     setContactForm((current) => ({ ...current, [name]: value }));
   };
 
+  // Sends the contact form to Web3Forms. If the env key is missing, the user
+  // gets a clear error instead of a silent failure.
   const handleContactSubmit = async (event) => {
     event.preventDefault();
+
+    // The deployed form only works once the service key exists in the local
+    // environment. Without it, submitting would fail every time.
     if (!web3FormsAccessKey) {
       setContactStatus({
         type: "error",
@@ -411,6 +493,8 @@ export default function App() {
     setContactStatus({ type: "", message: "" });
 
     try {
+      // Web3Forms accepts JSON payloads, so we send the form fields directly
+      // rather than building a mailto link.
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
@@ -418,22 +502,31 @@ export default function App() {
           Accept: "application/json",
         },
         body: JSON.stringify({
+          // access_key authenticates the form request with Web3Forms.
           access_key: web3FormsAccessKey,
           name: contactForm.name,
           email: contactForm.email,
           message: contactForm.message,
+
+          // These fields control the email subject/sender metadata that lands
+          // in the inbox.
           subject: `Portfolio inquiry from ${contactForm.name || "a visitor"}`,
           from_name: "Mahendra Portfolio",
+
+          // This makes replying from the inbox go back to the visitor.
           replyto: contactForm.email,
         }),
       });
 
+      // Web3Forms returns JSON whether the request succeeds or fails, so we
+      // inspect both the HTTP status and the response body.
       const result = await response.json();
 
       if (!response.ok || !result.success) {
         throw new Error(result.message || "Unable to send message right now.");
       }
 
+      // Reset the form only after a confirmed success.
       setContactForm({
         name: "",
         email: "",
@@ -453,24 +546,34 @@ export default function App() {
     }
   };
 
+  // Copies contact details like email or phone number to the clipboard and
+  // briefly shows success feedback in the relevant card.
   const handleCopy = async (label, value) => {
     try {
       await navigator.clipboard.writeText(value);
       setCopiedField(label);
+
+      // Clear the temporary success state after a short delay so the icon can
+      // switch back to the normal copy indicator.
       window.setTimeout(() => setCopiedField(""), 1800);
     } catch {
+      // If clipboard access fails, avoid showing a misleading success state.
       setCopiedField("");
     }
   };
 
   return (
     <div className="site-shell">
+      {/* Accessibility skip link for keyboard and screen-reader users. */}
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
+
+      {/* Decorative background layers controlled by CSS. */}
       <div className="site-shell__gradient site-shell__gradient--one" aria-hidden="true" />
       <div className="site-shell__gradient site-shell__gradient--two" aria-hidden="true" />
 
+      {/* Sticky site header with brand, navigation, theme toggle, and resume CTA. */}
       <header ref={headerRef} className={`topbar ${scrolled ? "topbar--scrolled" : ""}`}>
         <div className="topbar__inner">
           <a href="#hero" className="brand" onClick={closeMenu}>
@@ -478,6 +581,7 @@ export default function App() {
             <span className="brand__role">IT Support | Help Desk | Technical Support</span>
           </a>
 
+          {/* Mobile menu toggle. Hidden on larger screens through CSS. */}
           <button
             type="button"
             className="topbar__toggle"
@@ -488,6 +592,7 @@ export default function App() {
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
 
+          {/* Navigation panel that becomes collapsible on smaller screens. */}
           <div className={`topbar__panel ${menuOpen ? "topbar__panel--open" : ""}`}>
             <nav className="topbar__nav" aria-label="Primary">
               {navItems.map((item) => (
@@ -513,6 +618,7 @@ export default function App() {
             </a>
           </div>
 
+          {/* Theme switcher toggles the light/dark data attribute on <html>. */}
           <button
             type="button"
             className="theme-toggle"
@@ -534,8 +640,10 @@ export default function App() {
       </header>
 
       <main id="main-content">
+        {/* Hero: first impression, positioning, and primary actions. */}
         <section className="hero" id="hero">
           <div className="hero__inner">
+            {/* Left side: positioning statement, quick summary, and key actions. */}
             <div className="hero__copy section-intro--animated reveal-on-scroll">
               <span className="eyebrow hero__eyebrow">
                 Entry-level IT and desktop operations
@@ -551,6 +659,7 @@ export default function App() {
                 <span>Open to on-site, hybrid, and entry-level tech roles</span>
               </div>
 
+              {/* Main calls to action: download resume or jump to project work. */}
               <div className="hero__actions">
                 <a href={`${assetBase}MahendraRanwaCS.pdf`} download className="button button--primary">
                   <span>Download Resume</span>
@@ -561,6 +670,7 @@ export default function App() {
                 </a>
               </div>
 
+              {/* Reuses the shared social link component for consistency. */}
               <div className="hero__socials">
                 {socialLinks.map((item) => (
                   <SocialLink key={item.label} item={item} className="inline-link" />
@@ -568,6 +678,7 @@ export default function App() {
               </div>
             </div>
 
+            {/* Right-side hero panel with portrait and quick credibility points. */}
             <div className="hero__panel section-intro--animated reveal-on-scroll">
               <div className="hero-card hero-card--portrait">
                 <div className="hero-card__media">
@@ -592,6 +703,7 @@ export default function App() {
                 </div>
               </div>
 
+              {/* These smaller cards are generated from heroStats for easy editing. */}
               <div className="hero__stats">
                 {heroStats.map((stat) => (
                   <div key={stat.label} className="stat-card">
@@ -604,6 +716,7 @@ export default function App() {
           </div>
         </section>
 
+        {/* Quick keyword strip to make the page more scannable. */}
         <section className="stack-band reveal-on-scroll" aria-label="Tech stack and support strengths">
           <div className="stack-band__label">Tech stack</div>
           <div className="stack-band__items">
@@ -615,6 +728,7 @@ export default function App() {
           </div>
         </section>
 
+        {/* Work section: project cards plus one featured case study. */}
         <section className="section section--work" id="work">
           <SectionIntro
             eyebrow="Selected work"
@@ -622,6 +736,7 @@ export default function App() {
             text=""
           />
 
+          {/* Standard project card grid driven by the projects array above. */}
           <div className="projects-grid">
             {projects.map((project) => (
               <article key={project.title} className="project-card section-intro--animated reveal-on-scroll">
@@ -638,6 +753,7 @@ export default function App() {
                   )}
                 </div>
                 <div className="project-card__body">
+                  {/* Card metadata gives quick context before the longer text. */}
                   <div className="project-card__topline">
                     <span className="project-card__type">{project.type}</span>
                     <span className="project-card__metric">{project.metric}</span>
@@ -645,6 +761,7 @@ export default function App() {
                   <h3>{project.title}</h3>
                   <p className="project-card__summary">{project.summary}</p>
                   <p>{project.description}</p>
+                  {/* Secondary details are grouped into a mini facts grid. */}
                   <div className="project-card__details" aria-label={`${project.title} details`}>
                     <div>
                       <strong>Tools</strong>
@@ -659,6 +776,7 @@ export default function App() {
                       <span>{project.metric}</span>
                     </div>
                   </div>
+                  {/* Reusable tag list for quick tech scanning. */}
                   <ul className="tag-list" aria-label={`${project.title} highlights`}>
                     {project.highlights.map((item) => (
                       <li key={item}>{item}</li>
@@ -678,6 +796,7 @@ export default function App() {
             ))}
           </div>
 
+          {/* Larger project breakdown to explain process, not just output. */}
           <article className="featured-project reveal-on-scroll">
             <div className="featured-project__intro">
               <span className="section-intro__eyebrow">{featuredProject.eyebrow}</span>
@@ -717,6 +836,7 @@ export default function App() {
           </article>
         </section>
 
+        {/* About section: experience on the left, supporting profile details on the right. */}
         <section className="section section--about" id="about">
           <SectionIntro
             eyebrow="About"
@@ -727,6 +847,7 @@ export default function App() {
           <div className="about-grid">
             <div className="about-panel section-intro--animated reveal-on-scroll">
               <h3>Experience</h3>
+              {/* Experience timeline built from the experience array. */}
               <div className="timeline">
                 {experience.map((item) => (
                   <article key={item.role} className="timeline__item">
@@ -735,6 +856,7 @@ export default function App() {
                       <h4>{item.role}</h4>
                       <p>{item.company}</p>
                     </div>
+                    {/* Bullets are text-only now; the old decorative timeline dots were removed. */}
                     <ul>
                       {item.bullets.map((bullet) => (
                         <li key={bullet}>{bullet}</li>
@@ -765,6 +887,7 @@ export default function App() {
                 </div>
               </article>
 
+              {/* Qualifications are kept separate so recruiters can scan them quickly. */}
               <article className="info-card section-intro--animated reveal-on-scroll">
                 <h3>Credentials</h3>
                 <ul className="info-list">
@@ -774,10 +897,12 @@ export default function App() {
                 </ul>
               </article>
 
+              {/* Compact strengths list for short, high-value personal traits. */}
               <article className="info-card section-intro--animated reveal-on-scroll">
                 <h3>Strengths</h3>
                 <div className="strength-grid">
                   {strengths.map((item) => {
+                    // Each strength also stores its icon component in the data.
                     const Icon = item.icon;
 
                     return (
@@ -798,6 +923,7 @@ export default function App() {
           </div>
         </section>
 
+        {/* Services/support areas section: what the user can contribute day one. */}
         <section className="section section--services" id="services">
           <SectionIntro
             eyebrow="Support Areas"
@@ -805,6 +931,7 @@ export default function App() {
             text=""
           />
 
+          {/* Same pattern as projects: the array drives the whole card layout. */}
           <div className="services-grid">
             {serviceItems.map((item) => (
               <article key={item.title} className="service-card section-intro--animated reveal-on-scroll">
@@ -823,6 +950,7 @@ export default function App() {
           </div>
         </section>
 
+        {/* Tools section: practical technical categories rather than exhaustive tools. */}
         <section className="section section--tools" id="tools">
           <SectionIntro
             eyebrow="Tools I Use"
@@ -843,6 +971,7 @@ export default function App() {
           </div>
         </section>
 
+        {/* Contact section: intro, form, direct contact cards, and location card. */}
         <section className="section section--contact" id="contact">
           <div className="contact-panel section-intro--animated reveal-on-scroll">
             <div className="contact-panel__copy">
@@ -862,6 +991,7 @@ export default function App() {
             </div>
 
             <div className="contact-panel__side">
+              {/* Controlled contact form that submits through Web3Forms. */}
               <form className="contact-form" onSubmit={handleContactSubmit}>
                 <label className="contact-form__field">
                   <span>Name</span>
@@ -900,6 +1030,8 @@ export default function App() {
                   <Send size={16} />
                   <span>{sendingMessage ? "Sending..." : "Send Message"}</span>
                 </button>
+                {/* Success and error states share the same output area with a
+                    modifier class controlling the final styling. */}
                 {contactStatus.message ? (
                   <p
                     className={`contact-form__status ${
@@ -912,8 +1044,11 @@ export default function App() {
                 ) : null}
               </form>
 
+              {/* Direct contact cards for people who prefer email/phone/map actions. */}
               <div className="contact-list">
                 {contactItems.map((item) => {
+                  // Contact cards can either copy data (email/phone) or behave
+                  // like a normal external link (location).
                   const Icon = item.icon;
                   return (
                     <a
@@ -969,6 +1104,7 @@ export default function App() {
         </section>
       </main>
 
+      {/* Footer repeats the essentials and provides quick exit links. */}
       <footer className="footer">
         <div className="footer__inner">
           <div className="footer__meta">
