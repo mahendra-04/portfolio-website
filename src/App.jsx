@@ -23,7 +23,7 @@ import {
   Ticket,
   X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 const assetBase = import.meta.env.BASE_URL;
@@ -57,46 +57,46 @@ const socialLinks = [
 ];
 
 const heroStats = [
-  { value: "Open to work", label: "IT support and help desk roles" },
-  { value: "Hands-on", label: "Troubleshooting approach" },
-  { value: "Windows + Labs", label: "Support environment" },
+  { value: "Open to work", label: "Help desk and IT operations" },
+  { value: "Hands-on", label: "Windows, devices, and troubleshooting" },
+  { value: "Lab-tested", label: "Shared labs and classroom environments" },
 ];
 
 const projects = [
-  {
-    title: "Personal Portfolio Website",
-    type: "Front-end build",
-    icon: Monitor,
-    image: `${assetBase}mahendra.jpeg`,
-    metric: "Responsive redesign",
-    summary: "Redesigned a recruiter-facing portfolio experience with clearer hierarchy and stronger deployment polish.",
-    description:
-      "Built a responsive portfolio website with React and Vite, improved deployment reliability, and refined the live GitHub Pages experience.",
-    highlights: ["Responsive layout", "Vite deployment", "UI refinement"],
-    href: "https://github.com/mahendra-04",
-  },
   {
     title: "Raspberry Pi Smart Car System",
     type: "Hardware + software",
     icon: Cpu,
     image: `${assetBase}buggy.jpg`,
-    metric: "Remote device control",
-    summary: "Connected hardware, remote access, and sensor testing into one practical troubleshooting project.",
+    metric: "Remote setup and testing workflow",
+    summary: "Combined device setup, remote access, and hardware testing in one Raspberry Pi build.",
     description:
-      "Configured Raspberry Pi OS, enabled SSH and VNC access, and integrated sensors for remote testing and hardware control.",
-    highlights: ["Raspberry Pi setup", "Remote access", "Sensor integration"],
+      "Configured Raspberry Pi OS, enabled SSH and VNC, connected sensors, and verified remote control for testing.",
+    highlights: ["Raspberry Pi OS", "SSH/VNC setup", "Sensor testing"],
     href: "https://github.com/mahendra-04",
   },
   {
+    title: "Personal Portfolio Website",
+    type: "Front-end build",
+    icon: Monitor,
+    image: `${assetBase}mahendra.jpeg`,
+    metric: "Improved mobile and recruiter UX",
+    summary: "Rebuilt my portfolio to make it easier to scan.",
+    description:
+      "Built with React and Vite, improved responsiveness, and deployed it on GitHub Pages.",
+    highlights: ["React + Vite", "Responsive layout", "GitHub Pages"],
+    href: "https://github.com/mahendra-04/portfolio-website",
+  },
+  {
     title: "Embedded Diagnostics Workflow",
-    type: "Technical troubleshooting",
+    type: "Diagnostics workflow",
     icon: Network,
     image: `${assetBase}embedded-control.jpg`,
-    metric: "Structured fault isolation",
-    summary: "Applied step-by-step system checks to isolate faults and verify technical fixes in lab environments.",
+    metric: "Step-by-step fault isolation",
+    summary: "Used structured testing to isolate faults and verify fixes.",
     description:
-      "Applied fault isolation, verification, and structured testing across embedded systems and lab-based technical environments.",
-    highlights: ["Fault isolation", "System verification", "Lab support"],
+      "Worked through embedded issues with repeatable checks, verification steps, and lab-based troubleshooting.",
+    highlights: ["Fault isolation", "Verification", "Embedded lab work"],
     href: "https://github.com/mahendra-04",
   },
 ];
@@ -105,20 +105,20 @@ const serviceItems = [
   {
     title: "Desktop Support",
     icon: Monitor,
-    text: "Set up Windows systems, install software, support shared workstations, and help users recover quickly from daily technical issues.",
-    points: ["Windows setup", "Software installs", "Shared workstation readiness"],
+    text: "Set up Windows systems, install software, and keep workstations ready.",
+    points: ["Windows setup", "Software deployment", "Workstation readiness"],
   },
   {
     title: "Issue Troubleshooting",
     icon: Headphones,
-    text: "Diagnose hardware, software, and connectivity problems using a calm, step-by-step process that leads to reliable fixes.",
-    points: ["Hardware checks", "Connectivity diagnosis", "Clear user communication"],
+    text: "Work through hardware, software, login, and connectivity issues with a clear, practical process.",
+    points: ["Hardware checks", "Network troubleshooting", "User-facing support"],
   },
   {
     title: "Technical Operations",
     icon: Network,
-    text: "Keep systems ready for labs, classrooms, and office use by handling setup, maintenance, and practical support requests.",
-    points: ["Lab preparation", "Routine maintenance", "Reliable support follow-through"],
+    text: "Support labs, classrooms, and offices through setup and maintenance.",
+    points: ["Lab preparation", "Routine maintenance", "Operational support"],
   },
 ];
 
@@ -128,10 +128,10 @@ const experience = [
     company: "Sheridan College IT Centre, Brampton",
     date: "Apr 2024 - Aug 2024",
     bullets: [
-      "Provided support for hardware, software, and network issues in shared lab environments.",
-      "Installed and configured Windows systems and academic software on multiple workstations.",
-      "Diagnosed Wi-Fi, LAN, and IP configuration issues and restored connectivity.",
-      "Helped users with login issues, system errors, and software access problems.",
+      "Handled hardware, software, and network issues in shared lab environments.",
+      "Installed Windows systems and academic software across shared workstations.",
+      "Diagnosed Wi-Fi, LAN, and IP configuration issues and restored user connectivity.",
+      "Helped users resolve login issues, software errors, and access-related problems.",
     ],
   },
   {
@@ -139,9 +139,9 @@ const experience = [
     company: "U+ Toastmasters Academy",
     date: "Sep 2025 - Mar 2026",
     bullets: [
-      "Maintained website functionality and handled technical issues affecting everyday use.",
-      "Supported users with content updates, access-related questions, and troubleshooting requests.",
-      "Worked with team members to improve reliability and resolve usability issues quickly.",
+      "Maintained website functionality and handled technical issues affecting regular site use.",
+      "Helped team members with content updates, access questions, and issue resolution.",
+      "Worked with team members to improve reliability and address usability problems quickly.",
     ],
   },
 ];
@@ -155,18 +155,18 @@ const credentials = [
 
 const strengths = [
   {
-    title: "User-first support",
-    text: "Calm communication, clear explanations, and dependable follow-through when issues affect day-to-day work.",
+    title: "User support",
+    text: "Communicate clearly, stay calm, and explain the next step.",
     icon: BadgeCheck,
   },
   {
     title: "System setup",
-    text: "Workstation imaging, software installs, account troubleshooting, and ready-for-use device preparation.",
+    text: "Prepare workstations, install software, and troubleshoot accounts.",
     icon: BriefcaseBusiness,
   },
   {
     title: "Technical diagnosis",
-    text: "Step-by-step isolation across hardware, software, connectivity, and embedded environments.",
+    text: "Use structured checks to narrow issues and verify fixes.",
     icon: Cpu,
   },
 ];
@@ -183,22 +183,22 @@ const stackItems = [
 const toolItems = [
   {
     title: "Windows & Device Setup",
-    text: "Configuring workstations, peripherals, software installs, and getting shared systems ready for use.",
+    text: "Configure workstations, peripherals, and software.",
     icon: Monitor,
   },
   {
     title: "Ticketing & Support Flow",
-    text: "Handling support requests with clear communication, prioritization, and dependable follow-through.",
+    text: "Handle requests with clear updates and solid follow-through.",
     icon: Ticket,
   },
   {
     title: "Networking Basics",
-    text: "Working through Wi-Fi, LAN, and IP issues with structured diagnosis and verification.",
+    text: "Work through Wi-Fi, LAN, and IP issues.",
     icon: ServerCog,
   },
   {
     title: "Security Mindset",
-    text: "Supporting access issues, account setup, and user guidance with a careful, reliable approach.",
+    text: "Support access issues, account setup, and user guidance.",
     icon: ShieldCheck,
   },
 ];
@@ -207,13 +207,13 @@ const featuredProject = {
   eyebrow: "Featured case study",
   title: "Portfolio Website Refresh",
   summary:
-    "A focused rebuild of my portfolio to present IT support skills more clearly, improve recruiter scanning, and ship a faster, cleaner GitHub Pages experience.",
+    "A rebuild focused on clarity, structure, and mobile usability.",
   challenge:
-    "The original site communicated my background, but it lacked strong hierarchy, modern interaction details, and a more portfolio-like presentation.",
+    "The earlier version made it too hard to find my key skills and projects.",
   approach:
-    "I redesigned the information flow, strengthened calls to action, improved section structure, optimized image loading, and refined the interface for both desktop and mobile viewing.",
+    "I simplified the layout, tightened the copy, and improved responsiveness.",
   outcome:
-    "The result is a cleaner, more recruiter-friendly portfolio with clearer navigation, stronger project presentation, and more polished contact pathways.",
+    "The result is a clearer portfolio with better navigation and a stronger first impression.",
   tech: ["React", "Vite", "GitHub Pages", "Responsive CSS"],
 };
 
@@ -268,15 +268,18 @@ function SocialLink({ item, className = "" }) {
 }
 
 export default function App() {
+  const web3FormsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+  const headerRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
   const [copiedField, setCopiedField] = useState("");
+  const [contactStatus, setContactStatus] = useState({ type: "", message: "" });
+  const [sendingMessage, setSendingMessage] = useState(false);
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
-    role: "",
     message: "",
   });
 
@@ -287,6 +290,9 @@ export default function App() {
 
     const onScroll = () => {
       setScrolled(window.scrollY > 18);
+      if (window.innerWidth <= 900) {
+        setMenuOpen(false);
+      }
     };
 
     onResize();
@@ -317,8 +323,8 @@ export default function App() {
         }
       },
       {
-        rootMargin: "-30% 0px -45% 0px",
-        threshold: [0.2, 0.45, 0.7],
+        rootMargin: "-18% 0px -55% 0px",
+        threshold: [0.15, 0.35, 0.55],
       }
     );
 
@@ -331,6 +337,34 @@ export default function App() {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return undefined;
+    }
+
+    const handlePointerDown = (event) => {
+      if (!headerRef.current?.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("touchstart", handlePointerDown, { passive: true });
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("touchstart", handlePointerDown);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     const items = document.querySelectorAll(".reveal-on-scroll");
@@ -353,20 +387,70 @@ export default function App() {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
+  const handleNavClick = (id) => {
+    setActiveSection(id);
+    closeMenu();
+  };
 
   const handleContactChange = (event) => {
     const { name, value } = event.target;
     setContactForm((current) => ({ ...current, [name]: value }));
   };
 
-  const handleContactSubmit = (event) => {
+  const handleContactSubmit = async (event) => {
     event.preventDefault();
-    const subject = encodeURIComponent(`Portfolio inquiry from ${contactForm.name || "a visitor"}`);
-    const body = encodeURIComponent(
-      `Name: ${contactForm.name}\nEmail: ${contactForm.email}\nRole interested in: ${contactForm.role}\n\n${contactForm.message}`
-    );
+    if (!web3FormsAccessKey) {
+      setContactStatus({
+        type: "error",
+        message: "Form setup is not complete yet. Add your Web3Forms key to start receiving messages.",
+      });
+      return;
+    }
 
-    window.location.href = `mailto:mranwa100@gmail.com?subject=${subject}&body=${body}`;
+    setSendingMessage(true);
+    setContactStatus({ type: "", message: "" });
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: web3FormsAccessKey,
+          name: contactForm.name,
+          email: contactForm.email,
+          message: contactForm.message,
+          subject: `Portfolio inquiry from ${contactForm.name || "a visitor"}`,
+          from_name: "Mahendra Portfolio",
+          replyto: contactForm.email,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Unable to send message right now.");
+      }
+
+      setContactForm({
+        name: "",
+        email: "",
+        message: "",
+      });
+      setContactStatus({
+        type: "success",
+        message: "Message sent. You should receive it in your email and can reply from your phone.",
+      });
+    } catch (error) {
+      setContactStatus({
+        type: "error",
+        message: error.message || "Something went wrong while sending your message.",
+      });
+    } finally {
+      setSendingMessage(false);
+    }
   };
 
   const handleCopy = async (label, value) => {
@@ -387,7 +471,7 @@ export default function App() {
       <div className="site-shell__gradient site-shell__gradient--one" aria-hidden="true" />
       <div className="site-shell__gradient site-shell__gradient--two" aria-hidden="true" />
 
-      <header className={`topbar ${scrolled ? "topbar--scrolled" : ""}`}>
+      <header ref={headerRef} className={`topbar ${scrolled ? "topbar--scrolled" : ""}`}>
         <div className="topbar__inner">
           <a href="#hero" className="brand" onClick={closeMenu}>
             <span className="brand__name">Mahendra Ranwa</span>
@@ -411,7 +495,7 @@ export default function App() {
                   key={item.id}
                   href={`#${item.id}`}
                   className={`topbar__link ${activeSection === item.id ? "topbar__link--active" : ""}`}
-                  onClick={closeMenu}
+                  onClick={() => handleNavClick(item.id)}
                   aria-current={activeSection === item.id ? "page" : undefined}
                 >
                   {item.label}
@@ -454,19 +538,17 @@ export default function App() {
           <div className="hero__inner">
             <div className="hero__copy section-intro--animated reveal-on-scroll">
               <span className="eyebrow hero__eyebrow">
-                Entry-level IT support and technical operations
+                Entry-level IT and desktop operations
               </span>
-              <p className="hero__kicker">Reliable troubleshooting. Clear communication. User-first support.</p>
-              <h1>IT Support Technician focused on reliable troubleshooting and user-first support.</h1>
+              <p className="hero__kicker">Windows setup. Fast fixes. Calm communication.</p>
+              <h1>Turning "did you try restarting it?" into actual solutions.</h1>
               <p className="hero__lead">
-                Computer Engineering Technology graduate focused on help desk,
-                desktop support, troubleshooting, and system setup. I bring
-                hands-on lab experience, clear communication, and a disciplined
-                approach to resolving technical issues efficiently.
+                Computer Engineering Technology graduate with hands-on
+                experience in lab support, Windows setup, and troubleshooting.
               </p>
               <div className="hero__availability" aria-label="Availability details">
                 <span>Based in Brampton, Ontario</span>
-                <span>Open to on-site, hybrid, and entry-level support roles</span>
+                <span>Open to on-site, hybrid, and entry-level tech roles</span>
               </div>
 
               <div className="hero__actions">
@@ -498,15 +580,14 @@ export default function App() {
                 </div>
                 <div className="hero-card__body">
                   <span className="hero-card__label">Current focus</span>
-                  <h2>Professional support built on calm troubleshooting and dependable follow-through</h2>
+                  <h2>Focused on help desk and desktop support roles</h2>
                   <p>
-                    Open to IT support, help desk, desktop support, and
-                    technical operations roles where clear communication and
-                    dependable execution matter most.
+                    Looking for a role where I can solve issues, support users,
+                    and keep devices running smoothly.
                   </p>
                   <div className="hero-card__badge">
                     <BadgeCheck size={16} />
-                    <span>Available for support and technician roles</span>
+                    <span>Available for technician and operations roles</span>
                   </div>
                 </div>
               </div>
@@ -537,8 +618,8 @@ export default function App() {
         <section className="section section--work" id="work">
           <SectionIntro
             eyebrow="Selected work"
-            title="Projects that reflect practical troubleshooting and technical execution."
-            text="A focused set of builds and diagnostics work that demonstrates how I approach setup, problem solving, testing, and delivery."
+            title="Projects that show how I work."
+            text=""
           />
 
           <div className="projects-grid">
@@ -639,8 +720,8 @@ export default function App() {
         <section className="section section--about" id="about">
           <SectionIntro
             eyebrow="About"
-            title="Practical support experience backed by structured troubleshooting."
-            text="I am a Computer Engineering Technology graduate building a portfolio around dependable support, thoughtful communication, and hands-on technical execution. My background combines technical training, real support work, and a user-focused mindset suited for entry-level IT support environments."
+            title="Hands-on experience backed by technical training."
+            text=""
           />
 
           <div className="about-grid">
@@ -676,11 +757,10 @@ export default function App() {
                 </div>
                 <div className="profile-card__body">
                   <span className="section-intro__eyebrow">Profile</span>
-                  <h3>Support-minded and detail-driven</h3>
+                  <h3>Reliable, practical, and ready to help</h3>
                   <p>
-                    I enjoy turning technical problems into clear next steps for users,
-                    whether that means fixing access issues, setting up devices, or
-                    keeping systems stable behind the scenes.
+                    I like solving problems, preparing devices, and helping
+                    people get back to work quickly.
                   </p>
                 </div>
               </article>
@@ -720,9 +800,9 @@ export default function App() {
 
         <section className="section section--services" id="services">
           <SectionIntro
-            eyebrow="Services"
-            title="Areas where I can contribute with immediate value."
-            text="Focused on technical support work where reliability, clear communication, and practical troubleshooting all matter."
+            eyebrow="Support Areas"
+            title="Areas where I can contribute from day one."
+            text=""
           />
 
           <div className="services-grid">
@@ -746,8 +826,8 @@ export default function App() {
         <section className="section section--tools" id="tools">
           <SectionIntro
             eyebrow="Tools I Use"
-            title="Core areas I use to keep support work practical, organized, and dependable."
-            text="A snapshot of the environments and support habits I bring into day-to-day technical work."
+            title="Technical areas I use in day-to-day work."
+            text=""
           />
 
           <div className="tools-grid">
@@ -767,11 +847,9 @@ export default function App() {
           <div className="contact-panel section-intro--animated reveal-on-scroll">
             <div className="contact-panel__copy">
               <span className="section-intro__eyebrow">Contact</span>
-              <h2>Let&apos;s connect about IT support, help desk, or technical operations roles.</h2>
+              <h2>Let&apos;s connect.</h2>
               <p>
-                I&apos;m open to opportunities where I can support users,
-                maintain dependable systems, and help teams resolve technical
-                issues with clarity and consistency.
+                I&apos;m open to help desk, desktop support, and entry-level IT roles.
               </p>
               <p className="contact-panel__response">I usually respond within 24 hours.</p>
               <div className="contact-panel__actions">
@@ -808,16 +886,6 @@ export default function App() {
                   />
                 </label>
                 <label className="contact-form__field">
-                  <span>Role Interested In</span>
-                  <select name="role" value={contactForm.role} onChange={handleContactChange} required>
-                    <option value="">Select a role</option>
-                    <option value="IT Support">IT Support</option>
-                    <option value="Help Desk">Help Desk</option>
-                    <option value="Desktop Support">Desktop Support</option>
-                    <option value="Technical Operations">Technical Operations</option>
-                  </select>
-                </label>
-                <label className="contact-form__field">
                   <span>Message</span>
                   <textarea
                     name="message"
@@ -830,8 +898,18 @@ export default function App() {
                 </label>
                 <button type="submit" className="button button--primary">
                   <Send size={16} />
-                  <span>Send Message</span>
+                  <span>{sendingMessage ? "Sending..." : "Send Message"}</span>
                 </button>
+                {contactStatus.message ? (
+                  <p
+                    className={`contact-form__status ${
+                      contactStatus.type === "success" ? "contact-form__status--success" : "contact-form__status--error"
+                    }`}
+                    role="status"
+                  >
+                    {contactStatus.message}
+                  </p>
+                ) : null}
               </form>
 
               <div className="contact-list">
@@ -870,16 +948,22 @@ export default function App() {
                 })}
               </div>
 
-              <div className="contact-map" aria-hidden="true">
+              <a
+                href="https://maps.google.com/?q=Brampton,Ontario"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="contact-map"
+                aria-label="Open Brampton, Ontario in Google Maps"
+              >
                 <div className="contact-map__pin">
                   <MapPin size={18} />
                 </div>
                 <div className="contact-map__content">
                   <span>Based in</span>
                   <strong>Brampton, Ontario</strong>
-                  <p>Open to on-site, hybrid, and support-focused opportunities.</p>
+                  <p>Open to on-site, hybrid, and entry-level tech roles.</p>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         </section>
@@ -888,8 +972,8 @@ export default function App() {
       <footer className="footer">
         <div className="footer__inner">
           <div className="footer__meta">
-            <p>© 2026 Mahendra Ranwa. Built for IT support and help desk opportunities.</p>
-            <span className="footer__tagline">Reliable troubleshooting, clear communication, user-first support.</span>
+            <p>&copy; 2026 Mahendra Ranwa. Built for help desk and entry-level IT opportunities.</p>
+            <span className="footer__tagline">Windows setup, issue diagnosis, and clear communication.</span>
           </div>
           <div className="footer__group">
             <div className="footer__nav">
