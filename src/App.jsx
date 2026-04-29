@@ -29,6 +29,8 @@ import "./App.css";
 // Vite exposes the deployed base path through BASE_URL, which lets asset links
 // work both locally and on GitHub Pages.
 const assetBase = import.meta.env.BASE_URL;
+const contactEmail = "mranwa100@gmail.com";
+const contactEmailHref = `mailto:${contactEmail}`;
 
 // Primary navigation items. Each id matches a section id in the page so links
 // can scroll directly to the correct block.
@@ -55,7 +57,7 @@ const socialLinks = [
   },
   {
     label: "Resume",
-    href: `${assetBase}MahendraRanwaCS.pdf`,
+    href: `${assetBase}Mahendra_Ranwa_IT_Helpdesk_Resume.pdf`,
     icon: Download,
     download: true,
   },
@@ -64,7 +66,7 @@ const socialLinks = [
 // Short credential-style highlights shown beside the hero portrait.
 const heroStats = [
   { value: "Open to work", label: "Help desk and IT operations" },
-  { value: "Hands-on", label: "Windows, devices, and troubleshooting" },
+  { value: "A+ Certified", label: "CompTIA A+ credential completed" },
   { value: "Lab-tested", label: "Shared labs and classroom environments" },
 ];
 
@@ -159,7 +161,7 @@ const experience = [
 // Qualifications shown in the About sidebar.
 const credentials = [
   "Computer Engineering Technology (Advanced Diploma), Sheridan College",
-  "CompTIA A+ (Core 1 completed, Core 2 in progress)",
+  "CompTIA A+ Certified",
   "IT Service Desk: Service Management",
   "Computer Components and Peripherals for IT Technicians",
 ];
@@ -187,7 +189,7 @@ const strengths = [
 const stackItems = [
   "Windows Support",
   "Help Desk",
-  "Active Troubleshooting",
+  "CompTIA A+ Certified",
   "Raspberry Pi",
   "Networking Basics",
   "React + Vite",
@@ -236,8 +238,8 @@ const featuredProject = {
 const contactItems = [
   {
     label: "Email",
-    value: "mranwa100@gmail.com",
-    href: "mailto:mranwa100@gmail.com",
+    value: contactEmail,
+    href: contactEmailHref,
     icon: Mail,
   },
   {
@@ -474,53 +476,55 @@ export default function App() {
     setContactForm((current) => ({ ...current, [name]: value }));
   };
 
-  // Sends the contact form to Web3Forms. If the env key is missing, the user
-  // gets a clear error instead of a silent failure.
+  // Sends the contact form to Web3Forms, with a mailto fallback if the service
+  // is not configured or cannot be reached.
   const handleContactSubmit = async (event) => {
     event.preventDefault();
 
-    // The deployed form only works once the service key exists in the local
-    // environment. Without it, submitting would fail every time.
-    if (!web3FormsAccessKey) {
-      setContactStatus({
-        type: "error",
-        message: "Form setup is not complete yet. Add your Web3Forms key to start receiving messages.",
-      });
+    if (sendingMessage) {
       return;
     }
+
+    const form = event.currentTarget;
+    const subject = `Portfolio inquiry from ${contactForm.name || "a visitor"}`;
+    const fallbackEmailHref = `${contactEmailHref}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+      [`Name: ${contactForm.name}`, `Email: ${contactForm.email}`, "", contactForm.message].join("\n")
+    )}`;
+
+    const openEmailFallback = () => {
+      window.location.href = fallbackEmailHref;
+    };
 
     setSendingMessage(true);
     setContactStatus({ type: "", message: "" });
 
+    if (!web3FormsAccessKey) {
+      openEmailFallback();
+      setContactStatus({
+        type: "success",
+        message: "Your email app is opening with the message filled in. Press send there to finish.",
+      });
+      setSendingMessage(false);
+      return;
+    }
+
     try {
-      // Web3Forms accepts JSON payloads, so we send the form fields directly
-      // rather than building a mailto link.
+      const formData = new FormData(form);
+      formData.append("access_key", web3FormsAccessKey);
+      formData.append("subject", subject);
+      formData.append("from_name", "Mahendra Portfolio");
+      formData.append("replyto", contactForm.email);
+
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          // access_key authenticates the form request with Web3Forms.
-          access_key: web3FormsAccessKey,
-          name: contactForm.name,
-          email: contactForm.email,
-          message: contactForm.message,
-
-          // These fields control the email subject/sender metadata that lands
-          // in the inbox.
-          subject: `Portfolio inquiry from ${contactForm.name || "a visitor"}`,
-          from_name: "Mahendra Portfolio",
-
-          // This makes replying from the inbox go back to the visitor.
-          replyto: contactForm.email,
-        }),
+        headers: { Accept: "application/json" },
+        body: formData,
       });
 
-      // Web3Forms returns JSON whether the request succeeds or fails, so we
-      // inspect both the HTTP status and the response body.
-      const result = await response.json();
+      const contentType = response.headers.get("content-type") || "";
+      const result = contentType.includes("application/json")
+        ? await response.json()
+        : { success: response.ok, message: await response.text() };
 
       if (!response.ok || !result.success) {
         throw new Error(result.message || "Unable to send message right now.");
@@ -536,10 +540,11 @@ export default function App() {
         type: "success",
         message: "Message sent. You should receive it in your email and can reply from your phone.",
       });
-    } catch (error) {
+    } catch {
+      openEmailFallback();
       setContactStatus({
-        type: "error",
-        message: error.message || "Something went wrong while sending your message.",
+        type: "success",
+        message: "I could not send it automatically, so your email app is opening with the message filled in. Press send there to finish.",
       });
     } finally {
       setSendingMessage(false);
@@ -608,7 +613,7 @@ export default function App() {
               ))}
             </nav>
             <a
-              href={`${assetBase}MahendraRanwaCS.pdf`}
+              href={`${assetBase}Mahendra_Ranwa_IT_Helpdesk_Resume.pdf`}
               download
               className="button button--primary topbar__mobile-resume"
               onClick={closeMenu}
@@ -629,7 +634,7 @@ export default function App() {
           </button>
 
           <a
-            href={`${assetBase}MahendraRanwaCS.pdf`}
+            href={`${assetBase}Mahendra_Ranwa_IT_Helpdesk_Resume.pdf`}
             download
             className="button button--primary button--resume topbar__resume"
           >
@@ -661,7 +666,7 @@ export default function App() {
 
               {/* Main calls to action: download resume or jump to project work. */}
               <div className="hero__actions">
-                <a href={`${assetBase}MahendraRanwaCS.pdf`} download className="button button--primary">
+                <a href={`${assetBase}Mahendra_Ranwa_IT_Helpdesk_Resume.pdf`} download className="button button--primary">
                   <span>Download Resume</span>
                 </a>
                 <a href="#work" className="button button--secondary">
@@ -982,7 +987,7 @@ export default function App() {
               </p>
               <p className="contact-panel__response">I usually respond within 24 hours.</p>
               <div className="contact-panel__actions">
-                <a href="mailto:mranwa100@gmail.com" className="button button--primary">
+                <a href={contactEmailHref} className="button button--primary">
                   <Mail size={16} />
                   <span>Email Me</span>
                 </a>
@@ -992,7 +997,15 @@ export default function App() {
 
             <div className="contact-panel__side">
               {/* Controlled contact form that submits through Web3Forms. */}
-              <form className="contact-form" onSubmit={handleContactSubmit}>
+              <form className="contact-form" onSubmit={handleContactSubmit} aria-busy={sendingMessage}>
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  className="contact-form__botcheck"
+                  tabIndex="-1"
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
                 <label className="contact-form__field">
                   <span>Name</span>
                   <input
@@ -1026,7 +1039,7 @@ export default function App() {
                     required
                   />
                 </label>
-                <button type="submit" className="button button--primary">
+                <button type="submit" className="button button--primary" disabled={sendingMessage}>
                   <Send size={16} />
                   <span>{sendingMessage ? "Sending..." : "Send Message"}</span>
                 </button>

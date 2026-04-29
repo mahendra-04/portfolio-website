@@ -230,6 +230,7 @@ main,
 
 .topbar__toggle {
   display: none;
+  flex-shrink: 0;
 }
 
 /* Header panel contains the nav and mobile resume button. */
@@ -329,6 +330,7 @@ main,
   height: 2.6rem;
   display: inline-grid;
   place-items: center;
+  flex-shrink: 0;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: color-mix(in srgb, var(--panel) 84%, transparent 16%);
@@ -869,6 +871,7 @@ main section[id] {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.81rem;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .project-card h3,
@@ -1177,15 +1180,25 @@ main section[id] {
 
 /* Contact form field layout and interactive states. */
 .contact-form {
+  position: relative;
   display: grid;
   gap: 0.95rem;
   padding: 1.15rem;
   border-radius: 22px;
 }
 
+.contact-form__botcheck {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
 .contact-form button[disabled] {
   opacity: 0.7;
   cursor: wait;
+  transform: none;
 }
 
 .contact-form__field {
@@ -1552,6 +1565,10 @@ main section[id] {
     max-width: none;
   }
 
+  .featured-project__cta {
+    width: 100%;
+  }
+
   .section--about,
   .section--contact {
     padding-top: 4.25rem;
@@ -1598,10 +1615,21 @@ main section[id] {
   }
 
   .hero__actions .button,
+  .project-card__action,
+  .featured-project__cta,
   .contact-panel__actions .button,
   .inline-link {
     width: 100%;
     justify-content: center;
+  }
+
+  .stack-band__items {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stack-pill {
+    text-align: center;
   }
 
   .hero-card__body,
@@ -1646,6 +1674,11 @@ main section[id] {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .footer__nav,
+  .footer__links {
+    width: 100%;
+  }
 }
 
 /* Small-phone tuning: tighter spacing, smaller type, and stacked controls. */
@@ -1670,10 +1703,19 @@ main section[id] {
     font-size: 0.58rem;
   }
 
+  .topbar__toggle,
+  .theme-toggle {
+    width: 2.65rem;
+    height: 2.65rem;
+  }
+
   .topbar__link {
     width: 100%;
-    padding: 0.75rem 0.1rem;
+    padding: 0.85rem 0.9rem;
     border-radius: 14px;
+    font-size: 0.68rem;
+    letter-spacing: 0.09em;
+    text-align: left;
   }
 
   .hero {
@@ -1735,6 +1777,10 @@ main section[id] {
     margin-bottom: 1.4rem;
   }
 
+  .stack-band__items {
+    grid-template-columns: 1fr;
+  }
+
   .section-intro h2,
   .contact-panel h2 {
     font-size: clamp(1.85rem, 9vw, 2.4rem);
@@ -1771,6 +1817,22 @@ main section[id] {
     padding: 1rem;
   }
 
+  .project-card__icon,
+  .strength-card__icon,
+  .service-card__icon,
+  .tool-card__icon,
+  .contact-card__icon {
+    width: 2.55rem;
+    height: 2.55rem;
+    border-radius: 14px;
+  }
+
+  .hero-card__badge {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
   .contact-card__meta span,
   .contact-card__meta strong {
     word-break: break-word;
@@ -1786,15 +1848,24 @@ main section[id] {
   .contact-card {
     grid-template-columns: auto 1fr;
     align-items: start;
+    row-gap: 0.75rem;
   }
 
   .contact-card__copy {
     grid-column: 2;
-    justify-self: start;
-    margin-top: 0.2rem;
+    justify-self: stretch;
+    width: 100%;
+    height: 2.8rem;
+    margin-top: 0;
   }
 
   .contact-card__meta span {
+    overflow-wrap: anywhere;
+  }
+
+  .timeline__meta h4,
+  .contact-map__content strong,
+  .featured-project__intro h3 {
     overflow-wrap: anywhere;
   }
 
