@@ -31,6 +31,7 @@ import "./App.css";
 const assetBase = import.meta.env.BASE_URL;
 const contactEmail = "mranwa100@gmail.com";
 const contactEmailHref = `mailto:${contactEmail}`;
+const fallbackWeb3FormsAccessKey = "b608a0cd-0cc9-446b-8495-fe9765b25ba3";
 
 // Primary navigation items. Each id matches a section id in the page so links
 // can scroll directly to the correct block.
@@ -294,9 +295,9 @@ function SocialLink({ item, className = "" }) {
 }
 
 export default function App() {
-  // Access key for Web3Forms. This is injected through the local .env file and
-  // used by the contact form submission handler.
-  const web3FormsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+  // Web3Forms uses a client-side access key. The env value can override the
+  // checked-in fallback during local or GitHub Pages builds.
+  const web3FormsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || fallbackWeb3FormsAccessKey;
 
   // Ref used to detect clicks outside the header when the mobile menu is open.
   const headerRef = useRef(null);
