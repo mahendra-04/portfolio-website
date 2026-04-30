@@ -4,6 +4,15 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (() => {
+        try {
+          document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
+        } catch {
+          document.documentElement.dataset.theme = "dark";
+        }
+      })();
+    </script>
     <title>Mahendra Ranwa | IT Support Technician Portfolio</title>
     <meta
       name="description"
@@ -32,7 +41,7 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Mahendra Ranwa",
-        "jobTitle": "IT Support Technician",
+        "jobTitle": "Computer Engineering Technology Student",
         "url": "https://mahendra-04.github.io/portfolio-website/",
         "image": "https://mahendra-04.github.io/portfolio-website/mahendra.jpeg",
         "email": "mailto:mranwa100@gmail.com",
@@ -47,7 +56,7 @@
           "https://www.linkedin.com/in/mahendra-ranwa/",
           "https://github.com/mahendra-04"
         ],
-        "alumniOf": {
+        "affiliation": {
           "@type": "CollegeOrUniversity",
           "name": "Sheridan College"
         }

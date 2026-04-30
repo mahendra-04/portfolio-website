@@ -57,6 +57,7 @@
 /* Smooth in-page anchor scrolling for nav links. */
 html {
   scroll-behavior: smooth;
+  background: var(--bg);
 }
 
 /* Base page styling, including the layered background gradients used across
@@ -406,6 +407,10 @@ main section[id] {
   scroll-margin-top: 7rem;
 }
 
+main article[id] {
+  scroll-margin-top: 7rem;
+}
+
 /* Hero section wrapper and large decorative backdrop. */
 .hero {
   position: relative;
@@ -462,6 +467,22 @@ main section[id] {
   border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent 82%);
 }
 
+.hero__certification {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent 66%);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 20%, transparent 80%), color-mix(in srgb, var(--accent-secondary) 16%, transparent 84%));
+  color: var(--accent-strong);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
 /* Shared small uppercase label treatment used throughout the site. */
 .eyebrow,
 .section-intro__eyebrow,
@@ -469,7 +490,7 @@ main section[id] {
 .hero-card__label,
 .stack-band__label,
 .timeline__meta span,
-.featured-project__item strong,
+.case-study-card__grid strong,
 .contact-form__field span {
   color: var(--accent);
   font-family: Arial, Helvetica, sans-serif;
@@ -511,14 +532,14 @@ main section[id] {
 .hero-card__body p,
 .project-card p,
 .service-card p,
+.learning-track-card p,
 .contact-panel p,
 .timeline li,
 .info-list li,
 .profile-card__body p,
 .strength-card p,
 .tool-card p,
-.featured-project__intro p,
-.featured-project__item p,
+.case-study-card p,
 .contact-map__content p {
   color: var(--muted);
   font-family: Arial, Helvetica, sans-serif;
@@ -531,6 +552,36 @@ main section[id] {
   max-width: 59ch;
   margin: 1.2rem 0 0;
   font-size: 1rem;
+}
+
+.hero__role-targets {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.hero__role-targets > span {
+  color: var(--accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero__role-targets div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.hero__role-targets strong {
+  padding: 0.62rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line-strong) 56%, var(--line) 44%);
+  background: color-mix(in srgb, var(--panel-strong) 90%, transparent 10%);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.84rem;
 }
 
 /* Small pill-style metadata row beneath the hero text. */
@@ -597,8 +648,9 @@ main section[id] {
 .contact-panel,
 .contact-card,
 .contact-form,
-.featured-project,
-.profile-card {
+.case-study-card,
+.profile-card,
+.learning-track-card {
   border: 1px solid color-mix(in srgb, var(--line) 82%, transparent 18%);
   background: color-mix(in srgb, var(--panel) 92%, transparent 8%);
   box-shadow: var(--shadow);
@@ -685,6 +737,7 @@ main section[id] {
 
 /* Section wrappers provide the large rounded backgrounds behind each block. */
 .section--work,
+.section--track,
 .section--about,
 .section--services,
 .section--tools,
@@ -693,6 +746,7 @@ main section[id] {
 }
 
 .section--work,
+.section--track,
 .section--services,
 .section--tools {
   margin-top: 1.75rem;
@@ -784,8 +838,10 @@ main section[id] {
 .service-card,
 .tool-card,
 .contact-card,
+.case-study-card,
 .info-card,
-.about-panel {
+.about-panel,
+.learning-track-card {
   transition:
     transform 220ms ease,
     border-color 220ms ease,
@@ -800,11 +856,14 @@ main section[id] {
 .service-card:focus-within,
 .tool-card:hover,
 .contact-card:hover,
-.contact-card:focus-visible,
+.contact-card:focus-within,
+.case-study-card:hover,
+.case-study-card:focus-within,
+.learning-track-card:hover,
+.learning-track-card:focus-within,
 .info-card:hover,
 .about-panel:hover,
-.profile-card:hover,
-.featured-project:hover {
+.profile-card:hover {
   transform: translateY(-4px);
   border-color: var(--line-strong);
   box-shadow: var(--shadow-strong);
@@ -901,7 +960,7 @@ main section[id] {
 /* Shared inset panel style used inside project detail grids and strength cards. */
 .project-card__details div,
 .strength-card,
-.featured-project__item {
+.learning-track__timeline-item {
   display: grid;
   gap: 0.32rem;
   padding: 0.95rem;
@@ -926,32 +985,211 @@ main section[id] {
   line-height: 1.5;
 }
 
-.project-card__action,
-.featured-project__cta {
+.project-card__action {
   width: fit-content;
   margin-top: auto;
 }
 
-.featured-project {
+.case-study-grid {
   display: grid;
   gap: 1.2rem;
   margin-top: 1.6rem;
+}
+
+.case-study-card {
+  display: grid;
+  gap: 1.15rem;
   padding: 1.45rem;
   border-radius: 28px;
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 20%, transparent 80%), transparent 46%),
-    color-mix(in srgb, var(--panel) 92%, transparent 8%);
 }
 
-.featured-project__intro h3 {
+.case-study-card__intro h3 {
   margin: 0.75rem 0 0;
-  font-size: 1.75rem;
+  font-size: 1.55rem;
 }
 
-.featured-project__grid {
+.case-study-card__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.case-study-card__grid div {
+  display: grid;
+  gap: 0.32rem;
+  padding: 0.95rem;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--line) 76%, transparent 24%);
+  background: color-mix(in srgb, var(--panel) 92%, transparent 8%);
+}
+
+.case-study-card__grid strong {
+  color: var(--accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.case-study-card__action {
+  width: fit-content;
+}
+
+.learning-track {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.learning-track-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.45rem;
+  border-radius: 28px;
+}
+
+.learning-track-card h3 {
+  margin: 0;
+  font-size: 1.55rem;
+  line-height: 1.15;
+}
+
+.learning-track-card--summary {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 20%, transparent 80%), transparent 48%),
+    color-mix(in srgb, var(--panel) 94%, transparent 6%);
+}
+
+.learning-track__detail,
+.learning-track__status,
+.learning-track__timeline-item p {
+  margin: 0;
+}
+
+.learning-track__detail {
+  color: var(--subtle);
+}
+
+.learning-track__actions {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.learning-track__progress-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.learning-track__progress-top h3 {
+  margin: 0.6rem 0 0;
+  font-size: 2rem;
+  line-height: 1.05;
+}
+
+.learning-track__progress-pill {
+  padding: 0.58rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line-strong) 56%, var(--line) 44%);
+  background: color-mix(in srgb, var(--accent-soft) 78%, transparent 22%);
+  color: var(--accent-strong);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.learning-track__progress-bar {
+  position: relative;
+  height: 0.92rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 84%, transparent 16%);
+  background: color-mix(in srgb, var(--bg-soft) 82%, transparent 18%);
+  overflow: hidden;
+}
+
+.learning-track__progress-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 52%, var(--accent-secondary) 48%));
+}
+
+.learning-track__progress-marker {
+  position: absolute;
+  left: 0.6rem;
+  top: 50%;
+  width: 0.98rem;
+  height: 0.98rem;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, var(--panel-strong) 88%, white 12%);
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  box-shadow: 0 0 0 0.28rem color-mix(in srgb, var(--accent-soft) 70%, transparent 30%);
+  transform: translateY(-50%);
+}
+
+.learning-track__timeline {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.learning-track__timeline-item span {
+  color: var(--accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.learning-track__timeline-item strong {
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+.learning-track__timeline-item--current {
+  border-color: color-mix(in srgb, var(--line-strong) 60%, var(--line) 40%);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 20%, transparent 80%), transparent 90%),
+    color-mix(in srgb, var(--panel) 94%, transparent 6%);
+}
+
+.learning-track-card--skills {
+  margin-top: 1.2rem;
+}
+
+.learning-track__skills-header {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 56rem;
+}
+
+.learning-track__skill-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.learning-track__skill-badge {
+  padding: 0.72rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent 18%);
+  background: color-mix(in srgb, var(--panel-strong) 94%, transparent 6%);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.87rem;
+  font-weight: 700;
 }
 
 .tag-list,
@@ -1027,6 +1265,28 @@ main section[id] {
   margin: 0;
   padding-left: 0;
   list-style: none;
+}
+
+.timeline__content {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.timeline__metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.timeline__metrics span {
+  padding: 0.54rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 84%, transparent 16%);
+  background: color-mix(in srgb, var(--accent-soft) 64%, transparent 36%);
+  color: var(--accent-strong);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 /* Experience bullets are plain text lines now, with no default list markers. */
@@ -1248,6 +1508,121 @@ main section[id] {
   color: color-mix(in srgb, #c43b3b 82%, var(--text) 18%);
 }
 
+.quick-message-button {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.62rem;
+  min-height: 3.35rem;
+  padding: 0 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent 58%);
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 58%, var(--accent-secondary) 42%));
+  color: #fbf7f1;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.quick-message-button:hover,
+.quick-message-button:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 42px rgba(0, 0, 0, 0.28);
+}
+
+.quick-message-button--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.75rem) scale(0.96);
+}
+
+.quick-message-button svg {
+  flex-shrink: 0;
+}
+
+.quick-contact {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: end;
+  padding: 1.1rem;
+  pointer-events: none;
+}
+
+.quick-contact__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(3px);
+  pointer-events: auto;
+}
+
+.quick-contact__panel {
+  position: relative;
+  width: min(430px, 100%);
+  max-height: min(720px, calc(100dvh - 2.2rem));
+  overflow: auto;
+  pointer-events: auto;
+  padding: 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--line-strong) 42%, var(--line) 58%);
+  border-radius: 26px;
+  background: color-mix(in srgb, var(--panel-strong) 96%, transparent 4%);
+  box-shadow: var(--shadow-strong);
+  backdrop-filter: blur(16px);
+}
+
+.quick-contact__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.quick-contact__header h2 {
+  margin: 0.55rem 0 0;
+  font-size: 1.55rem;
+  line-height: 1.08;
+}
+
+.quick-contact__close {
+  width: 2.55rem;
+  height: 2.55rem;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--panel) 88%, transparent 12%);
+  color: var(--text);
+}
+
+.quick-contact__text {
+  margin: 0.85rem 0 1rem;
+  color: var(--muted);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+.quick-contact .contact-form {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
 /* Clickable email/phone/location cards. */
 .contact-list {
   display: grid;
@@ -1256,16 +1631,30 @@ main section[id] {
 
 .contact-card {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 0.85rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
   align-items: center;
   padding: 1rem 1.05rem;
   border-radius: 20px;
 }
 
+.contact-card__link {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: center;
+  min-width: 0;
+  border-radius: inherit;
+}
+
+.contact-card--location .contact-card__link {
+  grid-column: 1 / -1;
+}
+
 .contact-card__meta {
   display: grid;
   gap: 0.2rem;
+  min-width: 0;
 }
 
 .contact-card__meta span {
@@ -1392,6 +1781,12 @@ main section[id] {
   transition: opacity 520ms ease, transform 520ms ease;
 }
 
+.hero__copy.reveal-on-scroll,
+.hero__panel.reveal-on-scroll {
+  opacity: 1;
+  transform: none;
+}
+
 .reveal-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
@@ -1430,6 +1825,7 @@ main section[id] {
 /* Large tablet / small laptop breakpoint. */
 @media (max-width: 1080px) {
   .hero__inner,
+  .learning-track,
   .about-grid,
   .contact-panel {
     grid-template-columns: 1fr;
@@ -1441,7 +1837,8 @@ main section[id] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .featured-project__grid,
+  .learning-track__timeline,
+  .case-study-card__grid,
   .project-card__details {
     grid-template-columns: 1fr;
   }
@@ -1466,6 +1863,7 @@ main section[id] {
   .section--about,
   .section--contact,
   .section--work,
+  .section--track,
   .section--services,
   .section--tools {
     padding-left: 1.25rem;
@@ -1476,7 +1874,7 @@ main section[id] {
 /* Mobile navigation and single-column layout changes start here. */
 @media (max-width: 900px) {
   .topbar {
-    padding-top: 0.9rem;
+    padding-top: 0.75rem;
   }
 
   .topbar__inner {
@@ -1484,13 +1882,15 @@ main section[id] {
     grid-template-areas:
       "brand toggle theme"
       "panel panel panel";
-    align-items: start;
-    padding: 0.85rem 0.9rem;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.66rem 0.7rem;
+    border-radius: 18px;
+    overflow: visible;
   }
 
   .brand {
     grid-area: brand;
-    padding-top: 0.12rem;
   }
 
   .topbar__toggle {
@@ -1511,17 +1911,24 @@ main section[id] {
 
   .topbar__panel {
     grid-area: panel;
-    position: static;
+    position: absolute;
+    top: calc(100% + 0.55rem);
+    left: 0;
+    right: 0;
     display: none;
     width: 100%;
-    margin-top: 0.85rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--line);
+    margin-top: 0;
+    padding: 0.72rem;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--panel-strong) 96%, transparent 4%);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
   }
 
   .topbar__panel--open {
     display: grid;
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   .topbar__nav {
@@ -1545,12 +1952,12 @@ main section[id] {
 
   .hero {
     min-height: auto;
-    padding-top: 1.5rem;
+    padding-top: 1rem;
   }
 
   .hero__copy,
   .hero__panel {
-    padding: 1rem 0 0;
+    padding: 0.85rem 0 0;
   }
 
   .hero__stats {
@@ -1565,7 +1972,7 @@ main section[id] {
     max-width: none;
   }
 
-  .featured-project__cta {
+  .case-study-card__action {
     width: 100%;
   }
 
@@ -1578,22 +1985,61 @@ main section[id] {
 
 /* Smaller tablet / large phone adjustments. */
 @media (max-width: 720px) {
+  html,
+  body,
+  #root,
+  .site-shell {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   main,
   .footer,
   .topbar {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+  }
+
+  main,
+  .topbar__inner,
+  .hero,
+  .hero__inner,
+  .hero__copy,
+  .hero__panel,
+  .stack-band,
+  .section,
+  .footer__inner {
+    min-width: 0;
+    max-width: 100%;
   }
 
   .hero::before {
-    inset: 0.5rem 0 auto;
-    height: auto;
-    bottom: 2rem;
+    display: none;
   }
 
   .hero h1 {
-    font-size: clamp(2.9rem, 14vw, 4.4rem);
+    font-size: 2.55rem;
+    letter-spacing: 0;
+    line-height: 1.06;
     max-width: none;
+  }
+
+  .hero__kicker,
+  .hero__lead,
+  .section-intro p,
+  .project-card p,
+  .service-card p,
+  .learning-track-card p,
+  .tool-card p,
+  .contact-panel p,
+  .timeline li,
+  .profile-card__body p,
+  .strength-card p,
+  .case-study-card p,
+  .contact-map__content p {
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .projects-grid,
@@ -1604,9 +2050,11 @@ main section[id] {
 
   .hero__actions,
   .hero__socials,
+  .learning-track__actions,
   .contact-panel__actions {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.72rem;
   }
 
   .hero__availability {
@@ -1614,11 +2062,19 @@ main section[id] {
     align-items: stretch;
   }
 
+  .hero__availability span,
+  .stack-pill,
+  .tag-list li,
+  .info-list li {
+    white-space: normal;
+  }
+
   .hero__actions .button,
   .project-card__action,
-  .featured-project__cta,
+  .learning-track__actions .button,
   .contact-panel__actions .button,
-  .inline-link {
+  .inline-link,
+  .footer__link {
     width: 100%;
     justify-content: center;
   }
@@ -1639,6 +2095,8 @@ main section[id] {
   .profile-card__body,
   .service-card,
   .tool-card,
+  .learning-track-card,
+  .case-study-card,
   .contact-panel {
     padding: 1.2rem;
   }
@@ -1649,12 +2107,30 @@ main section[id] {
   }
 
   .stack-band {
+    margin-top: 0;
     padding: 1rem;
   }
 
   .tag-list li,
   .info-list li {
     width: 100%;
+  }
+
+  .project-card__details,
+  .learning-track__timeline,
+  .case-study-card__grid,
+  .strength-grid,
+  .contact-list {
+    gap: 0.75rem;
+  }
+
+  .learning-track__skill-cloud {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .learning-track__skill-badge {
+    text-align: center;
   }
 
   .timeline__item {
@@ -1667,6 +2143,21 @@ main section[id] {
 
   .contact-card {
     padding: 0.95rem;
+  }
+
+  .quick-contact {
+    padding: 0.85rem;
+  }
+
+  .quick-contact__panel {
+    width: 100%;
+    max-height: calc(100dvh - 1.7rem);
+  }
+
+  .quick-message-button--hero {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(0.75rem) scale(0.96);
   }
 
   .footer__inner,
@@ -1684,29 +2175,45 @@ main section[id] {
 /* Small-phone tuning: tighter spacing, smaller type, and stacked controls. */
 @media (max-width: 560px) {
   .topbar {
-    padding-top: 0.75rem;
+    padding-top: 0.6rem;
   }
 
   .topbar__inner {
-    grid-template-columns: minmax(0, 1fr) auto auto;
-    align-items: start;
-    padding: 0.8rem 0.85rem;
-    gap: 0.65rem;
+    grid-template-columns: minmax(0, 1fr) 2.45rem 2.45rem;
+    grid-template-areas:
+      "brand toggle theme"
+      "panel panel panel";
+    padding: 0.58rem 0.62rem;
+    gap: 0.48rem;
   }
 
   .brand__name {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .brand__role {
-    max-width: 18ch;
-    font-size: 0.58rem;
+    display: none;
   }
 
   .topbar__toggle,
   .theme-toggle {
-    width: 2.65rem;
-    height: 2.65rem;
+    width: 2.45rem;
+    height: 2.45rem;
+  }
+
+  .topbar__toggle {
+    justify-self: end;
+  }
+
+  .theme-toggle {
+    justify-self: end;
+  }
+
+  .topbar__panel {
+    padding: 0.65rem;
   }
 
   .topbar__link {
@@ -1719,8 +2226,12 @@ main section[id] {
   }
 
   .hero {
-    padding-top: 1rem;
-    padding-bottom: 2rem;
+    padding-top: 0.75rem;
+    padding-bottom: 1.1rem;
+  }
+
+  .hero__inner {
+    gap: 0.9rem;
   }
 
   .eyebrow,
@@ -1729,16 +2240,17 @@ main section[id] {
   .hero-card__label,
   .stack-band__label,
   .timeline__meta span,
-  .featured-project__item strong,
+  .case-study-card__grid strong,
   .contact-form__field span {
     font-size: 0.63rem;
     letter-spacing: 0.13em;
   }
 
   .hero h1 {
-    margin-top: 0.85rem;
-    font-size: clamp(2.3rem, 12vw, 3.2rem);
-    line-height: 1;
+    margin-top: 0.75rem;
+    font-size: 2rem;
+    line-height: 1.07;
+    letter-spacing: 0;
   }
 
   .hero__kicker {
@@ -1746,30 +2258,112 @@ main section[id] {
   }
 
   .hero__lead {
+    margin-top: 0.85rem;
+    font-size: 0.93rem;
+    line-height: 1.55;
+  }
+
+  .hero__certification {
+    width: 100%;
+    justify-content: center;
+    padding: 0.68rem 0.85rem;
+    text-align: center;
+  }
+
+  .hero__role-targets {
     margin-top: 1rem;
-    font-size: 0.95rem;
-    line-height: 1.65;
+  }
+
+  .hero__role-targets div {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .hero__role-targets strong {
+    text-align: center;
+  }
+
+  .hero__availability span,
+  .stack-pill,
+  .tag-list li,
+  .info-list li {
+    padding: 0.65rem 0.8rem;
+    font-size: 0.81rem;
+  }
+
+  .hero__availability {
+    gap: 0.55rem;
+    margin-top: 1rem;
+  }
+
+  .hero__actions {
+    margin-top: 1.35rem;
+  }
+
+  .hero__socials {
+    display: none;
+  }
+
+  .quick-message-button {
+    right: max(0.85rem, env(safe-area-inset-right));
+    bottom: max(0.85rem, env(safe-area-inset-bottom));
+    width: 3.35rem;
+    height: 3.35rem;
+    min-height: 3.35rem;
+    padding: 0;
+  }
+
+  .quick-message-button span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .quick-contact {
+    padding: 0;
+    align-items: end;
+  }
+
+  .quick-contact__panel {
+    max-height: calc(100dvh - 0.7rem);
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 24px 24px 0 0;
+    padding: 1rem;
+  }
+
+  .quick-contact__header h2 {
+    font-size: 1.35rem;
+  }
+
+  .quick-contact__text {
+    font-size: 0.92rem;
   }
 
   .section {
-    padding-top: 4.5rem;
+    padding-top: 3.4rem;
   }
 
   .section--about,
   .section--contact {
-    padding-top: 3.6rem;
+    padding-top: 2.25rem;
     padding-bottom: 1.1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
   }
 
   .section--work,
+  .section--track,
   .section--services,
   .section--tools {
-    padding-top: 3.6rem;
+    padding-top: 2.25rem;
     padding-bottom: 1.1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
   }
 
   .section-intro {
@@ -1783,8 +2377,9 @@ main section[id] {
 
   .section-intro h2,
   .contact-panel h2 {
-    font-size: clamp(1.85rem, 9vw, 2.4rem);
-    line-height: 1.04;
+    font-size: 2rem;
+    line-height: 1.08;
+    letter-spacing: 0;
   }
 
   .hero-card {
@@ -1795,6 +2390,10 @@ main section[id] {
     aspect-ratio: 1 / 1.06;
   }
 
+  .hero-card__body {
+    padding: 1rem;
+  }
+
   .hero-card__body h2 {
     font-size: 1.18rem;
   }
@@ -1803,7 +2402,8 @@ main section[id] {
   .service-card h3,
   .about-panel h3,
   .info-card h3,
-  .tool-card h3 {
+  .tool-card h3,
+  .learning-track-card h3 {
     font-size: 1.1rem;
   }
 
@@ -1811,10 +2411,37 @@ main section[id] {
   .about-panel,
   .info-card,
   .service-card,
+  .tool-card,
+  .learning-track-card,
+  .case-study-card,
   .contact-panel,
   .contact-form,
   .profile-card__body {
     padding: 1rem;
+  }
+
+  .section--work,
+  .section--track,
+  .section--about,
+  .section--services,
+  .section--tools,
+  .section--contact,
+  .stack-band,
+  .case-study-card {
+    border-radius: 22px;
+  }
+
+  .project-card,
+  .about-panel,
+  .info-card,
+  .profile-card,
+  .service-card,
+  .tool-card,
+  .learning-track-card,
+  .contact-panel,
+  .contact-form,
+  .contact-card {
+    border-radius: 20px;
   }
 
   .project-card__icon,
@@ -1839,20 +2466,31 @@ main section[id] {
   }
 
   .button {
+    width: 100%;
     min-height: auto;
     padding: 0.85rem 1rem;
     white-space: normal;
     text-align: center;
   }
 
+  .button svg,
+  .inline-link svg,
+  .footer__link svg {
+    flex-shrink: 0;
+  }
+
   .contact-card {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr;
     align-items: start;
     row-gap: 0.75rem;
   }
 
+  .contact-card__link {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
   .contact-card__copy {
-    grid-column: 2;
+    grid-column: 1;
     justify-self: stretch;
     width: 100%;
     height: 2.8rem;
@@ -1865,12 +2503,27 @@ main section[id] {
 
   .timeline__meta h4,
   .contact-map__content strong,
-  .featured-project__intro h3 {
+  .learning-track__progress-top h3 {
     overflow-wrap: anywhere;
+  }
+
+  .learning-track__progress-top h3 {
+    font-size: 1.55rem;
+  }
+
+  .learning-track__skill-cloud {
+    grid-template-columns: 1fr;
   }
 
   .contact-map__content {
     max-width: none;
+  }
+
+  .footer__nav,
+  .footer__links {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
   }
 }
 
