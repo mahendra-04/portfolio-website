@@ -286,7 +286,7 @@ const experience = [
 
 // Qualifications shown in the About sidebar.
 const credentials = [
-  "Computer Engineering Technology student, Sheridan College",
+  "Computer Engineering Technology graduate, Sheridan College",
   "CompTIA A+ Certified",
   "IT Service Desk: Service Management",
   "Computer Components and Peripherals for IT Technicians",
@@ -891,7 +891,7 @@ export default function App() {
               <p className="hero__kicker">Windows setup. Fast fixes. Calm communication.</p>
               <h1>IT support technician for Windows, help desk, and desktop support.</h1>
               <p className="hero__lead">
-                Computer Engineering Technology student at Sheridan College with
+                Computer Engineering Technology graduate from Sheridan College with
                 hands-on experience in lab support, Windows 10/11 setup, and troubleshooting.
               </p>
               <div className="hero__role-targets" aria-label="Target roles">
