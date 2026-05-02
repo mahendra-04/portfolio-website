@@ -88,10 +88,11 @@ const targetRoles = [
   "IT Support Technician",
 ];
 
-const learningTrackCompletedDays = 3;
+const learningTrackStartedDays = 5;
+const learningTrackFullyCompletedDays = 4;
 const learningTrackTotalDays = 45;
 const learningTrackProgressPercent = Math.round(
-  (learningTrackCompletedDays / learningTrackTotalDays) * 100,
+  (learningTrackStartedDays / learningTrackTotalDays) * 100,
 );
 
 // Short credential-style highlights shown beside the hero portrait.
@@ -102,27 +103,29 @@ const heroStats = [
 ];
 
 const learningTrack = {
-  currentDay: learningTrackCompletedDays,
+  currentDay: learningTrackStartedDays,
+  fullyCompletedDays: learningTrackFullyCompletedDays,
   totalDays: learningTrackTotalDays,
   progressPercent: learningTrackProgressPercent,
   subtitle: "Building real-world support skills for Tier 1 and Tier 2 IT roles.",
-  progressLabel: `${learningTrackCompletedDays} / ${learningTrackTotalDays} Days Completed`,
-  status: "Completed Day 3: Storage, RAM, Boot, BIOS/UEFI",
-  next: "Day 4: Peripherals and Printers",
+  progressLabel: `${learningTrackStartedDays} / ${learningTrackTotalDays} Days Started`,
+  completedLabel: `${learningTrackFullyCompletedDays} Days Completed`,
+  status: "Day 5 lesson completed",
+  next: "Day 6: Windows 10/11 Basics",
   repositoryHref: "https://github.com/mahendra-04/it-helpdesk-45-day-journey",
   githubHref: "https://github.com/mahendra-04",
   progressTrackerHref:
     "https://github.com/mahendra-04/it-helpdesk-45-day-journey/blob/main/progress-tracker.md",
   description:
-    "I am currently completing a structured 45-day IT Help Desk learning journey to build practical support skills for Tier 1 and Tier 2 roles. So far, I have completed the foundations of IT Help Desk, computer hardware basics, and storage, RAM, boot, and BIOS/UEFI troubleshooting concepts. I am using this public repository to document daily learning, hands-on tasks, troubleshooting scenarios, and progress toward IT support roles.",
+    "I am currently completing a structured 45-day IT Help Desk learning journey to build practical support skills for Tier 1 and Tier 2 roles. So far, I have completed the foundations of IT Help Desk, computer hardware basics, storage/RAM/boot concepts, peripherals and printers, and the hardware troubleshooting framework. I am using this public repository to document daily learning, hands-on checks, troubleshooting scenarios, and progress toward IT support roles.",
   focusSummary:
-    "What I have documented so far includes IT help desk terminology, ticket note structure, the difference between Tier 1 and Tier 2 support, hardware versus software, laptop and desktop hardware, Windows spec checks, slow-computer basics, storage versus RAM, HDD vs SSD vs NVMe, the boot process, BIOS and UEFI, boot order, Secure Boot, TPM, BitLocker, and \"No bootable device found\" troubleshooting basics.",
+    "What I have documented so far includes help desk terminology, Tier 1 vs Tier 2 support, ticket notes, computer hardware, Windows spec checks, storage/RAM/boot concepts, BIOS/UEFI settings, peripherals, printers, drivers, Device Manager, Print Spooler, diagnostic questions, one-change-at-a-time testing, documentation, and escalation notes.",
 };
 
 const learningTrackHighlights = [
-  { label: "Completed", value: "3 days" },
-  { label: "Current milestone", value: "Day 3 finished" },
-  { label: "Next focus", value: "Peripherals and Printers" },
+  { label: "Progress", value: learningTrack.progressLabel },
+  { label: "Fully Completed", value: learningTrack.completedLabel },
+  { label: "Next", value: "Day 6 - Windows 10/11 Basics" },
 ];
 
 const learningTrackMilestones = [
@@ -147,6 +150,18 @@ const learningTrackMilestones = [
   {
     label: "Day 4",
     title: "Peripherals and Printers",
+    text: "Completed",
+    state: "completed",
+  },
+  {
+    label: "Day 5",
+    title: "Hardware Troubleshooting Framework",
+    text: "Lesson completed, practice pending after Day 7.",
+    state: "pending",
+  },
+  {
+    label: "Day 6",
+    title: "Windows 10/11 Basics",
     text: "Next",
     state: "next",
   },
@@ -165,9 +180,17 @@ const learningTrackSkills = [
   "NVMe",
   "Boot Process",
   "BIOS/UEFI",
+  "Peripherals",
+  "Input Devices",
+  "Output Devices",
+  "Drivers",
+  "Device Manager",
+  "Printers",
+  "Print Queue",
+  "Print Spooler",
+  "Hardware Troubleshooting",
+  "Escalation",
   "Windows Basics",
-  "Tier 1 Support",
-  "Tier 2 Support",
 ];
 
 // Main project cards rendered in the Work section. The first item becomes the
@@ -1172,13 +1195,13 @@ export default function App() {
                   <span className="section-intro__eyebrow">Current progress</span>
                   <h3>{learningTrack.progressLabel}</h3>
                 </div>
-                <span className="learning-track__progress-pill">{learningTrack.progressPercent}% complete</span>
+                <span className="learning-track__progress-pill">{learningTrack.progressPercent}% started</span>
               </div>
 
               <div
                 className="learning-track__progress-bar"
                 role="progressbar"
-                aria-label="45-day IT Help Desk learning track progress"
+                aria-label="45-day IT Help Desk learning track started progress"
                 aria-valuenow={learningTrack.currentDay}
                 aria-valuemin={0}
                 aria-valuemax={learningTrack.totalDays}
@@ -1212,7 +1235,13 @@ export default function App() {
                     className={`learning-track__topic learning-track__topic--${milestone.state}`}
                   >
                     <div className="learning-track__topic-icon" aria-hidden="true">
-                      {milestone.state === "completed" ? <BadgeCheck size={16} /> : <ArrowRight size={16} />}
+                      {milestone.state === "completed" ? (
+                        <BadgeCheck size={16} />
+                      ) : milestone.state === "pending" ? (
+                        <Ticket size={16} />
+                      ) : (
+                        <ArrowRight size={16} />
+                      )}
                     </div>
                     <div className="learning-track__topic-copy">
                       <div className="learning-track__topic-top">
@@ -1499,7 +1528,7 @@ export default function App() {
         className={`quick-track-button ${quickContactOpen ? "quick-message-button--hidden" : ""} ${
           !quickMessageReady ? "quick-message-button--hero" : ""
         }`}
-        aria-label="View Mahendra's current Day 3 of 45 IT Help Desk challenge progress"
+        aria-label="View Mahendra's current Day 5 of 45 IT Help Desk learning track progress"
         onClick={() => handleNavClick("track")}
       >
         <ArrowRight size={18} />

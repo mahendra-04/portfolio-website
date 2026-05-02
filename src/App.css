@@ -1290,6 +1290,26 @@ main article[id] {
   background: color-mix(in srgb, var(--accent-soft) 32%, transparent 68%);
 }
 
+.learning-track__topic--pending {
+  border-color: color-mix(in srgb, var(--accent-secondary) 34%, var(--line) 66%);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-secondary) 13%, transparent 87%), transparent 100%),
+    color-mix(in srgb, var(--panel) 92%, transparent 8%);
+}
+
+.learning-track__topic--pending .learning-track__topic-icon {
+  border-color: color-mix(in srgb, var(--accent-secondary) 34%, transparent 66%);
+  background: color-mix(in srgb, var(--accent-secondary) 18%, transparent 82%);
+}
+
+.learning-track__topic--pending em {
+  max-width: 18rem;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-align: right;
+  text-transform: none;
+}
+
 .learning-track-card--skills {
   margin-top: 1.2rem;
 }
