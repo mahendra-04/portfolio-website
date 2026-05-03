@@ -1100,7 +1100,7 @@ main article[id] {
 
 .learning-track__snapshot {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
   gap: 0.75rem;
 }
 
@@ -1288,6 +1288,18 @@ main article[id] {
 
 .learning-track__topic--next .learning-track__topic-icon {
   background: color-mix(in srgb, var(--accent-soft) 32%, transparent 68%);
+}
+
+.learning-track__topic--lesson {
+  border-color: color-mix(in srgb, var(--line-strong) 42%, var(--line) 58%);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 10%, transparent 90%), transparent 100%),
+    color-mix(in srgb, var(--panel) 92%, transparent 8%);
+}
+
+.learning-track__topic--lesson .learning-track__topic-icon {
+  border-color: color-mix(in srgb, var(--line-strong) 44%, transparent 56%);
+  background: color-mix(in srgb, var(--accent-soft) 28%, transparent 72%);
 }
 
 .learning-track__topic--pending {
@@ -1997,7 +2009,6 @@ main article[id] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .learning-track__snapshot,
   .learning-track__progress-notes,
   .learning-track__topics,
   .case-study-card__grid,
@@ -2684,7 +2695,7 @@ main article[id] {
   }
 
   .learning-track__skill-cloud {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .contact-map__content {

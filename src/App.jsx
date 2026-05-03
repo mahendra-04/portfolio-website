@@ -88,8 +88,9 @@ const targetRoles = [
   "IT Support Technician",
 ];
 
-const learningTrackStartedDays = 5;
+const learningTrackStartedDays = 7;
 const learningTrackFullyCompletedDays = 4;
+const learningTrackLessonModeDays = 3;
 const learningTrackTotalDays = 45;
 const learningTrackProgressPercent = Math.round(
   (learningTrackStartedDays / learningTrackTotalDays) * 100,
@@ -110,22 +111,24 @@ const learningTrack = {
   subtitle: "Building real-world support skills for Tier 1 and Tier 2 IT roles.",
   progressLabel: `${learningTrackStartedDays} / ${learningTrackTotalDays} Days Started`,
   completedLabel: `${learningTrackFullyCompletedDays} Days Completed`,
-  status: "Day 5 lesson completed",
-  next: "Day 6: Windows 10/11 Basics",
+  lessonModeLabel: `${learningTrackLessonModeDays} Lesson-Mode Days`,
+  status: "Completed Day 7 lesson: Windows Users and Permissions",
+  next: "Day 8 - File System and Disk Management",
   repositoryHref: "https://github.com/mahendra-04/it-helpdesk-45-day-journey",
   githubHref: "https://github.com/mahendra-04",
   progressTrackerHref:
     "https://github.com/mahendra-04/it-helpdesk-45-day-journey/blob/main/progress-tracker.md",
   description:
-    "I am currently completing a structured 45-day IT Help Desk learning journey to build practical support skills for Tier 1 and Tier 2 roles. So far, I have completed the foundations of IT Help Desk, computer hardware basics, storage/RAM/boot concepts, peripherals and printers, and the hardware troubleshooting framework. I am using this public repository to document daily learning, hands-on checks, troubleshooting scenarios, and progress toward IT support roles.",
+    "I am currently completing a structured 45-day IT Help Desk learning journey to build practical support skills for Tier 1 and Tier 2 roles. So far, I have completed the foundations of IT Help Desk, computer hardware basics, storage/RAM/boot concepts, peripherals and printers, hardware troubleshooting, Windows basics, and Windows users and permissions. I am using this public repository to document learning progress, hands-on checks, troubleshooting notes, and preparation toward IT support roles.",
   focusSummary:
-    "What I have documented so far includes help desk terminology, Tier 1 vs Tier 2 support, ticket notes, computer hardware, Windows spec checks, storage/RAM/boot concepts, BIOS/UEFI settings, peripherals, printers, drivers, Device Manager, Print Spooler, diagnostic questions, one-change-at-a-time testing, documentation, and escalation notes.",
+    "Recent notes cover support terminology, Tier 1 vs Tier 2 support, ticket documentation, laptop/desktop hardware, Windows specs and slow-computer checks, storage/RAM/boot basics, BIOS/UEFI, peripherals, printers, Device Manager, Print Spooler, diagnostic questions, one-change-at-a-time testing, documentation and escalation, Windows 10/11 navigation, account types, UAC, user profiles, permissions, shared folders, groups, and least privilege.",
 };
 
 const learningTrackHighlights = [
   { label: "Progress", value: learningTrack.progressLabel },
   { label: "Fully Completed", value: learningTrack.completedLabel },
-  { label: "Next", value: "Day 6 - Windows 10/11 Basics" },
+  { label: "Lesson Mode", value: learningTrack.lessonModeLabel },
+  { label: "Progress %", value: `${learningTrack.progressPercent}%` },
 ];
 
 const learningTrackMilestones = [
@@ -156,12 +159,24 @@ const learningTrackMilestones = [
   {
     label: "Day 5",
     title: "Hardware Troubleshooting Framework",
-    text: "Lesson completed, practice pending after Day 7.",
+    text: "Lesson completed, additional practice later.",
     state: "pending",
   },
   {
     label: "Day 6",
     title: "Windows 10/11 Basics",
+    text: "Lesson Completed",
+    state: "lesson",
+  },
+  {
+    label: "Day 7",
+    title: "Windows Users and Permissions",
+    text: "Lesson Completed",
+    state: "lesson",
+  },
+  {
+    label: "Day 8",
+    title: "File System and Disk Management",
     text: "Next",
     state: "next",
   },
@@ -191,6 +206,16 @@ const learningTrackSkills = [
   "Hardware Troubleshooting",
   "Escalation",
   "Windows Basics",
+  "Control Panel",
+  "File Explorer",
+  "Task Manager",
+  "Windows Update",
+  "User Accounts",
+  "UAC",
+  "Permissions",
+  "User Profiles",
+  "Shared Folders",
+  "Least Privilege",
 ];
 
 // Main project cards rendered in the Work section. The first item becomes the
@@ -1205,6 +1230,7 @@ export default function App() {
                 aria-valuenow={learningTrack.currentDay}
                 aria-valuemin={0}
                 aria-valuemax={learningTrack.totalDays}
+                aria-valuetext={`${learningTrack.progressPercent}% of the 45-day track started`}
               >
                 <span
                   className="learning-track__progress-fill"
@@ -1237,10 +1263,12 @@ export default function App() {
                     <div className="learning-track__topic-icon" aria-hidden="true">
                       {milestone.state === "completed" ? (
                         <BadgeCheck size={16} />
+                      ) : milestone.state === "next" ? (
+                        <ArrowRight size={16} />
                       ) : milestone.state === "pending" ? (
                         <Ticket size={16} />
                       ) : (
-                        <ArrowRight size={16} />
+                        <FileText size={16} />
                       )}
                     </div>
                     <div className="learning-track__topic-copy">
@@ -1528,7 +1556,7 @@ export default function App() {
         className={`quick-track-button ${quickContactOpen ? "quick-message-button--hidden" : ""} ${
           !quickMessageReady ? "quick-message-button--hero" : ""
         }`}
-        aria-label="View Mahendra's current Day 5 of 45 IT Help Desk learning track progress"
+        aria-label={`View Mahendra's current Day ${learningTrack.currentDay} of ${learningTrack.totalDays} IT Help Desk learning track progress`}
         onClick={() => handleNavClick("track")}
       >
         <ArrowRight size={18} />
