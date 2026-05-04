@@ -1,5 +1,11 @@
-/* Mobile responsive styles */
+/* Minimal responsive fallback sheet.
 
+   This file is a lighter version of responsive.css. It only changes base type
+   scale and navigation direction, which makes it useful for quick prototypes or
+   older pages that do not need the full legacy inline-style override layer. */
+
+/* Phone width: reduce typography and stack nav links to avoid horizontal
+   overflow. The !important flags are aimed at old inline-style prototypes. */
 @media (max-width: 640px) {
   body {
     font-size: 14px;
@@ -19,6 +25,8 @@
   }
 }
 
+/* Tablet width: keep the layout more spacious than phone mode while reducing
+   oversized headings from desktop designs. */
 @media (min-width: 641px) and (max-width: 1024px) {
   h1 {
     font-size: 3rem !important;

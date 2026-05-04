@@ -1,10 +1,20 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!--
+      Vite serves this HTML as the app shell. React mounts into #root, while
+      metadata, theme bootstrapping, and search/social preview tags live here so
+      browsers and crawlers can read them before JavaScript finishes loading.
+    -->
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
+      /*
+        Apply the saved theme before the React bundle loads. This prevents the
+        page from briefly flashing the wrong light/dark theme during startup.
+        localStorage is wrapped in try/catch for privacy modes that block it.
+      */
       (() => {
         try {
           document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
@@ -21,6 +31,8 @@
     <meta name="theme-color" content="#050816" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://mahendra-04.github.io/portfolio-website/" />
+    <!-- Open Graph and Twitter metadata control how the portfolio appears when
+         shared in messaging apps, LinkedIn, and other social previews. -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Mahendra Ranwa | IT Support Technician Portfolio" />
     <meta
@@ -36,6 +48,10 @@
       content="IT support portfolio featuring Mahendra Ranwa's troubleshooting skills, technical projects, and support experience."
     />
     <meta name="twitter:image" content="https://mahendra-04.github.io/portfolio-website/mahendra.jpeg" />
+    <!-- Structured data describes the portfolio owner as a Person. Search
+         engines can use this to connect the site with profile links, education,
+         contact details, and the public portfolio URL. Keep the script body as
+         valid JSON because application/ld+json does not allow comments. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -64,7 +80,9 @@
     </script>
   </head>
   <body>
+    <!-- React replaces this empty root with the portfolio application. -->
     <div id="root"></div>
+    <!-- Vite rewrites this module import during development/build. -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

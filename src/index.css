@@ -1,9 +1,18 @@
+/* Global baseline imported before App.css. This file keeps browser-level resets
+   and root defaults in one place so component styles can focus on the actual
+   portfolio UI instead of repeatedly neutralizing default margins and sizing. */
+
+/* Universal box sizing makes widths predictable: padding and borders are
+   included inside declared dimensions, which is especially important for the
+   fixed mobile buttons, header grid, and card layouts in App.css. */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* The React mount chain needs full width and at least full viewport height so
+   the background layers and sticky header can span the page reliably. */
 html,
 body,
 #root {
@@ -13,6 +22,9 @@ body,
   padding: 0;
 }
 
+/* Dark fallback page background. App.css later replaces most colors with theme
+   variables, but this keeps the page polished before React and CSS variables
+   finish loading. */
 body {
   overflow-x: hidden;
   background: #050816;
@@ -24,6 +36,8 @@ body {
     linear-gradient(180deg, #050816 0%, #07111f 45%, #050816 100%);
 }
 
+/* Form controls inherit the app typography instead of browser-specific default
+   fonts, keeping labels, inputs, and buttons visually consistent. */
 button,
 input,
 textarea,
@@ -31,6 +45,8 @@ select {
   font: inherit;
 }
 
+/* Code/pre defaults are included for future snippets or debugging notes without
+   needing a component-specific font declaration. */
 code,
 pre {
   font-family: 'Fira Code', Consolas, monospace;

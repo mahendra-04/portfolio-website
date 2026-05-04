@@ -27,6 +27,16 @@ import {
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
+// App.jsx is intentionally organized as a single portfolio page:
+// 1. Static data arrays define the content and icons for each section.
+// 2. Small shared components keep repeated link/heading markup consistent.
+// 3. The main App component owns UI behavior: theme, navigation state,
+//    scroll-aware highlights, reveal animations, contact form submission,
+//    and quick-contact interactions.
+//
+// This structure keeps content editing approachable. Most portfolio updates
+// should happen in the arrays below instead of inside the JSX layout.
+
 // Vite exposes the deployed base path through BASE_URL, which lets asset links
 // work both locally and on GitHub Pages.
 const assetBase = import.meta.env.BASE_URL;
@@ -34,6 +44,9 @@ const contactEmail = "mranwa100@gmail.com";
 const contactEmailHref = `mailto:${contactEmail}`;
 
 function getStoredTheme() {
+  // Reading localStorage can throw in locked-down browsers, private browsing
+  // modes, or embedded previews. Returning "dark" gives the app a stable
+  // default instead of letting a storage exception break the first render.
   try {
     return localStorage.getItem("theme") || "dark";
   } catch {
@@ -42,6 +55,8 @@ function getStoredTheme() {
 }
 
 function saveStoredTheme(theme) {
+  // The saved value is only a convenience. The live theme is always applied to
+  // document.documentElement, so failures here should never block UI updates.
   try {
     localStorage.setItem("theme", theme);
   } catch {
@@ -88,6 +103,9 @@ const targetRoles = [
   "IT Support Technician",
 ];
 
+// Learning-track progress is calculated from the individual day counts so the
+// progress bar, labels, and ARIA values stay synchronized when one number is
+// updated. Keep these as numbers instead of hard-coded text where possible.
 const learningTrackStartedDays = 7;
 const learningTrackFullyCompletedDays = 4;
 const learningTrackLessonModeDays = 3;
@@ -124,6 +142,8 @@ const learningTrack = {
     "Recent notes cover support terminology, Tier 1 vs Tier 2 support, ticket documentation, laptop/desktop hardware, Windows specs and slow-computer checks, storage/RAM/boot basics, BIOS/UEFI, peripherals, printers, Device Manager, Print Spooler, diagnostic questions, one-change-at-a-time testing, documentation and escalation, Windows 10/11 navigation, account types, UAC, user profiles, permissions, shared folders, groups, and least privilege.",
 };
 
+// Snapshot cards in the learning-track section. These are derived from
+// learningTrack so the visual stats stay aligned with the detailed copy.
 const learningTrackHighlights = [
   { label: "Progress", value: learningTrack.progressLabel },
   { label: "Fully Completed", value: learningTrack.completedLabel },
@@ -131,6 +151,8 @@ const learningTrackHighlights = [
   { label: "Progress %", value: `${learningTrack.progressPercent}%` },
 ];
 
+// Timeline-style entries for the learning journey. The state value controls
+// both styling and which Lucide icon is rendered in the progress card.
 const learningTrackMilestones = [
   {
     label: "Day 1",
@@ -182,6 +204,8 @@ const learningTrackMilestones = [
   },
 ];
 
+// Skill badges are deliberately broad and recruiter-readable. They are not a
+// full resume keyword dump; they make the current learning focus scannable.
 const learningTrackSkills = [
   "Help Desk Basics",
   "Ticket Documentation",
@@ -265,6 +289,9 @@ const projects = [
   },
 ];
 
+// Case studies expand project cards into a support-style Problem / Action /
+// Result format. Keeping this separate from projects lets the cards stay short
+// while still giving recruiters evidence when they scroll deeper.
 const projectCaseStudies = [
   {
     id: "case-raspberry-diagnostics",
@@ -513,6 +540,9 @@ export default function App() {
   // Keeps desktop/mobile navigation behavior in sync with viewport size and
   // scroll position. On smaller screens, scrolling also closes the open menu.
   useEffect(() => {
+    // This effect handles low-cost global UI state that needs to react to the
+    // browser viewport rather than to a specific component: the sticky-header
+    // shadow, the quick-message button timing, and the mobile menu reset.
     // If the screen grows back to desktop width, force-close the mobile menu so
     // the layout resets cleanly.
     const onResize = () => {
@@ -543,6 +573,10 @@ export default function App() {
   // Watches scroll position and updates the active nav item based on the
   // section that has crossed a stable reading line in the viewport.
   useEffect(() => {
+    // The nav highlight does not use IntersectionObserver because the desired
+    // behavior is "which section has the reader reached?" rather than "which
+    // section is visible by any amount?" A fixed reading line gives steadier
+    // results for tall sections and avoids rapid flicker near boundaries.
     const sectionIds = navItems.map((item) => item.id);
     let frameId = 0;
 
@@ -562,11 +596,16 @@ export default function App() {
       const documentHeight = document.documentElement.scrollHeight;
       const bottomPosition = window.scrollY + window.innerHeight;
 
+      // When the user reaches the bottom, force the final section active even
+      // if its top never crossed the reading line because the content is short.
       if (documentHeight - bottomPosition < 8) {
         setActiveSection(sections[sections.length - 1].id);
         return;
       }
 
+      // The reading line sits about a third of the way down the viewport, but
+      // is capped so very tall desktop screens do not highlight sections too
+      // early.
       const readingLine = window.scrollY + Math.min(window.innerHeight * 0.38, 360);
       let currentSectionId = sections[0].id;
 
@@ -580,6 +619,9 @@ export default function App() {
     };
 
     const scheduleActiveSectionUpdate = () => {
+      // requestAnimationFrame throttles scroll work to the browser paint cycle.
+      // That keeps active-section calculation smooth without pulling in another
+      // dependency or running layout reads on every raw scroll event.
       if (frameId) {
         return;
       }
@@ -656,6 +698,8 @@ export default function App() {
     };
 
     document.addEventListener("keydown", handleEscape);
+    // Focus after the next paint so the dialog's input exists in the DOM before
+    // the browser attempts to move keyboard focus.
     window.requestAnimationFrame(() => quickContactNameRef.current?.focus());
 
     return () => {
@@ -666,6 +710,9 @@ export default function App() {
   // Adds the "is-visible" class once elements scroll into view so the reveal
   // animation only runs once per element.
   useEffect(() => {
+    // This is intentionally progressive enhancement. If animations are disabled
+    // through prefers-reduced-motion, CSS reveals the content immediately while
+    // this observer still runs harmlessly in the background.
     // Every animated block uses the same class name, so one observer can
     // handle all of them.
     const items = document.querySelectorAll(".reveal-on-scroll");
@@ -712,6 +759,8 @@ export default function App() {
   };
 
   const openQuickContact = () => {
+    // Clearing previous status avoids showing an old success/fallback message
+    // when the visitor opens a fresh quick-message dialog.
     setQuickContactOpen(true);
     setContactStatus({ type: "", message: "" });
   };
@@ -721,6 +770,8 @@ export default function App() {
   const handleContactSubmit = async (event) => {
     event.preventDefault();
 
+    // Guard against double submissions caused by rapid clicks or pressing Enter
+    // while the Web3Forms request is still in flight.
     if (sendingMessage) {
       return;
     }
@@ -731,6 +782,9 @@ export default function App() {
       [`Name: ${contactForm.name}`, `Email: ${contactForm.email}`, "", contactForm.message].join("\n")
     )}`;
 
+    // The fallback intentionally uses mailto instead of dropping the message.
+    // It is less seamless, but it preserves the user's typed content and gives
+    // them a clear way to finish sending from their own email client.
     const openEmailFallback = () => {
       window.location.href = fallbackEmailHref;
     };
@@ -749,6 +803,9 @@ export default function App() {
     }
 
     try {
+      // Web3Forms accepts standard form fields plus a few metadata fields. The
+      // hidden botcheck input in renderContactForm is included automatically in
+      // this FormData object and helps filter simple spam submissions.
       const formData = new FormData(form);
       formData.append("access_key", web3FormsAccessKey);
       formData.append("subject", subject);
@@ -762,6 +819,8 @@ export default function App() {
       });
 
       const contentType = response.headers.get("content-type") || "";
+      // Some network/proxy failures return plain text instead of JSON. Handling
+      // both shapes keeps the fallback path reliable.
       const result = contentType.includes("application/json")
         ? await response.json()
         : { success: response.ok, message: await response.text() };
@@ -791,6 +850,9 @@ export default function App() {
     }
   };
 
+  // The same form appears in the full contact section and in the floating quick
+  // dialog. Sharing one renderer keeps validation, botcheck, status messages,
+  // and controlled inputs identical in both places.
   const renderContactForm = ({ nameInputRef } = {}) => (
     <form className="contact-form" onSubmit={handleContactSubmit} aria-busy={sendingMessage}>
       <input
@@ -1551,6 +1613,8 @@ export default function App() {
         </div>
       </footer>
 
+      {/* Floating learning-track shortcut. It appears after the hero area so
+          visitors can jump back to current progress without reopening nav. */}
       <a
         href="#track"
         className={`quick-track-button ${quickContactOpen ? "quick-message-button--hidden" : ""} ${
@@ -1565,6 +1629,8 @@ export default function App() {
         </span>
       </a>
 
+      {/* Floating quick-message trigger. The full dialog is rendered only while
+          open so it does not add extra focusable controls to the page. */}
       <button
         type="button"
         className={`quick-message-button ${quickContactOpen ? "quick-message-button--hidden" : ""} ${

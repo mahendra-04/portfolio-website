@@ -1,26 +1,37 @@
-/* Mobile First Responsive Design */
+/* Legacy responsive override sheet.
 
-/* Small devices (mobile) */
+   This file appears to support an older version of the portfolio that used
+   inline styles heavily. Because inline styles have high specificity, many
+   selectors here target style attributes and use !important to force mobile
+   corrections. The current class-based layout is mostly handled in App.css,
+   but these rules are kept documented in case older markup or experimental
+   branches still import this file. */
+
+/* Small devices (mobile): collapse complex layouts, reduce spacing, and hide
+   fixed side navigation that would steal horizontal space on narrow screens. */
 @media (max-width: 640px) {
   body {
     font-size: 14px;
   }
 
+  /* Repeat box sizing inside the breakpoint so older embedded/inline layouts
+     still behave predictably even if this file is loaded without index.css. */
   * {
     box-sizing: border-box;
   }
 
-  /* Hide side nav on mobile */
+  /* Hide the older fixed side nav on mobile. Attribute selectors are used here
+     because that version of the layout encoded positioning directly inline. */
   [style*="position: fixed"][style*="left: 18"] {
     display: none;
   }
 
-  /* Adjust header padding */
+  /* Tighten global page chrome so content has room on 320-390px devices. */
   header {
     padding: 16px 16px 16px 16px !important;
   }
 
-  /* Adjust main content padding */
+  /* Main sections lose the old desktop left rail offset on mobile. */
   main section, main .hero {
     padding: 40px 16px 40px 16px !important;
   }
@@ -55,7 +66,8 @@
     font-size: 14px !important;
   }
 
-  /* Responsive grid */
+  /* Force inline-grid sections into a single column. This protects card grids
+     from overflowing when the old markup used repeat(auto-fit, ...) inline. */
   [style*="gridTemplateColumns: repeat"] {
     grid-template-columns: 1fr !important;
   }
@@ -115,7 +127,8 @@
   }
 }
 
-/* Tablet devices */
+/* Tablet devices: preserve more structure than phones, but still account for
+   the old side navigation rail and reduce multi-column pressure. */
 @media (min-width: 641px) and (max-width: 1024px) {
   /* Show side nav but adjust positioning */
   [style*="position: fixed"][style*="left: 18"] {
@@ -177,7 +190,8 @@
   }
 }
 
-/* Large devices - optimize for performance */
+/* Large devices: keep desktop spacing, but limit some auto-fit grids to two
+   columns so cards remain readable instead of becoming too narrow. */
 @media (min-width: 1025px) and (max-width: 1440px) {
   main section {
     padding: 80px 32px 80px 92px !important;
@@ -188,14 +202,16 @@
   }
 }
 
-/* Extra large devices */
+/* Extra large devices: give the old layout more vertical breathing room while
+   keeping the same left offset for the fixed navigation rail. */
 @media (min-width: 1441px) {
   main section {
     padding: 90px 32px 90px 92px !important;
   }
 }
 
-/* Orientation adjustments */
+/* Landscape phones and short-height tablets need a shorter hero so the first
+   screen does not become mostly whitespace. */
 @media (orientation: landscape) and (max-height: 600px) {
   main .hero {
     min-height: auto;
@@ -207,7 +223,8 @@
   }
 }
 
-/* Touch device optimizations */
+/* Touch device optimizations: make tap targets meet the common 44px minimum
+   and remove dependency on hover-only affordances. */
 @media (hover: none) and (pointer: coarse) {
   /* Larger touch targets */
   a, button, [role="button"] {
@@ -223,7 +240,8 @@
   /* Remove hover effects on touch devices - they'll use the base styles */
 }
 
-/* Print styles */
+/* Print styles: hide animated/fixed decoration and let the document print as a
+   simple content flow. */
 @media print {
   .animated-bg, [style*="position: fixed"] {
     display: none !important;
