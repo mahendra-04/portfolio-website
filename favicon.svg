@@ -1,13 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!--
+    Favicon composition:
+    - Rounded square background gives the icon a solid browser-tab silhouette.
+    - Gradients match the portfolio's cool accent palette.
+    - The clipped portrait keeps the favicon personal while preserving a clean
+      circular frame at tiny sizes.
+  -->
   <defs>
+    <!-- Circular clipping mask used to crop the portrait image. -->
     <clipPath id="avatarClip">
       <circle cx="32" cy="32" r="19.5" />
     </clipPath>
+    <!-- Deep background glow behind the avatar. -->
     <radialGradient id="bgGlow" cx="50%" cy="35%" r="70%">
       <stop offset="0%" stop-color="#1e3a8a" />
       <stop offset="55%" stop-color="#0f172a" />
       <stop offset="100%" stop-color="#020617" />
     </radialGradient>
+    <!-- Accent ring surrounding the portrait. -->
     <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#67e8f9" />
       <stop offset="55%" stop-color="#60a5fa" />
@@ -15,15 +25,18 @@
     </linearGradient>
   </defs>
 
+  <!-- Outer app-icon shape and subtle inner depth layers. -->
   <rect width="64" height="64" rx="18" fill="url(#bgGlow)" />
   <circle cx="32" cy="32" r="24" fill="rgba(255,255,255,0.06)" />
   <circle cx="32" cy="32" r="22.5" fill="none" stroke="url(#ring)" stroke-width="2.5" />
   <circle cx="32" cy="32" r="20.5" fill="#081121" />
 
+  <!-- Portrait is clipped into the circular avatar frame. -->
   <g clip-path="url(#avatarClip)">
     <image href="mahendra.jpeg" x="10" y="8" width="44" height="44" preserveAspectRatio="xMidYMid slice" />
   </g>
 
+  <!-- Final highlight strokes improve readability at small favicon sizes. -->
   <circle cx="32" cy="32" r="19.5" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1" />
   <path d="M18 15c6-5 22-6 29 1" fill="none" stroke="rgba(255,255,255,0.22)" stroke-linecap="round" />
 </svg>
