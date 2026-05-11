@@ -106,9 +106,7 @@ const targetRoles = [
 // Learning-track progress is calculated from the individual day counts so the
 // progress bar, labels, and ARIA values stay synchronized when one number is
 // updated. Keep these as numbers instead of hard-coded text where possible.
-const learningTrackStartedDays = 7;
-const learningTrackFullyCompletedDays = 4;
-const learningTrackLessonModeDays = 3;
+const learningTrackStartedDays = 9;
 const learningTrackTotalDays = 45;
 const learningTrackProgressPercent = Math.round(
   (learningTrackStartedDays / learningTrackTotalDays) * 100,
@@ -123,33 +121,18 @@ const heroStats = [
 
 const learningTrack = {
   currentDay: learningTrackStartedDays,
-  fullyCompletedDays: learningTrackFullyCompletedDays,
   totalDays: learningTrackTotalDays,
   progressPercent: learningTrackProgressPercent,
   subtitle: "Building real-world support skills for Tier 1 and Tier 2 IT roles.",
   progressLabel: `${learningTrackStartedDays} / ${learningTrackTotalDays} Days Started`,
-  completedLabel: `${learningTrackFullyCompletedDays} Days Completed`,
-  lessonModeLabel: `${learningTrackLessonModeDays} Lesson-Mode Days`,
-  status: "Completed Day 7 lesson: Windows Users and Permissions",
-  next: "Day 8 - File System and Disk Management",
+  status: "Completed Day 9 lesson: Windows Services, Startup Apps, and Task Manager",
+  next: "Day 10 - Software Installation and Removal",
   repositoryHref: "https://github.com/mahendra-04/it-helpdesk-45-day-journey",
-  githubHref: "https://github.com/mahendra-04",
   progressTrackerHref:
     "https://github.com/mahendra-04/it-helpdesk-45-day-journey/blob/main/progress-tracker.md",
   description:
-    "I am currently completing a structured 45-day IT Help Desk learning journey to build practical support skills for Tier 1 and Tier 2 roles. So far, I have completed the foundations of IT Help Desk, computer hardware basics, storage/RAM/boot concepts, peripherals and printers, hardware troubleshooting, Windows basics, and Windows users and permissions. I am using this public repository to document learning progress, hands-on checks, troubleshooting notes, and preparation toward IT support roles.",
-  focusSummary:
-    "Recent notes cover support terminology, Tier 1 vs Tier 2 support, ticket documentation, laptop/desktop hardware, Windows specs and slow-computer checks, storage/RAM/boot basics, BIOS/UEFI, peripherals, printers, Device Manager, Print Spooler, diagnostic questions, one-change-at-a-time testing, documentation and escalation, Windows 10/11 navigation, account types, UAC, user profiles, permissions, shared folders, groups, and least privilege.",
+    "I am documenting this track through public notes, hands-on checks, and troubleshooting practice. The first nine days cover help desk foundations, hardware, Windows basics, permissions, disk management, services, startup apps, and Task Manager.",
 };
-
-// Snapshot cards in the learning-track section. These are derived from
-// learningTrack so the visual stats stay aligned with the detailed copy.
-const learningTrackHighlights = [
-  { label: "Progress", value: learningTrack.progressLabel },
-  { label: "Fully Completed", value: learningTrack.completedLabel },
-  { label: "Lesson Mode", value: learningTrack.lessonModeLabel },
-  { label: "Progress %", value: `${learningTrack.progressPercent}%` },
-];
 
 // Timeline-style entries for the learning journey. The state value controls
 // both styling and which Lucide icon is rendered in the progress card.
@@ -181,8 +164,8 @@ const learningTrackMilestones = [
   {
     label: "Day 5",
     title: "Hardware Troubleshooting Framework",
-    text: "Lesson completed, additional practice later.",
-    state: "pending",
+    text: "Completed",
+    state: "completed",
   },
   {
     label: "Day 6",
@@ -199,6 +182,18 @@ const learningTrackMilestones = [
   {
     label: "Day 8",
     title: "File System and Disk Management",
+    text: "Lesson Completed",
+    state: "lesson",
+  },
+  {
+    label: "Day 9",
+    title: "Windows Services, Startup Apps, and Task Manager",
+    text: "Lesson Completed",
+    state: "lesson",
+  },
+  {
+    label: "Day 10",
+    title: "Software Installation and Removal",
     text: "Next",
     state: "next",
   },
@@ -240,6 +235,14 @@ const learningTrackSkills = [
   "User Profiles",
   "Shared Folders",
   "Least Privilege",
+  "File System",
+  "Disk Management",
+  "Disk Cleanup",
+  "Storage Sense",
+  "OneDrive Sync",
+  "Windows Services",
+  "Startup Apps",
+  "Performance Troubleshooting",
 ];
 
 // Main project cards rendered in the Work section. The first item becomes the
@@ -1023,7 +1026,7 @@ export default function App() {
                 <span>CompTIA A+ Certified</span>
               </div>
               <p className="hero__kicker">Windows setup. Fast fixes. Calm communication.</p>
-              <h1>IT support technician for Windows, help desk, and desktop support.</h1>
+              <h1>Turning &quot;did you try restarting it?&quot; into actual solutions.</h1>
               <p className="hero__lead">
                 Computer Engineering Technology graduate from Sheridan College with
                 hands-on experience in lab support, Windows 10/11 setup, and troubleshooting.
@@ -1232,50 +1235,6 @@ export default function App() {
           />
 
           <div className="learning-track">
-            <article className="learning-track-card learning-track-card--summary section-intro--animated reveal-on-scroll">
-              <span className="section-intro__eyebrow">Career development project</span>
-              <h3>Public progress updates that show how I am building support-ready skills.</h3>
-              <p>{learningTrack.description}</p>
-              <p className="learning-track__detail">{learningTrack.focusSummary}</p>
-              <div className="learning-track__snapshot" aria-label="Learning track snapshot">
-                {learningTrackHighlights.map((item) => (
-                  <div key={item.label} className="learning-track__snapshot-item">
-                    <span>{item.label}</span>
-                    <strong>{item.value}</strong>
-                  </div>
-                ))}
-              </div>
-              <div className="learning-track__actions">
-                <a
-                  href={learningTrack.repositoryHref}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="button button--primary"
-                >
-                  <ExternalLink size={16} />
-                  <span>View Learning Repository</span>
-                </a>
-                <a
-                  href={learningTrack.progressTrackerHref}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="button button--secondary"
-                >
-                  <ExternalLink size={16} />
-                  <span>View Progress Tracker</span>
-                </a>
-                <a
-                  href={learningTrack.githubHref}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="button button--secondary"
-                >
-                  <ExternalLink size={16} />
-                  <span>View GitHub Profile</span>
-                </a>
-              </div>
-            </article>
-
             <article className="learning-track-card learning-track-card--progress section-intro--animated reveal-on-scroll">
               <div className="learning-track__progress-top">
                 <div>
@@ -1316,40 +1275,65 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="learning-track__topics" aria-label="Completed and upcoming learning track topics">
+              <p className="learning-track__summary">{learningTrack.description}</p>
+
+              <div className="learning-track__actions">
+                <a
+                  href={learningTrack.repositoryHref}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="button button--primary"
+                >
+                  <ExternalLink size={16} />
+                  <span>View Learning Repository</span>
+                </a>
+                <a
+                  href={learningTrack.progressTrackerHref}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="button button--secondary"
+                >
+                  <ExternalLink size={16} />
+                  <span>View Progress Tracker</span>
+                </a>
+              </div>
+            </article>
+
+            <article className="learning-track-card learning-track-card--topics section-intro--animated reveal-on-scroll">
+              <div className="learning-track__panel-heading">
+                <span className="section-intro__eyebrow">Completed topics</span>
+                <h3>Day-by-day progress</h3>
+              </div>
+
+              <ol className="learning-track__topic-list" aria-label="Completed and upcoming learning track topics">
                 {learningTrackMilestones.map((milestone) => (
-                  <article
+                  <li
                     key={milestone.title}
-                    className={`learning-track__topic learning-track__topic--${milestone.state}`}
+                    className={`learning-track__topic-item learning-track__topic-item--${milestone.state}`}
                   >
-                    <div className="learning-track__topic-icon" aria-hidden="true">
+                    <span className="learning-track__topic-icon" aria-hidden="true">
                       {milestone.state === "completed" ? (
                         <BadgeCheck size={16} />
                       ) : milestone.state === "next" ? (
                         <ArrowRight size={16} />
-                      ) : milestone.state === "pending" ? (
-                        <Ticket size={16} />
                       ) : (
                         <FileText size={16} />
                       )}
-                    </div>
+                    </span>
                     <div className="learning-track__topic-copy">
-                      <div className="learning-track__topic-top">
-                        <span>{milestone.label}</span>
-                        <em>{milestone.text}</em>
-                      </div>
-                      <strong>{milestone.title}</strong>
+                      <strong>{milestone.label}: {milestone.title}</strong>
+                      <span>{milestone.text}</span>
                     </div>
-                  </article>
+                  </li>
                 ))}
-              </div>
+              </ol>
             </article>
           </div>
 
           <article className="learning-track-card learning-track-card--skills section-intro--animated reveal-on-scroll">
             <div className="learning-track__skills-header">
-              <span className="section-intro__eyebrow">Current skill focus</span>
-              <h3>Support topics I am reinforcing through daily notes, troubleshooting practice, and public progress updates.</h3>
+              <span className="section-intro__eyebrow">Skills covered so far</span>
+              <h3>Support skills I am actively documenting and practicing.</h3>
             </div>
 
             <div className="learning-track__skill-cloud" aria-label="IT Help Desk learning track skills">
