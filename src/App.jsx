@@ -106,7 +106,7 @@ const targetRoles = [
 // Learning-track progress is calculated from the individual day counts so the
 // progress bar, labels, and ARIA values stay synchronized when one number is
 // updated. Keep these as numbers instead of hard-coded text where possible.
-const learningTrackStartedDays = 9;
+const learningTrackStartedDays = 12;
 const learningTrackTotalDays = 45;
 const learningTrackProgressPercent = Math.round(
   (learningTrackStartedDays / learningTrackTotalDays) * 100,
@@ -125,13 +125,13 @@ const learningTrack = {
   progressPercent: learningTrackProgressPercent,
   subtitle: "Building real-world support skills for Tier 1 and Tier 2 IT roles.",
   progressLabel: `${learningTrackStartedDays} / ${learningTrackTotalDays} Days Started`,
-  status: "Completed Day 9 lesson: Windows Services, Startup Apps, and Task Manager",
-  next: "Day 10 - Software Installation and Removal",
+  status: "Completed Day 12 lesson: Windows Troubleshooting Tools",
+  next: "Day 13 - Networking Basics",
   repositoryHref: "https://github.com/mahendra-04/it-helpdesk-45-day-journey",
   progressTrackerHref:
     "https://github.com/mahendra-04/it-helpdesk-45-day-journey/blob/main/progress-tracker.md",
   description:
-    "I am documenting this track through public notes, hands-on checks, and troubleshooting practice. The first nine days cover help desk foundations, hardware, Windows basics, permissions, disk management, services, startup apps, and Task Manager.",
+    "I am currently completing a structured 45-day IT Help Desk learning journey to build practical support skills for Tier 1 and Tier 2 roles. So far, I have covered IT Help Desk foundations, computer hardware, storage and boot concepts, peripherals and printers, hardware troubleshooting, Windows basics, user accounts and permissions, file systems, disk management, Windows services, startup apps, Task Manager, software support, Windows updates, drivers, Device Manager, and Windows troubleshooting tools. I am using this public repository to document learning progress, hands-on checks, troubleshooting notes, and preparation toward IT support roles.",
 };
 
 // Timeline-style entries for the learning journey. The state value controls
@@ -140,60 +140,78 @@ const learningTrackMilestones = [
   {
     label: "Day 1",
     title: "IT Help Desk Foundation",
-    text: "Completed",
+    text: "Lesson Completed",
     state: "completed",
   },
   {
     label: "Day 2",
     title: "Computer Hardware Basics",
-    text: "Completed",
+    text: "Lesson Completed",
     state: "completed",
   },
   {
     label: "Day 3",
     title: "Storage, RAM, Boot, BIOS/UEFI",
-    text: "Completed",
+    text: "Lesson Completed",
     state: "completed",
   },
   {
     label: "Day 4",
     title: "Peripherals and Printers",
-    text: "Completed",
+    text: "Lesson Completed",
     state: "completed",
   },
   {
     label: "Day 5",
     title: "Hardware Troubleshooting Framework",
-    text: "Completed",
+    text: "Lesson Completed",
     state: "completed",
   },
   {
     label: "Day 6",
     title: "Windows 10/11 Basics",
     text: "Lesson Completed",
-    state: "lesson",
+    state: "completed",
   },
   {
     label: "Day 7",
     title: "Windows Users and Permissions",
     text: "Lesson Completed",
-    state: "lesson",
+    state: "completed",
   },
   {
     label: "Day 8",
     title: "File System and Disk Management",
     text: "Lesson Completed",
-    state: "lesson",
+    state: "completed",
   },
   {
     label: "Day 9",
     title: "Windows Services, Startup Apps, and Task Manager",
     text: "Lesson Completed",
-    state: "lesson",
+    state: "completed",
   },
   {
     label: "Day 10",
     title: "Software Installation and Removal",
+    text: "Lesson Completed",
+    state: "completed",
+  },
+  {
+    label: "Day 11",
+    title: "Windows Updates, Drivers, and Device Manager",
+    text: "Lesson Completed",
+    state: "completed",
+  },
+  {
+    label: "Day 12",
+    title: "Windows Troubleshooting Tools",
+    text: "Lesson Completed",
+    state: "completed",
+  },
+  {
+    label: "Day 13",
+    title: "Networking Basics",
     text: "Next",
     state: "next",
   },
@@ -243,6 +261,21 @@ const learningTrackSkills = [
   "Windows Services",
   "Startup Apps",
   "Performance Troubleshooting",
+  "Software Installation",
+  "Software Removal",
+  "EXE Installers",
+  "MSI Installers",
+  "App Repair",
+  "Driver Troubleshooting",
+  "Update History",
+  "Driver Rollback",
+  "Event Viewer",
+  "Reliability Monitor",
+  "Safe Mode",
+  "System Restore",
+  "SFC",
+  "DISM",
+  "Crash Troubleshooting",
 ];
 
 // Main project cards rendered in the Work section. The first item becomes the
