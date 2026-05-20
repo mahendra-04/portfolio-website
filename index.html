@@ -1,67 +1,75 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!--
-      Vite serves this HTML as the app shell. React mounts into #root, while
-      metadata, theme bootstrapping, and search/social preview tags live here so
-      browsers and crawlers can read them before JavaScript finishes loading.
-    -->
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      /*
-        Apply the saved theme before the React bundle loads. This prevents the
-        page from briefly flashing the wrong light/dark theme during startup.
-        localStorage is wrapped in try/catch for privacy modes that block it.
-      */
-      (() => {
-        try {
-          document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
-        } catch {
-          document.documentElement.dataset.theme = "dark";
-        }
-      })();
-    </script>
+    <meta name="author" content="Mahendra Ranwa" />
     <title>Mahendra Ranwa | IT Support Technician Portfolio</title>
     <meta
       name="description"
-      content="Portfolio of Mahendra Ranwa, an IT support technician focused on Windows support, troubleshooting, desktop setup, and help desk readiness."
+      content="CompTIA A+ certified IT support portfolio for Mahendra Ranwa, a Sheridan College Computer Engineering Technology graduate with a completed 45-day IT Help Desk learning project. Focused on helpdesk, service desk, desktop support, Windows, Microsoft 365, networking, Active Directory concepts, PowerShell basics, troubleshooting, and user support."
     />
-    <meta name="theme-color" content="#050816" />
+    <meta
+      name="keywords"
+      content="Mahendra Ranwa, IT Support Technician, Help Desk, Service Desk, Desktop Support, Technical Support, Windows support, Microsoft 365, Active Directory, PowerShell, networking fundamentals, troubleshooting, ticketing systems, Sheridan College, CompTIA A+"
+    />
+    <meta name="theme-color" content="#07070a" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://mahendra-04.github.io/portfolio-website/" />
-    <!-- Open Graph and Twitter metadata control how the portfolio appears when
-         shared in messaging apps, LinkedIn, and other social previews. -->
+    <link rel="preload" as="image" href="mahendra.jpeg" />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:site_name" content="Mahendra Ranwa Portfolio" />
     <meta property="og:title" content="Mahendra Ranwa | IT Support Technician Portfolio" />
     <meta
       property="og:description"
-      content="Explore Mahendra Ranwa's IT support portfolio, including desktop support skills, troubleshooting projects, and technical experience."
+      content="CompTIA A+ certified IT support portfolio featuring a completed 45-day IT Help Desk learning project, Windows support, Microsoft 365, networking, Active Directory concepts, PowerShell basics, hardware diagnostics, and user support."
     />
     <meta property="og:url" content="https://mahendra-04.github.io/portfolio-website/" />
     <meta property="og:image" content="https://mahendra-04.github.io/portfolio-website/mahendra.jpeg" />
+    <meta property="og:image:alt" content="Portrait of Mahendra Ranwa" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Mahendra Ranwa | IT Support Technician Portfolio" />
     <meta
       name="twitter:description"
-      content="IT support portfolio featuring Mahendra Ranwa's troubleshooting skills, technical projects, and support experience."
+      content="CompTIA A+ certified IT support portfolio featuring a completed 45-day IT Help Desk learning project, Microsoft 365, Windows, networking, Active Directory concepts, PowerShell basics, and user support."
     />
     <meta name="twitter:image" content="https://mahendra-04.github.io/portfolio-website/mahendra.jpeg" />
-    <!-- Structured data describes the portfolio owner as a Person. Search
-         engines can use this to connect the site with profile links, education,
-         contact details, and the public portfolio URL. Keep the script body as
-         valid JSON because application/ld+json does not allow comments. -->
+    <meta name="twitter:image:alt" content="Portrait of Mahendra Ranwa" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Mahendra Ranwa",
-        "jobTitle": "IT Support Technician",
+        "jobTitle": "IT Helpdesk and Desktop Support Candidate",
         "url": "https://mahendra-04.github.io/portfolio-website/",
         "image": "https://mahendra-04.github.io/portfolio-website/mahendra.jpeg",
         "email": "mailto:mranwa100@gmail.com",
         "telephone": "+1-437-244-5424",
+        "knowsAbout": [
+          "IT Help Desk",
+          "IT Support",
+          "Desktop Support",
+          "Service Desk",
+          "Windows troubleshooting",
+          "Microsoft 365 support",
+          "Active Directory concepts",
+          "PowerShell basics",
+          "Ticketing systems",
+          "Linux/UNIX fundamentals",
+          "Networking fundamentals",
+          "Hardware diagnostics",
+          "Lab system setup",
+          "Technical documentation",
+          "Customer support"
+        ],
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Brampton",
@@ -72,17 +80,16 @@
           "https://www.linkedin.com/in/mahendra-ranwa/",
           "https://github.com/mahendra-04"
         ],
-        "alumniOf": {
+        "affiliation": {
           "@type": "CollegeOrUniversity",
           "name": "Sheridan College"
-        }
+        },
+        "description": "Computer Engineering Technology graduate from Sheridan College focused on IT helpdesk, service desk, desktop support, and technical support roles, with a completed 45-day IT Help Desk learning project."
       }
     </script>
   </head>
   <body>
-    <!-- React replaces this empty root with the portfolio application. -->
     <div id="root"></div>
-    <!-- Vite rewrites this module import during development/build. -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

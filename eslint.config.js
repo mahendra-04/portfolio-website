@@ -34,7 +34,7 @@ export default defineConfig([
       // Vite/React patterns often keep PascalCase components or constants that
       // are referenced dynamically. This rule still catches real unused values
       // while avoiding false positives for upper-case exported-style names.
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': ['error', { varsIgnorePattern: '^(motion|[A-Z_])' }],
     },
   },
 ])

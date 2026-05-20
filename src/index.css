@@ -1,53 +1,38 @@
-/* Global baseline imported before App.css. This file keeps browser-level resets
-   and root defaults in one place so component styles can focus on the actual
-   portfolio UI instead of repeatedly neutralizing default margins and sizing. */
+@import "tailwindcss";
 
-/* Universal box sizing makes widths predictable: padding and borders are
-   included inside declared dimensions, which is especially important for the
-   fixed mobile buttons, header grid, and card layouts in App.css. */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  
+  --color-dark-bg: #0f172a;
+  --color-dark-card: #1e293b;
+  --color-dark-border: #334155;
+  --color-dark-text: #f8fafc;
+  --color-dark-text-muted: #94a3b8;
+
+  --color-light-bg: #f8fafc;
+  --color-light-card: #ffffff;
+  --color-light-border: #e2e8f0;
+  --color-light-text: #0f172a;
+  --color-light-text-muted: #475569;
 }
 
-/* The React mount chain needs full width and at least full viewport height so
-   the background layers and sticky header can span the page reliably. */
-html,
-body,
-#root {
-  width: 100%;
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-/* Dark fallback page background. App.css later replaces most colors with theme
-   variables, but this keeps the page polished before React and CSS variables
-   finish loading. */
-body {
-  overflow-x: hidden;
-  background: #050816;
-  color: #f8fafc;
-  font-family: 'Segoe UI', sans-serif;
-  background-image:
-    radial-gradient(circle at top left, rgba(34, 211, 238, 0.14), transparent 28%),
-    radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 24%),
-    linear-gradient(180deg, #050816 0%, #07111f 45%, #050816 100%);
-}
-
-/* Form controls inherit the app typography instead of browser-specific default
-   fonts, keeping labels, inputs, and buttons visually consistent. */
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-/* Code/pre defaults are included for future snippets or debugging notes without
-   needing a component-specific font declaration. */
-code,
-pre {
-  font-family: 'Fira Code', Consolas, monospace;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-light-bg text-light-text dark:bg-dark-bg dark:text-dark-text transition-colors duration-300;
+  }
 }

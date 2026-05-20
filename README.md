@@ -1,16 +1,47 @@
-# React + Vite
+# Mahendra Ranwa IT Support Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Minimal, recruiter-focused portfolio for IT Help Desk, IT Support Technician,
+Desktop Support, Technical Support, Tier 1 / Tier 2 Support, and junior systems
+support roles.
 
-Currently, two official plugins are available:
+The site now highlights the completed
+[45-Day IT Help Desk Learning Journey](https://github.com/mahendra-04/it-helpdesk-45-day-journey)
+as a featured project with completion metrics, support skills, and recruiter-friendly
+documentation.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+- React
+- Vite
+- Lucide React
+- GitHub Pages
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Local development
 
-## Expanding the ESLint configuration
+```bash
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Quality checks
+
+```bash
+npm run lint
+npm run build
+```
+
+## Deployment
+
+The site is configured for GitHub Pages deployment.
+
+```bash
+npm run deploy
+```
+
+## Project goals
+
+- Make the IT Support role direction clear within the first few seconds
+- Highlight troubleshooting, Windows/Linux fundamentals, networking basics, documentation, and user support
+- Feature the completed 45-day IT Help Desk learning repository prominently
+- Present real projects and labs honestly without inflated claims
+- Keep the site fast, responsive, accessible, and recruiter-friendly
